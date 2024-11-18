@@ -56,7 +56,8 @@ export const ToggleButton = styled.button`
   display: flex;
   align-items: center;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+
   font-size: 1rem;
   color: #333;
   border-radius: 20px;
@@ -117,7 +118,7 @@ export const SmallButton = styled.button`
   min-width: 120px;
   color: #717171;
   border: 1px solid #717171;
-  border-radius: 5px;
+  border-radius: 3px;
   cursor: pointer;
   transition: background-color 0.3s;
 `;
