@@ -9,7 +9,7 @@ function MainPage() {
       <Header />
       <S.MainWrapper>
         <S.Banner />
-        <PlanList />
+        {/* <PlanList /> */}
       </S.MainWrapper>
     </>
   );
