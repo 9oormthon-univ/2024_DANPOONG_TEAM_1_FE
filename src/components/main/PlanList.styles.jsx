@@ -75,6 +75,7 @@ export const PlanDetail = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  bottom: 0px;
 `;
 
 export const PlanUser = styled.p`
@@ -120,6 +121,7 @@ export const ThemePopularLanking = styled.div`
   align-items: flex-start;
   width: 100%;
   gap: 50px;
+  position: relative;
 `;
 
 export const ThemePlan = styled.div`
@@ -133,8 +135,18 @@ export const ThemePlan = styled.div`
   box-shadow: 2px 4px 20px 0px ${({ theme }) => theme.colors.gray3};
 `;
 
-export const Arrow = styled.img`
+export const LeftArrow = styled.img`
+  position: absolute;
   width: 50px;
+  left: 120px;
+  z-index: 1;
+`;
+
+export const RightArrow = styled.img`
+  position: absolute;
+  width: 50px;
+  right: 120px;
+  z-index: 1;
 `;
 
 export const PopularPostContainer = styled.div`

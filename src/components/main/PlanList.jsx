@@ -115,7 +115,7 @@ function PlanList() {
       <S.ThemePopularLanking>
         <S.Title>테마별 축제</S.Title>
         <S.PlanContainer>
-          {startIndex > 0 && <S.Arrow src={leftArrowIcon} alt="arrow" onClick={handlePrev} />}
+          {startIndex > 0 && <S.LeftArrow src={leftArrowIcon} alt="arrow" onClick={handlePrev} />}
           {MockData &&
             MockData.slice(startIndex, startIndex + itemsPerPage).map((item, index) => (
               <S.ThemePlan key={index}>
@@ -123,7 +123,7 @@ function PlanList() {
               </S.ThemePlan>
             ))}
           {startIndex + itemsPerPage < MockData.length && (
-            <S.Arrow src={rightArrowIcon} alt="arrow" onClick={handleNext} />
+            <S.RightArrow src={rightArrowIcon} alt="arrow" onClick={handleNext} />
           )}
         </S.PlanContainer>
       </S.ThemePopularLanking>
