@@ -21,7 +21,6 @@ export const sendRequest = async (instance, method, url, data = {}) => {
     throw error;
   }
 };
-s;
 
 // 동적 URL 생성
 export const createUrl = (path, params = {}) => {

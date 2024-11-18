@@ -1,4 +1,6 @@
 // 인터셉터 적용
+import { getAuthToken } from './request';
+
 export const applyInterceptors = instance => {
   const language = localStorage.getItem('language');
   instance.interceptors.request.use(
