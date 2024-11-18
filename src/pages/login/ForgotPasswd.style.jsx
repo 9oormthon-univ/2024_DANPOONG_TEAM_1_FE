@@ -88,18 +88,20 @@ export const Circle = styled.div`
 export const InputGroup = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 0.8rem;
+  border-bottom: 2px solid #333;
+  padding-bottom: 5px;
   width: 100%;
-  margin-bottom: 1rem;
 `;
 
 export const Input = styled.input`
-  flex: 1;
-  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  padding: 8px;
   border: none;
-  border-bottom: 2px solid #cecece;
   font-size: 1rem;
-  color: #333;
   outline: none;
+  color: #333;
 
   &::placeholder {
     color: #aaa;
@@ -108,19 +110,16 @@ export const Input = styled.input`
 `;
 
 export const SmallButton = styled.button`
-  flex-shrink: 0;
-  width: 130px;
-  padding: 8px;
+  margin-left: 10px;
+  padding: 5px 8px;
+  font-size: 0.7rem;
   font-weight: bold;
-  border: 1px solid black;
+  min-width: 120px;
+  color: #717171;
+  border: 1px solid #717171;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-left: 10px;
-  text-align: center;
-
-  &:hover {
-    background-color: #cccccc;
-  }
 `;
 
 export const LoginLink = styled(Link)`
@@ -128,7 +127,7 @@ export const LoginLink = styled(Link)`
   width: 100%;
   max-width: 400px;
   padding: 15px;
-  margin-top: 17px;
+  margin-top: 40px;
   text-align: center;
   font-size: 1rem;
   font-weight: bold;
@@ -140,4 +139,13 @@ export const LoginLink = styled(Link)`
   &:hover {
     background-color: #f5f5f5;
   }
+`;
+
+export const Label = styled.label`
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-right: 1rem;
+  white-space: nowrap;
+  width: 120px;
 `;

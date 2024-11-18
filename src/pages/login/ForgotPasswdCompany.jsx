@@ -28,23 +28,29 @@ const FindIdPassword = () => {
           {activeTab === 'id' ? (
             <>
               <S.InputGroup>
+                <S.Label>회사 이름</S.Label>
                 <S.Input type="text" placeholder="회사 이름을 입력해주세요." />
               </S.InputGroup>
               <S.InputGroup>
-                <S.Input type="text" placeholder="담당자 이름" />
+                <S.Label>담당자 이름</S.Label>
+                <S.Input type="text" />
               </S.InputGroup>
               <S.InputGroup>
-                <S.Input type="email" placeholder="회사 이메일" />
+                <S.Label>회사 이메일</S.Label>
+                <S.Input type="email" />
                 <S.SmallButton onClick={handleSendCode}>인증번호 발송</S.SmallButton>
               </S.InputGroup>
             </>
           ) : (
             <>
               <S.InputGroup>
-                <S.Input type="text" placeholder=" 담당자 이름" />
+                <S.Label>담당자 이름</S.Label>
+                <S.Input type="text" />
               </S.InputGroup>
               <S.InputGroup>
-                <S.Input type="email" placeholder="회사 이메일" />
+                <S.Label>회사 이메일</S.Label>
+                <S.Input type="email" />
+                <S.SmallButton onClick={handleSendCode}>인증번호 발송</S.SmallButton>
               </S.InputGroup>
             </>
           )}
