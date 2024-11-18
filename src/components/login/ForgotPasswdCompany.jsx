@@ -1,7 +1,7 @@
 // FindIdPassword.js
 import React, { useState } from 'react';
 import LoginHeader from '../../components/login/LoginHeader';
-import * as S from './ForgotPasswd.style';
+import * as S from './ForgotPasswd.styles';
 
 const FindIdPassword = () => {
   const [activeTab, setActiveTab] = useState('id');

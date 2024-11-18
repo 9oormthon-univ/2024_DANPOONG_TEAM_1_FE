@@ -3,13 +3,13 @@ import App from './App';
 import MainPage from './pages/main/MainPage';
 import NotFound from './pages/error/NotFound';
 import Login from './pages/login/Login';
-import LoginOption from './pages/login/LoginOption';
 import LoginForm from './components/login/LoginForm';
-import IndividualSignUp from './pages/signup/IndividualSignUp';
-import CompanySignUp from './pages/signup/CompanySignUp';
-import SignUpComplete from './components/login/SignUpComplete';
-import ForgotPasswdIndividual from './pages/login/ForgotPasswdIndividual';
-import ForgotPasswdCompany from './pages/login/ForgotPasswdCompany';
+import IndividualSignUp from './components/signup/IndividualSignUp';
+import CompanySignUp from './components/signup/CompanySignUp';
+import SignUpComplete from './components/signup/SignUpComplete';
+import ForgotPasswdIndividual from './components/login/ForgotPasswdIndividual';
+import ForgotPasswdCompany from './components/login/ForgotPasswdCompany';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -21,12 +21,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'login',
-        element: <Login />,
+        element: <Login />, // Login 내부에서 기본 옵션 화면과 Outlet을 처리
         children: [
-          {
-            index: true,
-            element: <LoginOption />, // 기본 로그인 옵션 화면
-          },
           {
             path: 'form/:userType', // userType을 URL 파라미터로 받음
             element: <LoginForm />, // 로그인 폼 화면

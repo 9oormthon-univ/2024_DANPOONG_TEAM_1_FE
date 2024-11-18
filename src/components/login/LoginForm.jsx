@@ -5,7 +5,7 @@ import companyImage from '../../assets/images/login/company.png';
 import UserImage from '../../assets/images/login/user.png';
 //import { useNavigate } from 'react-router-dom';
 //import { login } from '../../api/authApi';
-import * as S from './LoginForm.style';
+import * as S from './LoginForm.styles';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');

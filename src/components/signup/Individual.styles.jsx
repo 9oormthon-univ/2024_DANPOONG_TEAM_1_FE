@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Title } from './SignUp.styles'; // Title 컴포넌트가 별도 파일에서 올 경우 import
+import { Title } from './SignUp.styles';
 
 export const Container = styled.div`
   display: flex;

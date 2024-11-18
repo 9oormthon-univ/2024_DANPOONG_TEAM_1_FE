@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LoginHeader from '../../components/login/LoginHeader';
+import LoginHeader from '../login/LoginHeader';
 import { useNavigate } from 'react-router-dom';
 import * as S from './SignUp.styles';
 

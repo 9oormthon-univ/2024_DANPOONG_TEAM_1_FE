@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import LoginHeader from '../../components/login/LoginHeader';
+import LoginHeader from '../login/LoginHeader';
 import * as S from './SignUp.styles';
-import * as I from './Individual.style';
+import * as I from './Individual.styles';
 import searchIcon from '../../assets/images/search-icon.svg';
-import regionsData from '../../pages/signup/optimized_filtered_regions.json';
+import regionsData from '../login/optimized_filtered_regions.json';
 import { useNavigate } from 'react-router-dom';
 
 const IndividualSignUp = () => {

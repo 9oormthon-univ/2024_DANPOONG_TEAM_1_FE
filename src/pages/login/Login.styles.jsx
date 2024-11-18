@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 export const OptionWrapper = styled.div`
@@ -38,11 +39,12 @@ export const OptionsContainer = styled.div`
   padding: 0 10vw;
 `;
 
-export const OptionButton = styled.div`
+// Link로 스타일링된 OptionButton
+export const OptionButton = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* 버튼 중앙에 요소 배치 */
+  justify-content: center;
   padding: 20px;
   width: 18vw;
   height: 18vw;
@@ -59,7 +61,7 @@ export const OptionButton = styled.div`
 export const OptionIcon = styled.img`
   width: 7vw;
   height: 7vw;
-  margin-bottom: 1.5rem; /* 이미지와 텍스트 사이 간격 조정 */
+  margin-bottom: 1.5rem;
 `;
 
 export const OptionText = styled.span`

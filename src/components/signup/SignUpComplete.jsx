@@ -4,7 +4,7 @@ import checkIcon from '../../assets/images/login/check-icon.png';
 import LogoImage from '../../assets/images/trends-logo.svg';
 //import { useSelector } from 'react-redux';
 
-import * as S from './SignUpComplete.style';
+import * as S from './SignUpComplete.styles';
 
 const SignUpComplete = () => {
   const navigate = useNavigate();

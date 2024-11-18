@@ -14,7 +14,7 @@ import {
   Input,
   SmallButton,
   LoginLink,
-} from './ForgotPasswd.style';
+} from './ForgotPasswd.styles';
 
 const FindIdPassword = () => {
   const [activeTab, setActiveTab] = useState('id');
