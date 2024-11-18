@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px;
+  padding: 0 50px;
 `;
 
 export const SearchContainer = styled.div`
@@ -38,7 +38,7 @@ export const Searchbar = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  min-width: 400px;
+  min-width: 500px;
   box-shadow: 0px 0px 12px 0px ${({ theme }) => theme.colors.gray3};
 `;
 
@@ -82,5 +82,13 @@ export const Icon = styled.img`
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 15px;
+  gap: 20px;
+`;
+
+export const Menu = styled.p`
+  font-size: 18px;
+  &:hover {
+    font-weight: 500;
+    cursor: pointer;
+  }
 `;
