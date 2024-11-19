@@ -95,3 +95,9 @@ export const LoginContent = styled.div`
   width: 100%;
   padding: 113px;
 `;
+export const ErrorMessage = styled.p`
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  text-align: center;
+`;
