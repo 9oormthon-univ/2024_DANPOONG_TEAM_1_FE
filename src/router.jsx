@@ -9,7 +9,8 @@ import CompanySignUp from './components/signup/CompanySignUp';
 import SignUpComplete from './components/signup/SignUpComplete';
 import ForgotPasswdIndividual from './components/login/ForgotPasswdIndividual';
 import ForgotPasswdCompany from './components/login/ForgotPasswdCompany';
-
+import Profile from './pages/profile/Profile';
+import CreateFestival from './pages/createFestival/CreateFestival';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: '',
         element: <MainPage />,
+      },
+      {
+        path: 'create-festival',
+        element: <CreateFestival />, // 추가된 라우트
       },
       {
         path: 'login',
@@ -48,6 +53,10 @@ const router = createBrowserRouter([
             element: <ForgotPasswdCompany />, // 기업 비밀번호 찾기
           },
         ],
+      },
+      {
+        path: 'profile',
+        element: <Profile />, // 프로필 페이지 추가
       },
     ],
     errorElement: <NotFound />,
