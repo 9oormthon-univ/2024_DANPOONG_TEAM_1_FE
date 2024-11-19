@@ -1,31 +1,32 @@
 import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import * as S from './PlanDetailPage.styles';
 import Header from '../../components/common/header/Header';
-import { usePlanHook } from '../../api/plan/plan';
 import PlanMainDetail from '../../components/planDetail/PlanMainDetail';
 import FindPath from '../../components/planDetail/FindPath';
+import PlanComments from '../../components/planDetail/PlanComments';
+import { fetchPlanAsync } from '../../redux/slices/planSlice';
 
 function PlanDetailPage() {
   const { planId } = useParams();
-  const { fetchPlan } = usePlanHook();
+  const dispatch = useDispatch();
 
   const findPathRef = useRef(null);
 
   useEffect(() => {
-    const fetchPlanAsync = async () => {
-      await fetchPlan(planId);
-    };
     if (planId) {
-      fetchPlanAsync();
+      dispatch(fetchPlanAsync(planId));
     }
-  }, [planId, fetchPlan]);
+  }, [planId, dispatch]);
+
   return (
     <>
       <Header />
       <S.Container>
         <PlanMainDetail findPathRef={findPathRef} />
         <FindPath ref={findPathRef} />
+        <PlanComments planId={planId} />
       </S.Container>
     </>
   );
