@@ -77,10 +77,19 @@ export const PlanDetailKey = styled.th`
   padding-right: 30px;
 `;
 
+export const MapButton = styled.img`
+  width: 20px;
+  cursor: pointer;
+`;
+
 export const PlanDetailValue = styled.td`
   font-size: 20px;
   font-weight: 300;
   padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
 `;
 
 export const PlanInfoContainer = styled.div`

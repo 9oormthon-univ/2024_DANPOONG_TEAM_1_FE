@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import * as S from './PlanDetailPage.styles';
 import Header from '../../components/common/header/Header';
@@ -9,6 +9,9 @@ import FindPath from '../../components/planDetail/FindPath';
 function PlanDetailPage() {
   const { planId } = useParams();
   const { fetchPlan } = usePlanHook();
+
+  const findPathRef = useRef(null);
+
   useEffect(() => {
     const fetchPlanAsync = async () => {
       await fetchPlan(planId);
@@ -21,8 +24,8 @@ function PlanDetailPage() {
     <>
       <Header />
       <S.Container>
-        <PlanMainDetail />
-        <FindPath />
+        <PlanMainDetail findPathRef={findPathRef} />
+        <FindPath ref={findPathRef} />
       </S.Container>
     </>
   );

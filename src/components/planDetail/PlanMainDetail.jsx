@@ -5,8 +5,9 @@ import { category } from '../../assets/const/category';
 import planLikeIcon from '../../assets/images/plan-like-icon.svg';
 import planCommentIcon from '../../assets/images/plan-comment-icon.svg';
 import Planner from './components/Planner';
+import kakaoMapIcon from '../../assets/images/kakaomap-icon.svg';
 
-function PlanMainDetail() {
+function PlanMainDetail({ findPathRef }) {
   const currentPlan = useSelector(state => state.plan.currentPlan);
   const [categoryIcon, setCategoryIcon] = useState(null);
   const [categoryTitle, setCategoryTitle] = useState('');
@@ -20,6 +21,11 @@ function PlanMainDetail() {
       }
     }
   }, [currentPlan]);
+
+  // Scroll to FindPath component
+  const scrollToMap = () => {
+    findPathRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
 
   return (
     <S.Container>
@@ -43,6 +49,7 @@ function PlanMainDetail() {
                     <S.PlanDetailKey>장소</S.PlanDetailKey>
                     <S.PlanDetailValue>
                       {currentPlan.province} {currentPlan.city} {currentPlan.town}
+                      <S.MapButton src={kakaoMapIcon} alt="map" onClick={scrollToMap}></S.MapButton>
                     </S.PlanDetailValue>
                   </tr>
                   <tr>
