@@ -4,16 +4,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as S from './Header.styles';
 import logo from '../../../assets/images/trends-logo.svg';
 import searchIcon from '../../../assets/images/search-icon.svg';
-// import userIcon from '../../../assets/images/user-icon.svg';
-// import bellIcon from '../../../assets/images/bell-icon.svg';
-// import planningIcon from '../../../assets/images/planning-icon.svg';
+import userIcon from '../../../assets/images/user-icon.svg';
+import bellIcon from '../../../assets/images/bell-icon.svg';
+import planningIcon from '../../../assets/images/planning-icon.svg';
 
 function Header() {
   const { isLoggedIn } = useSelector(state => state.auth); // Redux 상태 가져오기
   const navigate = useNavigate(); // Navigation 사용
 
-  const handleRedirectToLogin = () => {
-    alert('로그인 후 이용 가능한 서비스입니다.');
+  const handleLogin = () => {
     navigate('/login'); // 로그인 페이지로 이동
   };
 
@@ -50,8 +49,8 @@ function Header() {
           </>
         ) : (
           <>
-            <S.Menu>회원가입</S.Menu>
-            <S.Menu>로그인</S.Menu>
+            <S.Menu onClick={handleLogin}>회원가입</S.Menu>
+            <S.Menu onClick={handleLogin}>로그인</S.Menu>
           </>
         )}
       </S.ButtonContainer>

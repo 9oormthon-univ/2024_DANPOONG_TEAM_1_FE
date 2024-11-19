@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const MonthPopularLanking = styled.div`
   background-color: white;
-  padding: 100px 150px;
+  padding: 100px 10%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -109,7 +109,7 @@ export const Title = styled.p`
 
 export const CommentPopularLanking = styled.div`
   background-color: white;
-  padding: 100px 150px;
+  padding: 100px 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -119,7 +119,7 @@ export const CommentPopularLanking = styled.div`
 
 export const ThemePopularLanking = styled.div`
   background-color: ${({ theme }) => theme.colors.gray1};
-  padding: 100px 150px;
+  padding: 100px 10%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -146,7 +146,7 @@ export const RightArrow = styled.img`
 
 export const RecentPostContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.gray1};
-  padding: 100px 150px;
+  padding: 100px 10%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

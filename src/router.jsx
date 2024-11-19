@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import MainPage from './pages/main/MainPage';
+import PlanDetailPage from './pages/planDetail/PlanDetailPage';
 import NotFound from './pages/error/NotFound';
 import Login from './pages/login/Login';
 import LoginForm from './components/login/LoginForm';
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />, // 프로필 페이지 추가
+      },
+      {
+        path: 'plan/:planId',
+        element: <PlanDetailPage />,
       },
     ],
     errorElement: <NotFound />,
