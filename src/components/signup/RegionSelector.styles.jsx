@@ -1,38 +1,5 @@
+// src/components/signup/RegionSelector.styles.jsx
 import styled from 'styled-components';
-import { Title } from './SignUp.styles';
-
-export const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  gap: 1rem;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
-export const CenteredTitle = styled(Title)`
-  position: fixed;
-  top: 4rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-`;
-
-export const SlidingFormWrapper = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.3s ease;
-  transform: ${({ isRegionOpen }) => (isRegionOpen ? 'translateX(-50px)' : 'translateX(0)')};
-`;
 
 export const RegionSearchWrapper = styled.div`
   flex: 1;
@@ -68,18 +35,21 @@ export const SearchInput = styled.input`
   color: #333;
   width: 100%;
   padding-right: 2.5rem;
+
   &::placeholder {
     color: #aaa;
   }
 `;
+
 export const SearchIcon = styled.img`
   position: absolute;
-  right: 0; /* 오른쪽 끝에 배치 */
-  bottom: 0.5rem; /* 아이콘이 줄에 맞춰지도록 */
+  right: 0;
+  bottom: 0.5rem;
   width: 24px;
   height: 24px;
   cursor: pointer;
 `;
+
 export const RegionList = styled.ul`
   max-height: 300px;
   overflow-y: auto;
@@ -91,6 +61,7 @@ export const RegionList = styled.ul`
 export const RegionItem = styled.li`
   padding: 0.5rem 0;
   cursor: pointer;
+
   &:hover {
     background-color: #f0f0f0;
   }

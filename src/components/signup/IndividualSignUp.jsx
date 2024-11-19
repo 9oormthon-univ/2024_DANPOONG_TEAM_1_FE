@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import LoginHeader from '../login/LoginHeader';
+import React, { useState, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import * as S from './SignUp.styles';
 import * as I from './Individual.styles';
-import searchIcon from '../../assets/images/search-icon.svg';
+import RegionSelector from './RegionSelector';
+import LoginHeader from '../login/LoginHeader';
 import regionsData from '../login/optimized_filtered_regions.json';
-import { useNavigate } from 'react-router-dom';
+import { signUpAsync } from '../../redux/slices/authSlice';
 
 const IndividualSignUp = () => {
   const [formValues, setFormValues] = useState({
@@ -19,25 +21,28 @@ const IndividualSignUp = () => {
   const [isRegionOpen, setIsRegionOpen] = useState(false);
   const [regionSearch, setRegionSearch] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(null);
-  const [warningMessage, setWarningMessage] = useState('');
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const regions = regionsData
-    .map(regionObj => regionObj.region)
-    .filter(region => typeof region === 'string' && region.length > 0);
+  const { loading, error } = useSelector(state => state.auth);
 
-  const filteredRegions = regions.filter(region => region.includes(regionSearch));
+  const regions = useMemo(() => regionsData, []);
+  const filteredRegions = useMemo(
+    () =>
+      regions.filter(
+        region => region.province.includes(regionSearch) || region.city.includes(regionSearch)
+      ),
+    [regionSearch, regions]
+  );
 
   const handleChange = e => {
     const { name, value } = e.target;
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
+    setFormValues(prev => ({ ...prev, [name]: value }));
+
     if (name === 'password' || name === 'passwordConfirm') {
-      setPasswordMatch(
-        formValues.password === value || formValues.password === formValues.passwordConfirm
-      );
+      const match =
+        name === 'password' ? value === formValues.passwordConfirm : formValues.password === value;
+      setPasswordMatch(match);
     }
   };
 
@@ -45,8 +50,9 @@ const IndividualSignUp = () => {
     setIsRegionOpen(!isRegionOpen);
   };
 
-  const handleRegionSelect = region => {
-    setFormValues({ ...formValues, region });
+  const handleRegionSelect = ({ province, city }) => {
+    const region = `${province} ${city}`;
+    setFormValues(prev => ({ ...prev, region }));
     setIsRegionOpen(false);
     setRegionSearch('');
   };
@@ -55,19 +61,45 @@ const IndividualSignUp = () => {
     setRegionSearch(e.target.value);
   };
 
-  const handleSubmit = e => {
+  const validateForm = () => {
+    if (!passwordMatch) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async e => {
     e.preventDefault();
 
     const allFieldsFilled = Object.values(formValues).every(value => value.trim() !== '');
     if (!allFieldsFilled) {
-      setWarningMessage('모든 필드를 작성해주세요.');
+      alert('모든 필드를 작성해주세요.');
       return;
     }
-    setWarningMessage('');
-    navigate('/login/signup-complete');
-  };
-  const handleSendCode = () => {
-    alert('개발 중인 단계입니다!');
+
+    if (!validateForm()) return;
+
+    const [province, city] = formValues.region.split(' ');
+
+    const payload = {
+      name: formValues.name,
+      phoneNumber: formValues.phone.replace(/\s+/g, ''),
+      email: formValues.email,
+      username: formValues.id,
+      password: formValues.password,
+      nickname: formValues.name,
+      province,
+      city,
+    };
+
+    try {
+      await dispatch(signUpAsync(payload)).unwrap();
+      alert('회원가입이 완료되었습니다!');
+      navigate('/login/signup-complete');
+    } catch (err) {
+      console.error('회원가입 실패:', err);
+    }
   };
 
   return (
@@ -88,7 +120,7 @@ const IndividualSignUp = () => {
               <S.Input
                 type="text"
                 name="phone"
-                placeholder="010 1234 5678"
+                placeholder="01012345678"
                 value={formValues.phone}
                 onChange={handleChange}
               />
@@ -96,18 +128,7 @@ const IndividualSignUp = () => {
 
             <S.FieldWrapper>
               <S.Label>이메일</S.Label>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <S.Input
-                  type="email"
-                  name="email"
-                  value={formValues.email}
-                  onChange={handleChange}
-                  style={{ flex: 1 }}
-                />
-                <S.SmallButton type="button" onClick={handleSendCode}>
-                  인증번호 발송
-                </S.SmallButton>
-              </div>
+              <S.Input type="email" name="email" value={formValues.email} onChange={handleChange} />
             </S.FieldWrapper>
 
             <S.FieldWrapper>
@@ -159,32 +180,20 @@ const IndividualSignUp = () => {
               />
             </S.FieldWrapper>
 
-            {warningMessage && <S.WarningMessage>{warningMessage}</S.WarningMessage>}
-            <S.SubmitButton type="submit">가입완료</S.SubmitButton>
+            {error && <S.WarningMessage>{error}</S.WarningMessage>}
+            <S.SubmitButton type="submit" disabled={loading}>
+              {loading ? '회원가입 중...' : '가입완료'}
+            </S.SubmitButton>
           </S.Form>
         </I.SlidingFormWrapper>
 
-        <I.RegionSearchWrapper isVisible={isRegionOpen}>
-          <I.SearchHeader>
-            <I.SearchLabel>지역</I.SearchLabel>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <I.SearchInput
-                type="text"
-                placeholder="지역 검색"
-                value={regionSearch}
-                onChange={handleRegionSearchChange}
-              />
-              <I.SearchIcon src={searchIcon} alt="search" />
-            </div>
-          </I.SearchHeader>
-          <I.RegionList>
-            {filteredRegions.map(region => (
-              <I.RegionItem key={region} onClick={() => handleRegionSelect(region)}>
-                {region}
-              </I.RegionItem>
-            ))}
-          </I.RegionList>
-        </I.RegionSearchWrapper>
+        <RegionSelector
+          isVisible={isRegionOpen}
+          regionSearch={regionSearch}
+          onSearchChange={handleRegionSearchChange}
+          regions={filteredRegions}
+          onSelect={handleRegionSelect}
+        />
       </I.Container>
     </div>
   );
