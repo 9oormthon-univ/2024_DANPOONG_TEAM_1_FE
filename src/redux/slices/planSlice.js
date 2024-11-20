@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchPlanAPI } from '../../api/plan/plan';
+import { fetchCommentAPI } from '../../api/comment/comment';
 
 const initialState = {
   plans: [], // 전체 플랜 리스트
-  currentPlan: null, // 특정 플랜 상세 정보
+  currentPlan: null, // 특정 플랜 상세 정보(댓글 리스트 포함)
   error: null, // 오류 메시지
 };
 
@@ -15,8 +16,8 @@ export const fetchPlanAsync = createAsyncThunk(
       return state.currentPlan;
     }
     try {
-      const response = await fetchPlanAPI(planId);
-      return response; // 성공 시 반환
+      const [plan, comments] = await Promise.all([fetchPlanAPI(planId), fetchCommentAPI(planId)]);
+      return { ...plan, comments };
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message);

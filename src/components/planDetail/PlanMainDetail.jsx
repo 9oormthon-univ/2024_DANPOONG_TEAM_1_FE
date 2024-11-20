@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import * as S from './PlanMainDetail.styles';
 import { category } from '../../assets/const/category';
@@ -7,10 +7,12 @@ import planCommentIcon from '../../assets/images/plan-comment-icon.svg';
 import Planner from './components/Planner';
 import kakaoMapIcon from '../../assets/images/kakaomap-icon.svg';
 
-function PlanMainDetail({ findPathRef }) {
+function PlanMainDetail() {
   const currentPlan = useSelector(state => state.plan.currentPlan);
   const [categoryIcon, setCategoryIcon] = useState(null);
   const [categoryTitle, setCategoryTitle] = useState('');
+
+  const findPathRef = useRef(null);
 
   useEffect(() => {
     if (currentPlan?.category) {

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import * as S from './PlanDetailPage.styles';
 import Header from '../../components/common/header/Header';
 import PlanMainDetail from '../../components/planDetail/PlanMainDetail';
@@ -11,6 +12,7 @@ import { fetchPlanAsync } from '../../redux/slices/planSlice';
 function PlanDetailPage() {
   const { planId } = useParams();
   const dispatch = useDispatch();
+  const { currentPlan, comments } = useSelector(state => state.plan);
 
   const findPathRef = useRef(null);
 
@@ -24,9 +26,9 @@ function PlanDetailPage() {
     <>
       <Header />
       <S.Container>
-        <PlanMainDetail findPathRef={findPathRef} />
+        {currentPlan && <PlanMainDetail plan={currentPlan} findPathRef={findPathRef} />}
         <FindPath ref={findPathRef} />
-        <PlanComments planId={planId} />
+        {comments && <PlanComments comments={comments} />}
       </S.Container>
     </>
   );

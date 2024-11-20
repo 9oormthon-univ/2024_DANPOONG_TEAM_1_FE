@@ -75,6 +75,7 @@ export const PlanDetailKey = styled.th`
   font-weight: 600;
   text-align: left;
   padding-right: 30px;
+  white-space: nowrap;
 `;
 
 export const MapButton = styled.img`
