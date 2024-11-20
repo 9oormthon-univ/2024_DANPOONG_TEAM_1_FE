@@ -3,6 +3,7 @@ const colors = {
   primary1: '#27104E',
   primary2: '#9A50F1',
   primary3: '#F9F7FE',
+  skyBlue: '#5098F1',
   white: '#FFFFFF',
   black: '#000000',
   gray1: '#f7f7f7',

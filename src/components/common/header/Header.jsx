@@ -12,8 +12,7 @@ function Header() {
   const { isLoggedIn } = useSelector(state => state.auth); // Redux 상태 가져오기
   const navigate = useNavigate(); // Navigation 사용
 
-  const handleRedirectToLogin = () => {
-    alert('로그인 후 이용 가능한 서비스입니다.');
+  const handleLogin = () => {
     navigate('/login'); // 로그인 페이지로 이동
   };
 
@@ -28,45 +27,32 @@ function Header() {
           </S.Searchbar>
         </form>
       </S.SearchContainer>
-
       <S.ButtonContainer>
         {isLoggedIn ? (
-          <Link to="/create-festival">
-            <S.PlanningButton>
-              <S.PlanningButtonInner>
-                <S.PlanningIcon src={planningIcon} alt="planning" />
-                축제 기획하기
-              </S.PlanningButtonInner>
-            </S.PlanningButton>
-          </Link>
-        ) : (
-          <S.PlanningButton
-            onClick={handleRedirectToLogin} // 클릭 시 로그인 페이지로 이동
-          >
-            <S.PlanningButtonInner>
-              <S.PlanningIcon src={planningIcon} alt="planning" />
-              축제 기획하기
-            </S.PlanningButtonInner>
-          </S.PlanningButton>
-        )}
-
-        {isLoggedIn ? (
-          <Link to="/profile">
+          <>
+            <Link to="/create-festival">
+              <S.PlanningButton>
+                <S.PlanningButtonInner>
+                  <S.PlanningIcon src={planningIcon} alt="planning" />
+                  축제 기획하기
+                </S.PlanningButtonInner>
+              </S.PlanningButton>
+            </Link>
+            <Link to="/profile">
+              <S.Button>
+                <S.Icon src={userIcon} alt="mypage" />
+              </S.Button>
+            </Link>
             <S.Button>
-              <S.Icon src={userIcon} alt="mypage" />
+              <S.Icon src={bellIcon} alt="alert" />
             </S.Button>
-          </Link>
+          </>
         ) : (
-          <Link to="/login">
-            <S.Button>
-              <S.Icon src={userIcon} alt="mypage" />
-            </S.Button>
-          </Link>
+          <>
+            <S.Menu onClick={handleLogin}>회원가입</S.Menu>
+            <S.Menu onClick={handleLogin}>로그인</S.Menu>
+          </>
         )}
-
-        <S.Button>
-          <S.Icon src={bellIcon} alt="alert" />
-        </S.Button>
       </S.ButtonContainer>
     </S.Container>
   );

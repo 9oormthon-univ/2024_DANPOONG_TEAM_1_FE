@@ -12,7 +12,7 @@ const defaultInstance = axios.create({
 applyInterceptors(defaultInstance);
 
 const companyInstance = axios.create(defaultInstance.defaults);
-companyInstance.defaults.baseURL += '/company';
+companyInstance.defaults.baseURL += '/companies';
 // applyInterceptors(companyInstance);
 
 const memberInstance = axios.create(defaultInstance.defaults);
