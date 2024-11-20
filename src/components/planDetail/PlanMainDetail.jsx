@@ -7,7 +7,7 @@ import planCommentIcon from '../../assets/images/plan-comment-icon.svg';
 import Planner from './components/Planner';
 import kakaoMapIcon from '../../assets/images/kakaomap-icon.svg';
 
-function PlanMainDetail(findPathRef) {
+function PlanMainDetail({ findPathRef }) {
   const currentPlan = useSelector(state => state.plan.currentPlan);
   const [categoryIcon, setCategoryIcon] = useState(null);
   const [categoryTitle, setCategoryTitle] = useState('');
