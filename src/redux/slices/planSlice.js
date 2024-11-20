@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchPlanAPI } from '../../api/plan/plan';
-import { fetchCommentAPI } from '../../api/comment/comment';
+import { fetchCommentAPI } from '../../api/plan/comment';
 
 const initialState = {
   plans: [], // 전체 플랜 리스트
@@ -17,7 +17,9 @@ export const fetchPlanAsync = createAsyncThunk(
     }
     try {
       const [plan, comments] = await Promise.all([fetchPlanAPI(planId), fetchCommentAPI(planId)]);
-      return { ...plan, comments };
+      console.log('하이');
+      console.log(comments);
+      return { ...plan, comments: Array.isArray(comments) ? comments : [] };
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message);

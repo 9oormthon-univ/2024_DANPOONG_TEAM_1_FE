@@ -12,7 +12,6 @@ import { fetchPlanAsync } from '../../redux/slices/planSlice';
 function PlanDetailPage() {
   const { planId } = useParams();
   const dispatch = useDispatch();
-  const { currentPlan, comments } = useSelector(state => state.plan);
 
   const findPathRef = useRef(null);
 
@@ -26,9 +25,9 @@ function PlanDetailPage() {
     <>
       <Header />
       <S.Container>
-        {currentPlan && <PlanMainDetail plan={currentPlan} findPathRef={findPathRef} />}
+        <PlanMainDetail findPathRef={findPathRef} />
         <FindPath ref={findPathRef} />
-        {comments && <PlanComments comments={comments} />}
+        <PlanComments />
       </S.Container>
     </>
   );

@@ -11,20 +11,31 @@ const defaultInstance = axios.create({
 });
 applyInterceptors(defaultInstance);
 
+// company ------
 const companyInstance = axios.create(defaultInstance.defaults);
 companyInstance.defaults.baseURL += '/companies';
 // applyInterceptors(companyInstance);
 
+// member ------
 const memberInstance = axios.create(defaultInstance.defaults);
 memberInstance.defaults.baseURL += '/members';
 // applyInterceptors(memberInstance);
 
+// plan ------
 const planInstance = axios.create(defaultInstance.defaults);
 planInstance.defaults.baseURL += '/plans';
-// applyInterceptors(planInstance);
 
-const commentInstance = axios.create(defaultInstance.defaults);
-commentInstance.defaults.baseURL += '/comments';
-// applyInterceptors(commentInstance);
+const planBannerInstance = axios.create(planInstance.defaults);
+planBannerInstance.defaults.baseURL += '/banner';
 
-export { defaultInstance, companyInstance, memberInstance, planInstance, commentInstance };
+const planDetailInstance = axios.create(planInstance.defaults);
+planDetailInstance.defaults.baseURL += '/detail';
+
+export {
+  defaultInstance,
+  companyInstance,
+  memberInstance,
+  planDetailInstance,
+  planInstance,
+  planBannerInstance,
+};

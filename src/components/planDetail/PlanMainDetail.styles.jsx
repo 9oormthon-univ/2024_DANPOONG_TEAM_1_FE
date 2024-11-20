@@ -108,6 +108,7 @@ export const LikeAndComment = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  gap: 15px;
 `;
 
 export const Text = styled.p`
@@ -118,10 +119,10 @@ export const Text = styled.p`
 export const IconContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 0px;
+  gap: 5px;
   align-items: center;
 `;
 export const Icon = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
 `;
