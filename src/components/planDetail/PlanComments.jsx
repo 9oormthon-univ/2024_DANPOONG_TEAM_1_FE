@@ -19,14 +19,6 @@ function PlanComments() {
   const currentPlan = useSelector(state => state.plan.currentPlan);
   const { isLoggedIn } = useSelector(state => state.auth);
 
-  // 댓글을 부모-자식 관계로 그룹핑
-  const groupedComments = currentPlan?.comments.reduce((acc, comment) => {
-    const parentGroup = comment.groups;
-    acc[parentGroup] = acc[parentGroup] || [];
-    acc[parentGroup].push(comment);
-    return acc;
-  }, {});
-
   // 계층 구조로 변환
   const buildNestedComments = comments => {
     const map = {};
