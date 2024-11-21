@@ -41,12 +41,9 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Deploy site to S3 bucket
-        env: 
-          BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME}}
-          AWS_DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION_ID }}
-        run: 
-          aws s3 sync ./build s3://$BUCKET_NAME
+        run: aws s3 sync ./build s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete
 
-      - name : Clear Cash
-        run:
-          aws cloudfront create-invalidation --distribution-id $AWS_DISTRIBUTION --paths "/*"
+      - name: Clear Cache
+        run: |
+          echo "Clearing CloudFront cache..."
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/*"
