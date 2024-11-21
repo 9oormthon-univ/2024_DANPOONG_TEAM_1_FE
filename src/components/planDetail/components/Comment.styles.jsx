@@ -69,3 +69,11 @@ export const NestedReplyButton = styled.button`
   background-color: ${({ theme }) => theme.colors.primary2};
   padding: 2px 5px;
 `;
+
+export const DeleteCommentButton = styled.button`
+  color: white;
+  font-size: 14px;
+  border-radius: 2px;
+  background-color: ${({ theme }) => theme.colors.gray6};
+  padding: 2px 5px;
+`;

@@ -60,12 +60,29 @@ export const InputContainer = styled.textarea`
   padding: 10px;
 `;
 
+export const ReplyCancelButton = styled.button`
+  background-color: white;
+  border: 1px solid ${({ theme }) => theme.colors.primary2};
+  color: ${({ theme }) => theme.colors.primary2};
+  padding: 8px 15px;
+  border-radius: 7px;
+  font-size: 16px;
+`;
+
 export const CreateCommentButton = styled.button`
+  border: 1px solid ${({ theme }) => theme.colors.primary2};
   background-color: ${({ theme }) => theme.colors.primary2};
   color: white;
   padding: 8px 15px;
   border-radius: 7px;
   font-size: 16px;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
 `;
 
 export const Line = styled.hr`
