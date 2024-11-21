@@ -31,7 +31,7 @@ jobs:
           echo REACT_APP_KAKAOMAP_KEY=${{ secrets.REACT_APP_KAKAOMAP_KEY }} >> .env
 
       - name: Build project
-        run: npm run build # 빌드 과정에서 오류가 없는지 확인
+        run: npm run build
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
