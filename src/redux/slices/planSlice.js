@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchPlanAPI } from '../../api/plan/plan';
+import { fetchPlanAPI } from '../../api/plan/detail';
 import {
   fetchCommentAPI,
   postCommentAPI,

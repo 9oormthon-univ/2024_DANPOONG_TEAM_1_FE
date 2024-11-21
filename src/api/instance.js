@@ -31,6 +31,9 @@ planBannerInstance.defaults.baseURL += '/banner';
 const planDetailInstance = axios.create(planInstance.defaults);
 planDetailInstance.defaults.baseURL += '/detail';
 
+const planMainInstance = axios.create(planInstance.defaults);
+planMainInstance.defaults.baseURL += '/main';
+
 export {
   defaultInstance,
   companyInstance,
@@ -38,4 +41,5 @@ export {
   planDetailInstance,
   planInstance,
   planBannerInstance,
+  planMainInstance,
 };

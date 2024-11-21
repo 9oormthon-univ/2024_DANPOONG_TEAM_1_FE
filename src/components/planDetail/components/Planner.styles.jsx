@@ -63,4 +63,8 @@ export const FollowButton = styled.button`
   font-weight: 400;
   padding: 10px 20px;
   border-radius: 8px;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.deepBlue};
+  }
 `;

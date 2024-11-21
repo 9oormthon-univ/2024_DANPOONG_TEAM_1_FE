@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as S from './PlanList.styles';
 import Category from './components/Category';
 import { useState } from 'react';
@@ -7,10 +7,37 @@ import leftArrowIcon from '../../assets/images/left-arrow-icon.svg';
 import { popularPlanList, recentPlanList } from '../../assets/const/planData';
 import defaultProfile from '../../assets/images/default-profile-image.svg';
 import PlanPreview from '../common/planPreview/PlanPreview';
+import {
+  fetchBannersAPI,
+  fetchHottestPlansAPI,
+  fetchPopularUsersAPI,
+  fetchRankingsAPI,
+  fetchThemesAPI,
+} from '../../api/plan/main';
 
 function PlanList() {
+  const [bannerList, setBannerList] = useState([]);
+  const [hottestPlanList, setHottestPlanList] = useState([]);
+  const [popularUserList, setPopularUserList] = useState([]);
+  const [rankingsList, setRankingList] = useState([]);
+  const [themeList, setThemeList] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
   const itemsPerPage = 5; // 한 번에 보여줄 아이템 수
+
+  useEffect(() => {
+    const fetchList = async () => {
+      try {
+        setBannerList(await fetchBannersAPI());
+        setHottestPlanList(await fetchHottestPlansAPI());
+        setPopularUserList(await fetchPopularUsersAPI());
+        setRankingList(await fetchRankingsAPI());
+        setThemeList(await fetchThemesAPI());
+      } catch (error) {
+        console.error('Failed to fetch lists:', error);
+      }
+    };
+    fetchList();
+  }, []);
 
   // 화살표 클릭 핸들러
   const handleNext = () => {
