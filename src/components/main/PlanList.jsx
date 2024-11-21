@@ -6,6 +6,7 @@ import rightArrowIcon from '../../assets/images/right-arrow-icon.svg';
 import leftArrowIcon from '../../assets/images/left-arrow-icon.svg';
 import { popularPlanList, recentPlanList } from '../../assets/const/planData';
 import defaultProfile from '../../assets/images/default-profile-image.svg';
+import PlanPreview from '../common/planPreview/PlanPreview';
 
 function PlanList() {
   const [startIndex, setStartIndex] = useState(0);
@@ -77,17 +78,11 @@ function PlanList() {
         <S.Title>가장 뜨거운 축제🔥</S.Title>
         <S.HotPlanContainer>
           {popularPlanList &&
-            popularPlanList.slice(0, 5).map((item, index) => (
-              <S.HotPlan key={index}>
-                <S.HotPlanImageContainer>
-                  <S.HotPlanImage src={item.image} alt="image" />
-                </S.HotPlanImageContainer>
-                <S.HotPlanContent>
-                  <S.HotPlanTitle>{item.title}</S.HotPlanTitle>
-                  <S.HotPlanUser>기획: {item.user}</S.HotPlanUser>
-                </S.HotPlanContent>
-              </S.HotPlan>
-            ))}
+            popularPlanList
+              .slice(0, 5)
+              .map((item, index) => (
+                <PlanPreview key={index} image={item.image} title={item.title} user={item.user} />
+              ))}
         </S.HotPlanContainer>
       </S.CommentPopularLanking>
       <S.RecentPostContainer>

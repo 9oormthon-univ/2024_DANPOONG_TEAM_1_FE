@@ -10,3 +10,14 @@ export const fetchPlanAPI = async planId => {
     return error;
   }
 };
+
+export const fetchSimilarPlanAPI = async planId => {
+  console.log(planId);
+  try {
+    const response = await sendRequest(planDetailInstance, 'get', `/1/similar`);
+    return response.data.result;
+  } catch (error) {
+    console.error('Failed to fetch similar plan:', error);
+    return error;
+  }
+};

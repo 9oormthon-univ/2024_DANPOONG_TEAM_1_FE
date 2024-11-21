@@ -36,7 +36,6 @@ export const postCommentAsync = createAsyncThunk(
     try {
       await postCommentAPI({ planId, commentData });
       const comments = await fetchCommentAPI(planId);
-
       return { planId, comments };
     } catch (error) {
       console.error(error);

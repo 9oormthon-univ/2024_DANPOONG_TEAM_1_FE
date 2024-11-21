@@ -7,6 +7,7 @@ import PlanMainDetail from '../../components/planDetail/PlanMainDetail';
 import FindPath from '../../components/planDetail/FindPath';
 import PlanComments from '../../components/planDetail/PlanComments';
 import { fetchPlanAsync } from '../../redux/slices/planSlice';
+import VariousOtherPlans from '../../components/planDetail/VariousOtherPlans';
 
 function PlanDetailPage() {
   const { planId } = useParams();
@@ -26,6 +27,7 @@ function PlanDetailPage() {
       <S.Container>
         <PlanMainDetail findPathRef={findPathRef} />
         <FindPath ref={findPathRef} />
+        <VariousOtherPlans planId={planId} />
         <PlanComments planId={planId} />
       </S.Container>
     </>

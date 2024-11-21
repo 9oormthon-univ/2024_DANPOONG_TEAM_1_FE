@@ -70,7 +70,7 @@ function PlanComments({ planId }) {
 
     const newCommentData = {
       body: commentValue,
-      groups: replyTo ? replyTo.groups : 0,
+      group: replyTo ? replyTo.groups : 0,
       hierarchy: replyTo ? replyTo.hierarchy + 1 : 0,
     };
 
@@ -88,6 +88,8 @@ function PlanComments({ planId }) {
     setReplyTo(null);
     setCommentValue('');
   };
+
+  // username 수정 필요
 
   return (
     <S.Container>
