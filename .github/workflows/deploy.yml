@@ -27,8 +27,8 @@ jobs:
 
       - name: env setting
         run: |
-          echo "REACT_APP_BACKEND_SERVER_URL=${{ secrets.REACT_APP_BACKEND_SERVER_URL }}" >> .env
-          echo "REACT_APP_KAKAOMAP_KEY=${{ secrets.REACT_APP_KAKAOMAP_KEY }}" >> .env
+          echo REACT_APP_BACKEND_SERVER_URL=${{ secrets.REACT_APP_BACKEND_SERVER_URL }} >> .env
+          echo REACT_APP_KAKAOMAP_KEY=${{ secrets.REACT_APP_KAKAOMAP_KEY }} >> .env
 
       - name: Build project
         run: npm run build # 빌드 과정에서 오류가 없는지 확인
