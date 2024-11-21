@@ -49,4 +49,4 @@ jobs:
 
       - name : Clear Cash
         run: |
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/*"
+          aws cloudfront create-invalidation --distribution-id $AWS_DISTRIBUTION --paths "/*"
