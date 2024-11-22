@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import * as S from './Banners.styles';
 import { fetchBannersAPI } from '../../api/plan/main';
 import rightArrowIcon from '../../assets/images/right-arrow-icon.svg';
