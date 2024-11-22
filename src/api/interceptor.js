@@ -46,7 +46,7 @@ export const applyInterceptors = instance => {
           console.error('❌ 토큰 재발급 실패:', refreshError.message || refreshError);
           // Refresh Token 실패 시 로그아웃 처리
           localStorage.removeItem('accessToken');
-          document.cookie = 'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+          //document.cookie = 'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
           alert('세션이 만료되었습니다. 다시 로그인해주세요.');
           window.location.href = '/login';
 
