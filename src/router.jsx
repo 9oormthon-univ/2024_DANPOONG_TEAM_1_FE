@@ -12,6 +12,8 @@ import ForgotPasswdIndividual from './components/login/ForgotPasswdIndividual';
 import ForgotPasswdCompany from './components/login/ForgotPasswdCompany';
 import Profile from './pages/profile/Profile';
 import CreateFestival from './pages/createFestival/CreateFestival';
+import Step2 from './components/createFestival/Steps/Step2';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -23,23 +25,27 @@ const router = createBrowserRouter([
       },
       {
         path: 'create-festival',
-        element: <CreateFestival />, // 추가된 라우트
+        element: <CreateFestival />,
+      },
+      {
+        path: 'create-festival/step2',
+        element: <Step2 />,
       },
       {
         path: 'login',
-        element: <Login />, // Login 내부에서 기본 옵션 화면과 Outlet을 처리
+        element: <Login />,
         children: [
           {
-            path: 'form/:userType', // userType을 URL 파라미터로 받음
-            element: <LoginForm />, // 로그인 폼 화면
+            path: 'form/:userType',
+            element: <LoginForm />,
           },
           {
             path: 'individual-signup',
-            element: <IndividualSignUp />, // 개인 회원가입 화면
+            element: <IndividualSignUp />,
           },
           {
             path: 'company-signup',
-            element: <CompanySignUp />, // 기업 회원가입 화면
+            element: <CompanySignUp />,
           },
           {
             path: 'signup-complete',
@@ -47,17 +53,17 @@ const router = createBrowserRouter([
           },
           {
             path: 'forgot-password-individual',
-            element: <ForgotPasswdIndividual />, // 개인 비밀번호 찾기
+            element: <ForgotPasswdIndividual />,
           },
           {
             path: 'forgot-password-company',
-            element: <ForgotPasswdCompany />, // 기업 비밀번호 찾기
+            element: <ForgotPasswdCompany />,
           },
         ],
       },
       {
         path: 'profile',
-        element: <Profile />, // 프로필 페이지 추가
+        element: <Profile />,
       },
       {
         path: 'plan/:planId',

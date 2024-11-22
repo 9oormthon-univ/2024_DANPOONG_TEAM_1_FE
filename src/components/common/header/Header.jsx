@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { resetState } from '../../../redux/slices/historySlice';
 import * as S from './Header.styles';
 import logo from '../../../assets/images/trends-logo.svg';
 import searchIcon from '../../../assets/images/search-icon.svg';
@@ -10,10 +11,15 @@ import planningIcon from '../../../assets/images/planning-icon.svg';
 
 function Header() {
   const { isLoggedIn } = useSelector(state => state.auth); // Redux 상태 가져오기
-  const navigate = useNavigate(); // Navigation 사용
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogin = () => {
-    navigate('/login'); // 로그인 페이지로 이동
+    navigate('/login');
+  };
+
+  const handleCreateFestival = () => {
+    dispatch(resetState());
   };
 
   return (
@@ -30,7 +36,7 @@ function Header() {
       <S.ButtonContainer>
         {isLoggedIn ? (
           <>
-            <Link to="/create-festival">
+            <Link to="/create-festival" onClick={handleCreateFestival}>
               <S.PlanningButton>
                 <S.PlanningButtonInner>
                   <S.PlanningIcon src={planningIcon} alt="planning" />
