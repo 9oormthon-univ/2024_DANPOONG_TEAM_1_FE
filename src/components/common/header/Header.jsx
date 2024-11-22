@@ -19,13 +19,13 @@ function Header() {
   return (
     <S.Container>
       <S.SearchContainer>
-        <S.Logo src={logo} alt="trends" />
-        <form>
-          <S.Searchbar>
-            <S.SearchInput type="text" placeholder="검색어를 입력하세요." />
-            <S.SearchIcon src={searchIcon} alt="search" />
-          </S.Searchbar>
-        </form>
+        <Link to="/">
+          <S.Logo src={logo} alt="trends" />
+        </Link>
+        <S.Searchbar>
+          <S.SearchInput type="text" placeholder="검색어를 입력하세요." />
+          <S.SearchIcon src={searchIcon} alt="search" />
+        </S.Searchbar>
       </S.SearchContainer>
       <S.ButtonContainer>
         {isLoggedIn ? (
@@ -34,7 +34,7 @@ function Header() {
               <S.PlanningButton>
                 <S.PlanningButtonInner>
                   <S.PlanningIcon src={planningIcon} alt="planning" />
-                  축제 기획하기
+                  <S.PlanningText>축제 기획하기</S.PlanningText>
                 </S.PlanningButtonInner>
               </S.PlanningButton>
             </Link>

@@ -7,6 +7,12 @@ export const PlanContainer = styled.div`
   align-items: center;
   width: 100%;
   gap: 15px;
+  @media (max-width: 1300px) {
+    gap: 8px;
+  }
+  @media (max-width: 1000px) {
+    gap: 5px;
+  }
 `;
 
 export const Title = styled.p`
@@ -34,6 +40,15 @@ export const RecentPlan = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.gray3};
   overflow: hidden;
   box-shadow: 2px 4px 20px 0px ${({ theme }) => theme.colors.gray3};
+  @media (max-width: 1300px) {
+    width: 150px;
+  }
+  @media (max-width: 1000px) {
+    width: 110px;
+  }
+  @media (max-width: 750px) {
+    width: 80px;
+  }
 `;
 
 export const UserProfile = styled.div`
@@ -43,27 +58,65 @@ export const UserProfile = styled.div`
   gap: 10px;
   width: 100%;
   padding: 10px 15px;
+  @media (max-width: 1000px) {
+    gap: 5px;
+    padding: 8px 10px;
+  }
 `;
 
 export const UserProfileImage = styled.img`
   width: 25px;
+
+  @media (max-width: 1000px) {
+    width: 20px;
+  }
+  @media (max-width: 750px) {
+    width: 15px;
+  }
 `;
 
 export const UserName = styled.p`
   font-size: 18px;
   font-weight: 500;
+  @media (max-width: 1300px) {
+    font-size: 16px;
+  }
+  @media (max-width: 1000px) {
+    font-size: 14px;
+  }
+  @media (max-width: 750px) {
+    font-size: 12px;
+  }
 `;
 
 export const RecentPlanImage = styled.img`
   width: 200px;
-  height: 250px;
+  aspect-ratio: 2 / 2.5;
   object-fit: cover;
+  @media (max-width: 1300px) {
+    width: 150px;
+  }
+  @media (max-width: 1000px) {
+    width: 110px;
+  }
+  @media (max-width: 750px) {
+    width: 80px;
+  }
 `;
 
 export const RecentPlanDefaultImage = styled.div`
   width: 200px;
-  height: 250px;
+  aspect-ratio: 2 / 2.5;
   background-color: ${({ theme }) => theme.colors.gray3};
+  @media (max-width: 1300px) {
+    width: 150px;
+  }
+  @media (max-width: 1000px) {
+    width: 110px;
+  }
+  @media (max-width: 750px) {
+    width: 80px;
+  }
 `;
 
 export const RecentPlanContent = styled.div`
@@ -72,12 +125,26 @@ export const RecentPlanContent = styled.div`
   align-items: flex-start;
   gap: 10px;
   padding: 10px;
+  @media (max-width: 1000px) {
+    padding: 10px;
+    gap: 5px;
+  }
+  @media (max-width: 750px) {
+    padding: 8px;
+  }
 `;
 
 export const RecentPlanTitle = styled.p`
   font-size: 14px;
+
+  @media (max-width: 1000px) {
+    font-size: 10px;
+  }
 `;
 
 export const RecentPlanLike = styled.p`
   font-size: 14px;
+  @media (max-width: 1000px) {
+    font-size: 10px;
+  }
 `;

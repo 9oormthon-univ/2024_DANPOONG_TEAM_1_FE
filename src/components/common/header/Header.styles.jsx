@@ -15,6 +15,7 @@ export const SearchContainer = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 30px;
+  width: 55%;
 `;
 
 export const Logo = styled.img`
@@ -30,7 +31,7 @@ export const SearchInput = styled.input`
   font-size: 16px;
 `;
 
-export const Searchbar = styled.div`
+export const Searchbar = styled.form`
   padding: 10px 18px;
   border-radius: 100px;
   border: 1px solid ${({ theme }) => theme.colors.gray5};
@@ -38,7 +39,6 @@ export const Searchbar = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  min-width: 500px;
   box-shadow: 0px 0px 12px 0px ${({ theme }) => theme.colors.gray3};
 `;
 
@@ -51,10 +51,26 @@ export const PlanningButton = styled.button`
   border-end-start-radius: 0px;
   box-shadow: 2px 3px 4px 0px ${({ theme }) => theme.colors.gray3};
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 750px) {
+    width: 45px; /* 버튼 크기 고정 */
+    height: 45px;
+    border-radius: 50%; /* 동그란 모양 */
+    padding: 0;
+  }
+`;
+
+export const PlanningText = styled.p`
+  font-size: 18px;
+  @media (max-width: 750px) {
+    display: none; /* 글씨 숨기기 */
+  }
 `;
 
 export const PlanningIcon = styled.img`
-  width: 20px;
+  width: 24px;
 `;
 
 export const PlanningButtonInner = styled.div`
@@ -62,7 +78,6 @@ export const PlanningButtonInner = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 5px;
-  font-size: 18px;
 `;
 
 export const Button = styled.button`
@@ -83,6 +98,9 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
+  @media (max-width: 750px) {
+    gap: 10px;
+  }
 `;
 
 export const Menu = styled.p`

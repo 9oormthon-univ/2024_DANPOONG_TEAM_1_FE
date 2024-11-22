@@ -15,7 +15,7 @@ export const InnerList = styled.div`
 
 export const BannerContainer = styled.div`
   flex: 0 0 100%; /* 가로 전체 너비를 차지 */
-  aspect-ratio: 3 / 1; /* 가로 세로 비율 고정 (16:9) */
+  aspect-ratio: 3 / 1;
   display: flex;
   flex-direction: column;
   align-items: center;

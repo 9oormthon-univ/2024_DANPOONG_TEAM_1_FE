@@ -3,7 +3,7 @@ import * as S from './VariousOtherPlans.styles';
 import PlanPreview from '../common/planPreview/PlanPreview';
 import { fetchSimilarPlanAPI } from '../../api/plan/detail';
 
-function VariousOtherPlans(planId) {
+function VariousOtherPlans({ planId }) {
   const [similarPlanList, setSimilarPlanList] = useState([]);
 
   useEffect(() => {
@@ -27,9 +27,11 @@ function VariousOtherPlans(planId) {
       </S.TitleContainer>
       <S.PlanContainer>
         {similarPlanList.length > 0 ? (
-          similarPlanList.map((item, index) => (
-            <PlanPreview key={index} title={item.name} image={item.imageLink} />
-          ))
+          similarPlanList
+            .slice(0, 5)
+            .map((item, index) => (
+              <PlanPreview key={index} title={item.name} image={item.imageLink} />
+            ))
         ) : (
           <p>유사 행사가 없습니다.</p>
         )}

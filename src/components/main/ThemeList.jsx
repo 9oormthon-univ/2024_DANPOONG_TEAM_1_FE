@@ -53,7 +53,7 @@ function ThemeList() {
             <S.Plan key={index} onClick={() => handlePlanClick(item.planId)}>
               <S.PlanImage src={item.imageLink} />
               <S.PlanContent>
-                <S.PlanUser>{matchedCategory}</S.PlanUser>
+                <S.PlanCategory>{matchedCategory}</S.PlanCategory>
                 <S.PlanTitle>{item.title}</S.PlanTitle>
                 <S.PlanDetail>
                   <S.PlanLike>{item.likesCount}</S.PlanLike>

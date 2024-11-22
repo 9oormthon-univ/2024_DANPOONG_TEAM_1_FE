@@ -7,11 +7,17 @@ export const PlanContainer = styled.div`
   align-items: center;
   width: 100%;
   gap: 15px;
+  @media (max-width: 1300px) {
+    gap: 8px;
+  }
+  @media (max-width: 1000px) {
+    gap: 5px;
+  }
 `;
 
 export const Plan = styled.div`
   width: 200px;
-  height: 280px;
+  aspect-ratio: 2 / 2.8;
   flex-shrink: 0;
   overflow: hidden;
   position: relative;
@@ -21,6 +27,15 @@ export const Plan = styled.div`
   &:hover {
     transform: scale(1.1);
     transition: 0.3s ease;
+  }
+  @media (max-width: 1300px) {
+    width: 150px;
+  }
+  @media (max-width: 1000px) {
+    width: 110px;
+  }
+  @media (max-width: 750px) {
+    width: 80px;
   }
 `;
 
@@ -36,8 +51,16 @@ export const PlanContent = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 50%;
-  padding: 0 15px;
+  bottom: 0px;
+  padding: 15px;
+  gap: 10px;
+  @media (max-width: 1000px) {
+    padding: 10px;
+    gap: 5px;
+  }
+  @media (max-width: 750px) {
+    padding: 8px;
+  }
 `;
 
 export const PlanTitle = styled.p`
@@ -46,6 +69,15 @@ export const PlanTitle = styled.p`
   font-weight: 700;
   text-shadow: 0px 4px 4px ${({ theme }) => theme.colors.gray6};
   word-break: keep-all;
+  @media (max-width: 1300px) {
+    font-size: 18px;
+  }
+  @media (max-width: 1000px) {
+    font-size: 16px;
+  }
+  @media (max-width: 750px) {
+    font-size: 14px;
+  }
 `;
 
 export const PlanDetail = styled.div`
@@ -54,13 +86,28 @@ export const PlanDetail = styled.div`
   align-items: center;
   justify-content: space-between;
   bottom: 0px;
+  @media (max-width: 1300px) {
+    font-size: 10px;
+  }
+  @media (max-width: 1000px) {
+    display: none;
+  }
 `;
 
-export const PlanUser = styled.p`
+export const PlanCategory = styled.p`
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   text-shadow: 0px 4px 4px ${({ theme }) => theme.colors.gray6};
+  @media (max-width: 1300px) {
+    font-size: 14px;
+  }
+  @media (max-width: 1000px) {
+    font-size: 12px;
+  }
+  @media (max-width: 750px) {
+    font-size: 10px;
+  }
 `;
 
 export const PlanLike = styled.p`
@@ -81,6 +128,9 @@ export const Title = styled.p`
   font-size: 35px;
   font-weight: 500;
   color: black;
+  @media (max-width: 750px) {
+    font-size: 25px;
+  }
 `;
 
 export const ThemePopularLanking = styled.div`
@@ -100,6 +150,18 @@ export const LeftArrow = styled.img`
   left: 120px;
   z-index: 1;
   cursor: pointer;
+  @media (max-width: 1300px) {
+    width: 40px;
+    left: 70px;
+  }
+  @media (max-width: 1000px) {
+    width: 30px;
+    left: 50px;
+  }
+  @media (max-width: 750px) {
+    width: 25px;
+    left: 40px;
+  }
 `;
 
 export const RightArrow = styled.img`
@@ -108,16 +170,18 @@ export const RightArrow = styled.img`
   right: 120px;
   z-index: 1;
   cursor: pointer;
-`;
-
-export const RecentPostContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.gray1};
-  padding: 100px 10%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  gap: 50px;
+  @media (max-width: 1300px) {
+    width: 40px;
+    right: 70px;
+  }
+  @media (max-width: 1000px) {
+    width: 30px;
+    right: 50px;
+  }
+  @media (max-width: 750px) {
+    width: 25px;
+    right: 40px;
+  }
 `;
 
 export const CategoryContainer = styled.div`

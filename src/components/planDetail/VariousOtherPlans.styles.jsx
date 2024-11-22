@@ -32,4 +32,8 @@ export const Title = styled.div`
 export const PlanContainer = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
 `;
