@@ -11,8 +11,7 @@ import Step7 from '../../components/createFestival/Steps/Step7';
 import Step8 from '../../components/createFestival/Steps/Step8';
 import Step9 from '../../components/createFestival/Steps/Step9';
 import Header from '../../components/common/header/Header';
-import { useLocation } from 'react-router-dom';
-import { resetState, setCurrentStep } from '../../redux/slices/historySlice';
+import { setCurrentStep } from '../../redux/slices/historySlice';
 
 const CreateFestival = () => {
   const currentStep = useSelector(state => state.history.currentStep);
