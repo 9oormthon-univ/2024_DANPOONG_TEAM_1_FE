@@ -4,6 +4,7 @@ import { setDetail } from '../../../redux/slices/historySlice';
 import * as S from '../StepStyle/Step8.styles';
 import { sendRequest } from '../../../api/request';
 import { planInstance } from '../../../api/instance';
+import { applyInterceptors } from '../../../api/interceptor';
 
 function Step8({ onNextStep }) {
   const { title, details } = useSelector(state => state.history);
@@ -15,9 +16,9 @@ function Step8({ onNextStep }) {
   const dispatch = useDispatch();
 
   // Redux 저장
-  const saveToRedux = () => {
-    dispatch(setDetail({ key: 'content', value: content }));
-    dispatch(setDetail({ key: 'budget', value: budget }));
+  const saveToRedux = async () => {
+    await dispatch(setDetail({ key: 'content', value: content }));
+    await dispatch(setDetail({ key: 'budget', value: budget }));
   };
 
   useEffect(() => {
@@ -63,17 +64,14 @@ function Step8({ onNextStep }) {
 
   // API 요청 처리
   const handleSubmit = async () => {
-    const token = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken');
 
-    if (!isAccessTokenValid(token)) {
+    if (!isAccessTokenValid(accessToken)) {
       alert('Access Token이 만료되었거나 유효하지 않습니다. 다시 로그인해주세요.');
       return;
     }
 
-    console.log('🔍 Authorization 헤더에 사용될 Access Token:', token);
-
     const { province, city, town } = splitAddress(details?.location);
-    const categoryValue = details?.theme + 1;
 
     if (!title || !province || !city || !town || !details?.period) {
       console.error('❌ 필수 데이터 누락:', {
@@ -87,38 +85,27 @@ function Step8({ onNextStep }) {
       return;
     }
 
-    const requestBody = {
-      title,
-      category: categoryValue,
-      startDate: details.period?.split(' ~ ')[0],
-      endDate: details.period?.split(' ~ ')[1],
-      target: details?.target || '기본 대상',
-      cost: Number(details?.cost) || 0,
-      bookingMethod: details?.ticket || '기본 티켓 구매 방법',
-      content: content || '기본 내용',
-      budget: Number(budget) || 0,
-      province,
-      city,
-      town,
-    };
-
-    console.log('🔍 데이터 타입 확인:');
-    Object.entries(requestBody).forEach(([key, value]) => {
-      console.log(`- ${key}: ${typeof value}`);
-    });
-
     try {
-      // Authorization 헤더 설정
-      planInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      console.log('🔑 Axios 기기본 Authorization 헤더 설정 완료:', token);
+      const categoryValue = details.theme;
+
+      const data = {
+        title,
+        category: categoryValue,
+        startDate: details.period?.split(' ~ ')[0],
+        endDate: details.period?.split(' ~ ')[1],
+        target: details?.target || '기본 대상',
+        cost: Number(details?.cost) || 0,
+        bookingMethod: details?.ticket || '기본 티켓 구매 방법',
+        content: content || '기본 내용',
+        budget: Number(budget) || 0,
+        province,
+        city,
+        town,
+      };
 
       // API 요청
-      const response = await sendRequest(planInstance, 'post', '/', requestBody, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
+      applyInterceptors(planInstance);
+      const response = await sendRequest(planInstance, 'post', '', data);
       console.log('✅ API 성공 응답:', response.data);
       alert('요청이 성공적으로 처리되었습니다.');
       onNextStep && onNextStep();
