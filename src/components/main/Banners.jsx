@@ -20,32 +20,27 @@ function Banners() {
     fetchList();
   }, []);
 
+  // handleNext 함수 정의
+  const handleNext = useCallback(() => {
+    setCurrentIndex(prev => (prev + 1) % bannerList.length);
+  }, [bannerList.length]);
+
+  const handlePrev = useCallback(() => {
+    setCurrentIndex(prev => (prev - 1 + bannerList.length) % bannerList.length);
+  }, [bannerList.length]);
+
+  const handlePaginationClick = useCallback(index => {
+    setCurrentIndex(index); // 특정 페이지 클릭 시 이동
+  }, []);
+
+  // 자동 슬라이딩
   useEffect(() => {
-    // 자동 슬라이딩
     const interval = setInterval(() => {
-      handleNext(); // 다음 배너로 이동
+      handleNext();
     }, intervalTime);
 
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 클리어
-  }, [currentIndex, handleNext]);
-
-  useEffect(() => {
-    // 의존성 배열에 handleNext 추가
-  }, [handleNext]);
-
-  const handleNext = () => {
-    // 다음 배너로 이동
-    setCurrentIndex(prev => (prev + 1) % bannerList.length);
-  };
-
-  const handlePrev = () => {
-    // 이전 배너로 이동
-    setCurrentIndex(prev => (prev - 1 + bannerList.length) % bannerList.length);
-  };
-
-  const handlePaginationClick = index => {
-    setCurrentIndex(index); // 특정 페이지 클릭 시 이동
-  };
+  }, [handleNext]); // handleNext를 의존성으로 추가
 
   return (
     <S.Container>
