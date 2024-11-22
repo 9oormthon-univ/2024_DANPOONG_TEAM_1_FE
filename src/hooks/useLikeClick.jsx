@@ -1,11 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { postLikePlanAsync, postLikeCommentAsync } from '../redux/slices/planSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 function useLikeClick(type) {
+  const checkLike = useSelector(state => state.plan.currentPlan?.checkLike);
   const dispatch = useDispatch();
-  const currentPlan = useSelector(state => state.plan.currentPlan);
-
   const handleClick = useCallback(
     async ({ planId, commentId }) => {
       if (type === 'comment') {
@@ -19,9 +18,7 @@ function useLikeClick(type) {
     [dispatch, type]
   );
 
-  const isActive = currentPlan?.checkLike;
-
-  return { handleClick, isActive };
+  return { handleClick, checkLike };
 }
 
 export default useLikeClick;

@@ -13,8 +13,12 @@ export const CommentContainer = styled.div`
 `;
 
 export const CommentCount = styled.p`
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 500;
+
+  @media (max-width: 750px) {
+    font-size: 24px;
+  }
 `;
 
 export const CreateCommentContainer = styled.div`
@@ -33,11 +37,17 @@ export const UserProfile = styled.div`
 
 export const ProfileImage = styled.img`
   width: 40px;
+  @media (max-width: 750px) {
+    width: 30px;
+  }
 `;
 
 export const UserName = styled.p`
   font-size: 20px;
   font-weight: 500;
+  @media (max-width: 750px) {
+    font-size: 18px;
+  }
 `;
 
 export const FormContainer = styled.form`

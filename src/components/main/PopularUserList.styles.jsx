@@ -19,6 +19,9 @@ export const Title = styled.p`
   font-size: 35px;
   font-weight: 500;
   color: black;
+  @media (max-width: 750px) {
+    font-size: 25px;
+  }
 `;
 
 export const RecentPostContainer = styled.div`
@@ -49,6 +52,7 @@ export const RecentPlan = styled.div`
   @media (max-width: 750px) {
     width: 80px;
   }
+  cursor: pointer;
 `;
 
 export const UserProfile = styled.div`

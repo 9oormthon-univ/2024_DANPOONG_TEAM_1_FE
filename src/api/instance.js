@@ -34,6 +34,9 @@ planDetailInstance.defaults.baseURL += '/detail';
 const planMainInstance = axios.create(planInstance.defaults);
 planMainInstance.defaults.baseURL += '/main';
 
+const planSearchInstance = axios.create(planInstance.defaults);
+planSearchInstance.defaults.baseURL += '/main';
+
 export {
   defaultInstance,
   companyInstance,
@@ -42,4 +45,5 @@ export {
   planInstance,
   planBannerInstance,
   planMainInstance,
+  planSearchInstance,
 };

@@ -37,6 +37,7 @@ export const Plan = styled.div`
   @media (max-width: 750px) {
     width: 80px;
   }
+  cursor: pointer;
 `;
 
 export const PlanImage = styled.div`

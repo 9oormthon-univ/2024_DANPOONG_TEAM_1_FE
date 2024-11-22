@@ -10,7 +10,7 @@ import kakaoMapIcon from '../../assets/images/kakaomap-icon.svg';
 import useLikeClick from '../../hooks/useLikeClick';
 
 function PlanMainDetail({ findPathRef, planId }) {
-  const { handleClick, isActive } = useLikeClick('plan');
+  const { handleClick, checkLike } = useLikeClick('plan');
   const { isLoggedIn } = useSelector(state => state.auth);
   const currentPlan = useSelector(state => state.plan.currentPlan);
   const [categoryIcon, setCategoryIcon] = useState(null);
@@ -25,6 +25,10 @@ function PlanMainDetail({ findPathRef, planId }) {
       }
     }
   }, [currentPlan]);
+
+  useEffect(() => {
+    console.log(checkLike);
+  }, [checkLike]);
 
   // Scroll to FindPath component
   const scrollToMap = () => {
@@ -85,7 +89,7 @@ function PlanMainDetail({ findPathRef, planId }) {
             <S.LikeAndComment>
               <S.IconContainer>
                 <S.Icon
-                  src={isActive ? filledLikeIcon : planLikeIcon}
+                  src={checkLike ? filledLikeIcon : planLikeIcon}
                   onClick={() => isLoggedIn && handleClick({ planId: planId })}
                 />
                 <S.Text>{currentPlan.likesCount}</S.Text>

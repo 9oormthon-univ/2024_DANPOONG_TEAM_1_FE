@@ -27,6 +27,9 @@ export const Title = styled.div`
   font-size: 30px;
   font-weight: 500;
   text-align: left;
+  @media (max-width: 750px) {
+    font-size: 24px;
+  }
 `;
 
 export const PlanContainer = styled.div`

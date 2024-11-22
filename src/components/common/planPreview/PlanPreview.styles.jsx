@@ -15,6 +15,7 @@ export const Container = styled.div`
   @media (max-width: 750px) {
     width: 80px;
   }
+  cursor: pointer;
 `;
 
 export const PlanImageContainer = styled.div`

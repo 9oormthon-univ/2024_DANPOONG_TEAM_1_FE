@@ -32,4 +32,5 @@ export const HotPlanContainer = styled.div`
   @media (max-width: 1000px) {
     gap: 5px;
   }
+  cursor: pointer;
 `;

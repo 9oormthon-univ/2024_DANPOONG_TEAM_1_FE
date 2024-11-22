@@ -181,15 +181,21 @@ const planSlice = createSlice({
 
         // 현재 선택된 플랜의 좋아요 수 업데이트
         if (state.currentPlan && state.currentPlan.id === planId) {
-          state.currentPlan.likesCount = likesCount;
-          state.currentPlan.checkLike = checkLike;
+          state.currentPlan = {
+            ...state.currentPlan,
+            likesCount,
+            checkLike,
+          };
         }
 
         // 전체 플랜 리스트에서도 좋아요 수 업데이트
         const planIndex = state.plans.findIndex(plan => plan.id === planId);
         if (planIndex !== -1) {
-          state.plans[planIndex].likesCount = likesCount;
-          state.plans[planIndex].checkLike = checkLike;
+          state.plans[planIndex] = {
+            ...state.plans[planIndex],
+            likesCount,
+            checkLike,
+          };
         }
 
         state.error = null;

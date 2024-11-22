@@ -27,6 +27,9 @@ export const Title = styled.div`
   font-size: 30px;
   font-weight: 500;
   text-align: left;
+  @media (max-width: 750px) {
+    font-size: 24px;
+  }
 `;
 
 export const MapContainer = styled.div`
@@ -44,6 +47,9 @@ export const AddressContainer = styled.div`
 export const Address = styled.p`
   font-size: 26px;
   font-weight: 500;
+  @media (max-width: 750px) {
+    font-size: 22px;
+  }
 `;
 
 export const AddressDetail = styled.p`

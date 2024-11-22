@@ -16,16 +16,25 @@ export const ProfileContainer = styled.div`
 
 export const ProfileImage = styled.img`
   width: 40px;
+  @media (max-width: 750px) {
+    width: 30px;
+  }
 `;
 
 export const UserName = styled.p`
   font-size: 20px;
   font-weight: 500;
+  @media (max-width: 750px) {
+    font-size: 18px;
+  }
 `;
 
 export const CommentDate = styled.p`
   font-size: 12px;
   color: ${({ theme }) => theme.colors.gray5};
+  @media (max-width: 750px) {
+    font-size: 10px;
+  }
 `;
 
 export const CommentContent = styled.p`

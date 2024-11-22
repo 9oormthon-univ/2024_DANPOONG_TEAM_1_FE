@@ -9,8 +9,11 @@ export const PlannerContainer = styled.div`
 `;
 
 export const PlannerTitle = styled.p`
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 30px;
+  font-weight: 500;
+  @media (max-width: 750px) {
+    font-size: 24px;
+  }
 `;
 
 export const Planner = styled.div`
