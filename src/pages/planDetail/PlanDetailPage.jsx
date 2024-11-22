@@ -13,6 +13,10 @@ function PlanDetailPage() {
   const { planId } = useParams();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const findPathRef = useRef(null);
 
   useEffect(() => {

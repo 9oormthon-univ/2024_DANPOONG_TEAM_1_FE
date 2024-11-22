@@ -60,6 +60,12 @@ export const RecentPlanImage = styled.img`
   object-fit: cover;
 `;
 
+export const RecentPlanDefaultImage = styled.div`
+  width: 200px;
+  height: 250px;
+  background-color: ${({ theme }) => theme.colors.gray3};
+`;
+
 export const RecentPlanContent = styled.div`
   display: flex;
   flex-direction: column;

@@ -23,17 +23,21 @@ function PopularUserList() {
     <S.RecentPostContainer>
       <S.Title>인기 기획자의 최근 게시글</S.Title>
       <S.PlanContainer>
-        {recentPlanList &&
-          recentPlanList.map((item, index) => (
+        {popularUserList &&
+          popularUserList.map((item, index) => (
             <S.RecentPlan key={index}>
               <S.UserProfile>
-                <S.UserProfileImage src={defaultProfile} alt="profile" />
-                <S.UserName>{item.user}</S.UserName>
+                <S.UserProfileImage src={item.memberImageLink || defaultProfile} alt="profile" />
+                <S.UserName>{item.name}</S.UserName>
               </S.UserProfile>
-              <S.RecentPlanImage src={item.image} alt="image" />
+              {item.planImageLink ? (
+                <S.RecentPlanImage src={item.planImageLink} alt="image" />
+              ) : (
+                <S.RecentPlanDefaultImage />
+              )}
               <S.RecentPlanContent>
                 <S.RecentPlanTitle>{item.title}</S.RecentPlanTitle>
-                <S.RecentPlanLike>{item.like}</S.RecentPlanLike>
+                <S.RecentPlanLike>{item.likesCount}</S.RecentPlanLike>
               </S.RecentPlanContent>
             </S.RecentPlan>
           ))}

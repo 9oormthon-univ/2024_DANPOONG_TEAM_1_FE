@@ -40,13 +40,6 @@ export const PlanContent = styled.div`
   padding: 0 15px;
 `;
 
-export const PlanLanking = styled.p`
-  color: white;
-  font-size: 50px;
-  font-weight: 700;
-  text-shadow: 0px 4px 4px ${({ theme }) => theme.colors.gray6};
-`;
-
 export const PlanTitle = styled.p`
   color: white;
   font-size: 20px;

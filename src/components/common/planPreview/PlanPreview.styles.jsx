@@ -52,3 +52,9 @@ export const Category = styled.p`
   width: 100%; /* 부모 요소에 맞게 크기 조정 */
   color: ${({ theme }) => theme.colors.primary1};
 `;
+
+export const PlanDefaultImage = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.colors.gray3};
+`;

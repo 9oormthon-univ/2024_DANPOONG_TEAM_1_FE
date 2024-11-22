@@ -1,36 +1,27 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { postLikePlanAsync, postLikeCommentAsync } from '../redux/slices/planSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function useLikeClick(type) {
   const dispatch = useDispatch();
-  const [isActive, setIsActive] = useState(false);
-  const [likesCount, setLikesCount] = useState(0);
+  const currentPlan = useSelector(state => state.plan.currentPlan);
 
-  const handleClick = async ({ planId, commentId }) => {
-    try {
-      setIsActive(!isActive);
-
-      let updatedLikesCount;
+  const handleClick = useCallback(
+    async ({ planId, commentId }) => {
       if (type === 'comment') {
-        const result = await dispatch(postLikeCommentAsync({ planId, commentId }));
-        updatedLikesCount = result.likesCount;
+        await dispatch(postLikeCommentAsync({ planId, commentId }));
       } else if (type === 'plan') {
-        console.log('성공');
-        const result = await dispatch(postLikePlanAsync(planId));
-        updatedLikesCount = result.likesCount;
-        console.log(updatedLikesCount);
+        await dispatch(postLikePlanAsync(planId));
       } else {
         throw new Error('Invalid type for like operation.');
       }
+    },
+    [dispatch, type]
+  );
 
-      setLikesCount(updatedLikesCount);
-    } catch (error) {
-      console.error('Failed to toggle like:', error);
-    }
-  };
+  const isActive = currentPlan?.checkLike;
 
-  return { handleClick, isActive, likesCount };
+  return { handleClick, isActive };
 }
 
 export default useLikeClick;

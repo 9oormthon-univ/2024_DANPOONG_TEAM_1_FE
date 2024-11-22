@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as S from './PlanPreview.styles';
 import { category } from '../../../assets/const/category';
 
-function PlanPreview({ image, title, user, itemCategory }) {
+function PlanPreview({ planId, image, title, user, itemCategory, town }) {
+  const navigate = useNavigate();
   const [categoryTitle, setCategoryTitle] = useState('');
 
   useEffect(() => {
@@ -13,10 +15,15 @@ function PlanPreview({ image, title, user, itemCategory }) {
       }
     }
   }, [itemCategory]);
+
+  const handlePlanClick = planId => {
+    navigate(`/plan/${planId}`);
+  };
+
   return (
-    <S.Container>
+    <S.Container onClick={() => handlePlanClick(planId)}>
       <S.PlanImageContainer>
-        <S.PlanImage src={image} alt="image" />
+        {image !== null ? <S.PlanImage src={image} alt="image" /> : <S.PlanDefaultImage />}
       </S.PlanImageContainer>
       <S.PlanContent>
         {categoryTitle && <S.Category>{categoryTitle}</S.Category>}

@@ -27,7 +27,7 @@ export const postLikePlanAPI = async planId => {
   applyInterceptors(planLikeInstance);
   try {
     const response = await sendRequest(planLikeInstance, 'post', `/${planId}/likes/`);
-    return response.data.result.likesCount;
+    return response.data.result;
   } catch (error) {
     console.error('Failed to fetch similar plan:', error);
     return error;

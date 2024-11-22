@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import * as S from './HottestPlanList.styles';
 import { useState } from 'react';
-import { popularPlanList } from '../../assets/const/planData';
 import PlanPreview from '../common/planPreview/PlanPreview';
 import { fetchHottestPlansAPI } from '../../api/plan/main';
 
@@ -11,7 +10,7 @@ function HottestPlanList() {
   useEffect(() => {
     const fetchList = async () => {
       try {
-        setHottestPlanList(await fetchHottestPlansAPI());
+        await setHottestPlanList(await fetchHottestPlansAPI());
       } catch (error) {
         console.error('Failed to fetch lists:', error);
       }
@@ -23,11 +22,18 @@ function HottestPlanList() {
     <S.CommentPopularLanking>
       <S.Title>가장 뜨거운 축제🔥</S.Title>
       <S.HotPlanContainer>
-        {popularPlanList &&
-          popularPlanList
+        {hottestPlanList &&
+          hottestPlanList
             .slice(0, 5)
             .map((item, index) => (
-              <PlanPreview key={index} image={item.image} title={item.title} user={item.user} />
+              <PlanPreview
+                planId={item.planId}
+                key={index}
+                image={item.imageLink}
+                title={item.title}
+                user={item.name}
+                town={item.town}
+              />
             ))}
       </S.HotPlanContainer>
     </S.CommentPopularLanking>
