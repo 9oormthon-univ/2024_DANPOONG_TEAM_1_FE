@@ -9,8 +9,8 @@ function Step8({ onNextStep }) {
   const { title, details } = useSelector(state => state.history);
   const [content, setContent] = useState(details?.content || '');
   const [budget, setBudget] = useState(details?.budget || '');
-  const [poster, setPoster] = useState(null);
-  const [banner, setBanner] = useState(null);
+  const [, setPoster] = useState(null);
+  const [, setBanner] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -22,6 +22,7 @@ function Step8({ onNextStep }) {
 
   useEffect(() => {
     saveToRedux();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content, budget]);
 
   // Access Token 검증 함수
