@@ -7,10 +7,15 @@ import PlanMainDetail from '../../components/planDetail/PlanMainDetail';
 import FindPath from '../../components/planDetail/FindPath';
 import PlanComments from '../../components/planDetail/PlanComments';
 import { fetchPlanAsync } from '../../redux/slices/planSlice';
+import VariousOtherPlans from '../../components/planDetail/VariousOtherPlans';
 
 function PlanDetailPage() {
   const { planId } = useParams();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const findPathRef = useRef(null);
 
@@ -24,9 +29,10 @@ function PlanDetailPage() {
     <>
       <Header />
       <S.Container>
-        <PlanMainDetail findPathRef={findPathRef} />
+        <PlanMainDetail findPathRef={findPathRef} planId={planId} />
         <FindPath ref={findPathRef} />
-        <PlanComments />
+        <VariousOtherPlans planId={planId} />
+        <PlanComments planId={planId} />
       </S.Container>
     </>
   );

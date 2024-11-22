@@ -13,3 +13,10 @@ export const Banner = styled.div`
   height: 500px;
   background-color: ${({ theme }) => theme.colors.gray3};
 `;
+
+export const PlanContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;

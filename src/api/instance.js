@@ -27,11 +27,19 @@ const planInstance = createInstance(defaultInstance, '/plans');
 const planBannerInstance = createInstance(planInstance, '/banner');
 const planDetailInstance = createInstance(planInstance, '/detail');
 
+const planMainInstance = axios.create(planInstance.defaults);
+planMainInstance.defaults.baseURL += '/main';
+
+const planSearchInstance = axios.create(planInstance.defaults);
+planSearchInstance.defaults.baseURL += '/main';
+
 export {
   defaultInstance,
   companyInstance,
   memberInstance,
   planInstance,
   planBannerInstance,
+  planMainInstance,
+  planSearchInstance,
   planDetailInstance,
 };

@@ -9,8 +9,11 @@ export const PlannerContainer = styled.div`
 `;
 
 export const PlannerTitle = styled.p`
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 30px;
+  font-weight: 500;
+  @media (max-width: 750px) {
+    font-size: 24px;
+  }
 `;
 
 export const Planner = styled.div`
@@ -63,4 +66,8 @@ export const FollowButton = styled.button`
   font-weight: 400;
   padding: 10px 20px;
   border-radius: 8px;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.deepBlue};
+  }
 `;

@@ -32,27 +32,11 @@ export const Title = styled.div`
   }
 `;
 
-export const MapContainer = styled.div`
-  width: 100%;
-  height: 350px;
-  border: 1px solid ${({ theme }) => theme.colors.gray3};
-`;
-
-export const AddressContainer = styled.div`
+export const PlanContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-`;
-
-export const Address = styled.p`
-  font-size: 26px;
-  font-weight: 500;
-  @media (max-width: 750px) {
-    font-size: 22px;
-  }
-`;
-
-export const AddressDetail = styled.p`
-  font-size: 16px;
-  font-weight: 400;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
 `;

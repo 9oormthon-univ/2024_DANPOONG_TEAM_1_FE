@@ -3,11 +3,16 @@ import { useSelector } from 'react-redux';
 import * as S from './PlanMainDetail.styles';
 import { category } from '../../assets/const/category';
 import planLikeIcon from '../../assets/images/plan-like-icon.svg';
+import filledLikeIcon from '../../assets/images/filled-like-icon.svg';
 import planCommentIcon from '../../assets/images/plan-comment-icon.svg';
 import Planner from './components/Planner';
 import kakaoMapIcon from '../../assets/images/kakaomap-icon.svg';
+import useLikeClick from '../../hooks/useLikeClick';
+import MoreIcon from './components/MoreIcon';
 
-function PlanMainDetail({ findPathRef }) {
+function PlanMainDetail({ findPathRef, planId }) {
+  const { handleClick, checkLike } = useLikeClick('plan');
+  const { isLoggedIn } = useSelector(state => state.auth);
   const currentPlan = useSelector(state => state.plan.currentPlan);
   const [categoryIcon, setCategoryIcon] = useState(null);
   const [categoryTitle, setCategoryTitle] = useState('');
@@ -22,6 +27,10 @@ function PlanMainDetail({ findPathRef }) {
     }
   }, [currentPlan]);
 
+  useEffect(() => {
+    console.log(checkLike);
+  }, [checkLike]);
+
   // Scroll to FindPath component
   const scrollToMap = () => {
     findPathRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -35,6 +44,7 @@ function PlanMainDetail({ findPathRef }) {
             <S.PlanCategory>
               <S.PlanCategoryIcon src={categoryIcon} alt="icon" />
               <S.PlanCategoryTitle>{categoryTitle}</S.PlanCategoryTitle>
+              <MoreIcon />
             </S.PlanCategory>
             <S.PlanContentContainer>
               {currentPlan.posterUrl ? (
@@ -80,7 +90,10 @@ function PlanMainDetail({ findPathRef }) {
             <S.PlanInfo>{currentPlan.content}</S.PlanInfo>
             <S.LikeAndComment>
               <S.IconContainer>
-                <S.Icon src={planLikeIcon} />
+                <S.Icon
+                  src={checkLike ? filledLikeIcon : planLikeIcon}
+                  onClick={() => isLoggedIn && handleClick({ planId: planId })}
+                />
                 <S.Text>{currentPlan.likesCount}</S.Text>
               </S.IconContainer>
               <S.IconContainer>
