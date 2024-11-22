@@ -8,6 +8,7 @@ import planCommentIcon from '../../assets/images/plan-comment-icon.svg';
 import Planner from './components/Planner';
 import kakaoMapIcon from '../../assets/images/kakaomap-icon.svg';
 import useLikeClick from '../../hooks/useLikeClick';
+import MoreIcon from './components/MoreIcon';
 
 function PlanMainDetail({ findPathRef, planId }) {
   const { handleClick, checkLike } = useLikeClick('plan');
@@ -43,6 +44,7 @@ function PlanMainDetail({ findPathRef, planId }) {
             <S.PlanCategory>
               <S.PlanCategoryIcon src={categoryIcon} alt="icon" />
               <S.PlanCategoryTitle>{categoryTitle}</S.PlanCategoryTitle>
+              <MoreIcon />
             </S.PlanCategory>
             <S.PlanContentContainer>
               {currentPlan.posterUrl ? (

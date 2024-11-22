@@ -28,6 +28,7 @@ export const PlanCategory = styled.div`
   @media (max-width: 1000px) {
     gap: 5px;
   }
+  position: relative;
 `;
 
 export const PlanCategoryIcon = styled.img`

@@ -7,7 +7,8 @@ export const fetchPlanAPI = async planId => {
   const token = getAuthToken(); // 로컬 스토리지에서 액세스 토큰 가져오기
 
   try {
-    if (token) {
+    console.log('dd', token);
+    if (token !== null) {
       const response = await sendRequest(planDetailInstance, 'get', `/${planId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
