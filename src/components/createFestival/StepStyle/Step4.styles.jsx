@@ -13,18 +13,19 @@ export const DateInputHeader = styled.div`
   justify-content: space-between;
   width: 40%;
   align-items: center;
-  max-width: 800px;
+  max-width: 500px;
   margin-bottom: 20px;
   border-radius: 50px;
   border: 1px solid #ccc;
   padding: 3px 30px;
+  margin-top: 50px;
 `;
 
 export const DateInputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 30px;
 `;
 
 export const Label = styled.div`

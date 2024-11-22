@@ -4,7 +4,7 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import * as S from '../StepStyle/Step2.styles';
 import { useDispatch } from 'react-redux';
 import { setDetail } from '../../../redux/slices/historySlice';
-
+import searchIcon from '../../../assets/images/search-icon.svg';
 function Step2({ onNextStep }) {
   const [mapCenter, setMapCenter] = useState({ lat: 37.5665, lng: 126.978 }); // 초기 위치
   const [searchQuery, setSearchQuery] = useState(''); // 검색 입력값
@@ -42,7 +42,7 @@ function Step2({ onNextStep }) {
         setSearchResults(data); // 검색 결과 설정
       } else {
         alert('검색 결과가 없습니다.');
-        setSearchResults([]);
+        setSearchResults([]); // 검색 결과 없을 경우 빈 배열 설정
       }
     });
   };
@@ -72,7 +72,7 @@ function Step2({ onNextStep }) {
     setMapCenter(position); // 지도 중심 이동
     setAddress(address); // 최종 선택된 주소 업데이트
     setSearchQuery(address); // 검색창 업데이트
-    setSearchResults([]); // 검색 결과 초기화
+    // setSearchResults([]); // 결과 클릭 후에는 검색 결과 유지
   };
 
   const handleNextButtonClick = () => {
@@ -87,31 +87,29 @@ function Step2({ onNextStep }) {
   const handleKeyPress = e => {
     if (e.key === 'Enter' && searchQuery.trim()) {
       handleSearch(); // 검색 실행
+      e.preventDefault();
     }
   };
 
   return (
     <S.Container>
       <S.LeftPanel>
-        <S.SearchInput
-          type="text"
-          value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
-          onKeyDown={handleKeyPress}
-          placeholder="장소를 입력해 주세요"
-        />
+        <S.Searchbar>
+          <S.SearchInput
+            type="text"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            onKeyDown={handleKeyPress}
+            placeholder="장소를 입력해 주세요"
+          />
+          <S.SearchIcon src={searchIcon} alt="search" />
+        </S.Searchbar>
         <S.SearchResults>
-          {searchResults.length === 0 && searchQuery.trim() === '' ? (
-            <S.PlaceholderMessage>장소를 입력해주세요!</S.PlaceholderMessage>
-          ) : searchResults.length === 0 && searchQuery.trim() !== '' ? (
-            <S.PlaceholderMessage>검색 결과가 없습니다.</S.PlaceholderMessage>
-          ) : (
-            searchResults.map((place, index) => (
-              <S.ResultItem key={index} onClick={() => handleResultClick(place)}>
-                {place.place_name} - {place.address_name}
-              </S.ResultItem>
-            ))
-          )}
+          {searchResults.map((place, index) => (
+            <S.ResultItem key={index} onClick={() => handleResultClick(place)}>
+              {place.place_name} - {place.address_name}
+            </S.ResultItem>
+          ))}
         </S.SearchResults>
         <S.NextButton onClick={handleNextButtonClick}>완료</S.NextButton>
       </S.LeftPanel>

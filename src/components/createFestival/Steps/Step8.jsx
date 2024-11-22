@@ -6,7 +6,7 @@ import { sendRequest } from '../../../api/request';
 import { planInstance } from '../../../api/instance';
 
 function Step8({ onNextStep }) {
-  const { title, details } = useSelector(state => state.history);
+  const { title, details } = useSelector(state => state.history); // title을 redux에서 가져옴
   const [content, setContent] = useState(details?.content || '');
   const [budget, setBudget] = useState(details?.budget || '');
   const [, setPoster] = useState(null);
@@ -149,7 +149,10 @@ function Step8({ onNextStep }) {
   return (
     <S.Container>
       <S.Section>
-        <S.Title>(은/는) 어떤 축제인가요?</S.Title>
+        <S.Title>
+          {' '}
+          <span style={{ color: '#9a50f1' }}>{title}</span>, 어떤 축제인가요?
+        </S.Title>
         <S.TextArea
           value={content}
           onChange={e => setContent(e.target.value)}
@@ -177,11 +180,12 @@ function Step8({ onNextStep }) {
           <S.Row>
             <S.Label>배너:</S.Label>
             <S.Input1 type="file" accept="image/*" onChange={e => handleFileChange(e, 'banner')} />
+          </S.Row>{' '}
+          <S.Row>
+            <S.SubmitButton onClick={handleSubmit}>작성완료</S.SubmitButton>
           </S.Row>
         </S.ImageUploadContainer>
       </S.Section>
-
-      <S.SubmitButton onClick={handleSubmit}>작성하기</S.SubmitButton>
     </S.Container>
   );
 }
