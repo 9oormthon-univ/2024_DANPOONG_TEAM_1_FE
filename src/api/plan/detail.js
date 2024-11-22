@@ -1,17 +1,15 @@
 import { planDetailInstance, planInstance } from '../instance';
 import { sendRequest } from '../request';
 import { applyInterceptors } from '../interceptor';
-import { getAuthToken } from '../request';
 
 export const fetchPlanAPI = async planId => {
-  const token = getAuthToken(); // 로컬 스토리지에서 액세스 토큰 가져오기
-
+  const accessToken = localStorage.getItem('accessToken');
   try {
     console.log('dd', token);
-    if (token !== null) {
+    if (accessToken !== null) {
       const response = await sendRequest(planDetailInstance, 'get', `/${planId}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       });
       return response.data.result;
