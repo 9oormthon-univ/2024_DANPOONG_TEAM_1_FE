@@ -25,7 +25,7 @@ function PlanDetailPage() {
     <>
       <Header />
       <S.Container>
-        <PlanMainDetail findPathRef={findPathRef} />
+        <PlanMainDetail findPathRef={findPathRef} planId={planId} />
         <FindPath ref={findPathRef} />
         <VariousOtherPlans planId={planId} />
         <PlanComments planId={planId} />

@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchPlanAPI } from '../../api/plan/detail';
+import { fetchPlanAPI, postLikePlanAPI } from '../../api/plan/detail';
 import {
   fetchCommentAPI,
   postCommentAPI,
   deleteCommentAPI,
   updateCommentAPI,
+  postLikeCommentAPI,
 } from '../../api/plan/comment';
 
 const initialState = {
@@ -79,6 +80,32 @@ export const updateCommentAsync = createAsyncThunk(
   }
 );
 
+export const postLikePlanAsync = createAsyncThunk(
+  'plan/postLikePlanAsync',
+  async (planId, { rejectWithValue }) => {
+    try {
+      const likesCount = await postLikePlanAPI(planId);
+      return { planId, likesCount };
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const postLikeCommentAsync = createAsyncThunk(
+  'plan/postLikeCommentAsync',
+  async ({ planId, commentId }, { rejectWithValue }) => {
+    try {
+      const likesCount = await postLikeCommentAPI({ planId, commentId });
+      return { planId, commentId, likesCount };
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const planSlice = createSlice({
   name: 'plan',
   initialState,
@@ -143,6 +170,53 @@ const planSlice = createSlice({
         state.error = null;
       })
       .addCase(updateCommentAsync.rejected, (state, action) => {
+        state.error = action.payload;
+      });
+
+    builder
+      .addCase(postLikePlanAsync.fulfilled, (state, action) => {
+        const { planId, likesCount } = action.payload;
+
+        // 현재 선택된 플랜의 좋아요 수 업데이트
+        if (state.currentPlan && state.currentPlan.id === planId) {
+          state.currentPlan.likesCount = likesCount;
+        }
+
+        // 전체 플랜 리스트에서도 좋아요 수 업데이트
+        const planIndex = state.plans.findIndex(plan => plan.id === planId);
+        if (planIndex !== -1) {
+          state.plans[planIndex].likesCount = likesCount;
+        }
+
+        state.error = null;
+      })
+      .addCase(postLikePlanAsync.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+
+      .addCase(postLikeCommentAsync.fulfilled, (state, action) => {
+        const { planId, commentId, likesCount } = action.payload;
+
+        if (state.currentPlan && state.currentPlan.id === planId) {
+          const comment = state.currentPlan.comments.find(comment => comment.id === commentId);
+          if (comment) {
+            comment.likesCount = likesCount;
+          }
+        }
+
+        // 전체 플랜 리스트에서도 댓글 좋아요 수 업데이트
+        const planIndex = state.plans.findIndex(plan => plan.id === planId);
+        if (planIndex !== -1) {
+          const comment = state.plans[planIndex]?.comments?.find(
+            comment => comment.id === commentId
+          );
+          if (comment) {
+            comment.likesCount = likesCount;
+          }
+        }
+        state.error = null;
+      })
+      .addCase(postLikeCommentAsync.rejected, (state, action) => {
         state.error = action.payload;
       });
   },

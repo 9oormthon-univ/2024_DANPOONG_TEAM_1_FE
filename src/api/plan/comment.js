@@ -52,3 +52,16 @@ export const updateCommentAPI = async ({ planId, commentId, commentBody }) => {
     return error;
   }
 };
+
+export const postLikeCommentAPI = async ({ planId, commentId }) => {
+  const postLikeCommenInstance = axios.create(planInstance.defaults);
+  postLikeCommenInstance.defaults.baseURL += `/${planId}/comments/likes/${commentId}`;
+  applyInterceptors(postLikeCommenInstance);
+  try {
+    const response = await sendRequest(postLikeCommenInstance, 'post', '');
+    return response.data.result.likesCount;
+  } catch (error) {
+    console.error('Failed to fetch similar plan:', error);
+    return error;
+  }
+};

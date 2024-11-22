@@ -1,22 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-`;
-
-export const MonthPopularLanking = styled.div`
-  background-color: white;
-  padding: 100px 10%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  gap: 50px;
-`;
-
 export const PlanContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -107,16 +90,6 @@ export const Title = styled.p`
   color: black;
 `;
 
-export const CommentPopularLanking = styled.div`
-  background-color: white;
-  padding: 100px 10%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  gap: 60px;
-`;
-
 export const ThemePopularLanking = styled.div`
   background-color: ${({ theme }) => theme.colors.gray1};
   padding: 100px 10%;
@@ -159,109 +132,4 @@ export const CategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const HotPlanContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 100%;
-  gap: 15px;
-`;
-
-export const HotPlan = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  gap: 15px;
-  width: 200px;
-`;
-
-export const HotPlanImageContainer = styled.div`
-  width: 200px;
-  height: 280px;
-  border-radius: 10px;
-  flex-shrink: 0;
-  overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.colors.gray6};
-`;
-
-export const HotPlanImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-export const HotPlanContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  width: 100%;
-`;
-export const HotPlanTitle = styled.p`
-  font-size: 18px;
-  text-align: left;
-  word-break: break-word; /* 텍스트 줄바꿈 */
-  width: 100%; /* 부모 요소에 맞게 크기 조정 */
-`;
-
-export const HotPlanUser = styled.p`
-  font-size: 14px;
-  color: ${({ theme }) => theme.colors.gray5};
-  text-align: left;
-  word-break: break-word; /* 텍스트 줄바꿈 */
-  width: 100%; /* 부모 요소에 맞게 크기 조정 */
-`;
-
-export const RecentPlan = styled.div`
-  background-color: white;
-  flex-shrink: 0;
-  width: 200px;
-  height: auto;
-  border-radius: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.gray3};
-  overflow: hidden;
-  box-shadow: 2px 4px 20px 0px ${({ theme }) => theme.colors.gray3};
-`;
-
-export const UserProfile = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding: 10px 15px;
-`;
-
-export const UserProfileImage = styled.img`
-  width: 25px;
-`;
-
-export const UserName = styled.p`
-  font-size: 18px;
-  font-weight: 500;
-`;
-
-export const RecentPlanImage = styled.img`
-  width: 200px;
-  height: 250px;
-  object-fit: cover;
-`;
-
-export const RecentPlanContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 10px;
-`;
-
-export const RecentPlanTitle = styled.p`
-  font-size: 14px;
-`;
-
-export const RecentPlanLike = styled.p`
-  font-size: 14px;
 `;
