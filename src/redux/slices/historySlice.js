@@ -5,7 +5,7 @@ const initialState = {
   title: '',
   details: {
     location: '',
-    theme: '', // 숫자로 저장됩니다.
+    theme: 0, // 숫자로 저장됩니다.
     period: '',
     target: '',
     cost: '',
