@@ -29,6 +29,10 @@ function Banners() {
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 클리어
   }, [currentIndex, handleNext]);
 
+  useEffect(() => {
+    // 의존성 배열에 handleNext 추가
+  }, [handleNext]);
+
   const handleNext = () => {
     // 다음 배너로 이동
     setCurrentIndex(prev => (prev + 1) % bannerList.length);
