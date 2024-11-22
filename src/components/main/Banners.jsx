@@ -18,7 +18,7 @@ function Banners() {
       }
     };
     fetchList();
-  }, [fetchBannersAPI]);
+  }, []);
 
   useEffect(() => {
     // 자동 슬라이딩
@@ -27,7 +27,7 @@ function Banners() {
     }, intervalTime);
 
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 클리어
-  }, [currentIndex]);
+  }, [currentIndex, handleNext]);
 
   const handleNext = () => {
     // 다음 배너로 이동
