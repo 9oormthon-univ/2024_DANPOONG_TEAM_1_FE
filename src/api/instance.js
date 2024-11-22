@@ -1,41 +1,37 @@
 import axios from 'axios';
 import { applyInterceptors } from './interceptor';
 
-//.env로 숨긴 url 주소 (backend 주소 <-> front 주소)
-
+// .env로 숨긴 URL 주소
 // eslint-disable-next-line no-undef
 const BASE_URL = process.env.REACT_APP_BACKEND_SERVER_URL;
-console.log('✅ BASE_URL:', BASE_URL);
+
+// Axios 기본 인스턴스
 const defaultInstance = axios.create({
   baseURL: BASE_URL,
+  withCredentials: true, // Refresh 토큰 처리를 위한 옵션
 });
+
+// 인터셉터 적용
 applyInterceptors(defaultInstance);
 
-// company ------
-const companyInstance = axios.create(defaultInstance.defaults);
-companyInstance.defaults.baseURL += '/companies';
-// applyInterceptors(companyInstance);
+// 추가 API 인스턴스
+const createInstance = (baseInstance, path) => {
+  const instance = axios.create(baseInstance.defaults);
+  instance.defaults.baseURL += path;
+  return instance;
+};
 
-// member ------
-const memberInstance = axios.create(defaultInstance.defaults);
-memberInstance.defaults.baseURL += '/members';
-// applyInterceptors(memberInstance);
-
-// plan ------
-const planInstance = axios.create(defaultInstance.defaults);
-planInstance.defaults.baseURL += '/plans';
-
-const planBannerInstance = axios.create(planInstance.defaults);
-planBannerInstance.defaults.baseURL += '/banner';
-
-const planDetailInstance = axios.create(planInstance.defaults);
-planDetailInstance.defaults.baseURL += '/detail';
+const companyInstance = createInstance(defaultInstance, '/companies');
+const memberInstance = createInstance(defaultInstance, '/members');
+const planInstance = createInstance(defaultInstance, '/plans');
+const planBannerInstance = createInstance(planInstance, '/banner');
+const planDetailInstance = createInstance(planInstance, '/detail');
 
 export {
   defaultInstance,
   companyInstance,
   memberInstance,
-  planDetailInstance,
   planInstance,
   planBannerInstance,
+  planDetailInstance,
 };
