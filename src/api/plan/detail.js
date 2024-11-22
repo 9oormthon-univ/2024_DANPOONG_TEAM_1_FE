@@ -5,7 +5,6 @@ import { applyInterceptors } from '../interceptor';
 export const fetchPlanAPI = async planId => {
   const accessToken = localStorage.getItem('accessToken');
   try {
-    console.log('dd', token);
     if (accessToken !== null) {
       const response = await sendRequest(planDetailInstance, 'get', `/${planId}`, {
         headers: {
