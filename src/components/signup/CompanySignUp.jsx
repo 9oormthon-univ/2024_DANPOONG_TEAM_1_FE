@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import LoginHeader from '../login/LoginHeader';
 import { useNavigate } from 'react-router-dom';
 import * as S from './SignUp.styles';
+import { defaultInstance } from '../../api/instance';
 
 const SignUpForm = () => {
   const [formValues, setFormValues] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    company: '',
+    username: '',
     password: '',
     passwordConfirm: '',
+    name: '',
+    phoneNumber: '',
+    companyName: '',
   });
 
   const [passwordMatch, setPasswordMatch] = useState(null);
@@ -23,6 +24,8 @@ const SignUpForm = () => {
       ...formValues,
       [name]: value,
     });
+
+    // 비밀번호 확인
     if (name === 'password' || name === 'passwordConfirm') {
       setPasswordMatch(
         formValues.password === value || formValues.password === formValues.passwordConfirm
@@ -30,19 +33,42 @@ const SignUpForm = () => {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+
+    // 모든 필드가 입력되었는지 확인
     const allFieldsFilled = Object.values(formValues).every(value => value.trim() !== '');
     if (!allFieldsFilled) {
       setWarningMessage('모든 필드를 작성해주세요.');
       return;
     }
-    setWarningMessage('');
-    navigate('/login/signup-complete');
-  };
 
-  const handleSendCode = () => {
-    alert('개발 중인 단계입니다!');
+    if (!passwordMatch) {
+      setWarningMessage('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    setWarningMessage('');
+
+    // POST 요청으로 데이터 전송
+    try {
+      const response = await defaultInstance.post('/companies/join', {
+        username: formValues.username,
+        password: formValues.password,
+        name: formValues.name,
+        phoneNumber: formValues.phoneNumber,
+        companyName: formValues.companyName,
+      });
+
+      alert('회원가입이 완료되었습니다.');
+      console.log('Response:', response.data);
+
+      // 회원가입 완료 후 페이지 이동
+      navigate('/login/signup-complete');
+    } catch (error) {
+      console.error('Error:', error.response ? error.response.data : error.message);
+      alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+    }
   };
 
   return (
@@ -51,44 +77,11 @@ const SignUpForm = () => {
       <S.Title>기업회원가입</S.Title>
       <S.Form onSubmit={handleSubmit}>
         <S.FieldWrapper>
-          <S.Label>담당자 이름</S.Label>
-          <S.Input type="text" name="name" value={formValues.name} onChange={handleChange} />
-        </S.FieldWrapper>
-
-        <S.FieldWrapper>
-          <S.Label>휴대폰</S.Label>
+          <S.Label>아이디</S.Label>
           <S.Input
             type="text"
-            name="phone"
-            placeholder="010 1234 5678"
-            value={formValues.phone}
-            onChange={handleChange}
-          />
-        </S.FieldWrapper>
-
-        <S.FieldWrapper>
-          <S.Label>회사 이메일</S.Label>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <S.Input
-              type="email"
-              name="email"
-              value={formValues.email}
-              onChange={handleChange}
-              style={{ flex: 1 }}
-            />
-            <S.SmallButton type="button" onClick={handleSendCode}>
-              인증번호 발송
-            </S.SmallButton>
-          </div>
-        </S.FieldWrapper>
-
-        <S.FieldWrapper>
-          <S.Label>회사 이름</S.Label>
-          <S.Input
-            type="text"
-            name="company"
-            placeholder="회사 이름을 입력해주세요."
-            value={formValues.company}
+            name="username"
+            value={formValues.username}
             onChange={handleChange}
           />
         </S.FieldWrapper>
@@ -117,6 +110,33 @@ const SignUpForm = () => {
               {passwordMatch ? '비밀번호가 일치합니다.' : '비밀번호가 일치하지 않습니다.'}
             </S.Message>
           )}
+        </S.FieldWrapper>
+
+        <S.FieldWrapper>
+          <S.Label>담당자 이름</S.Label>
+          <S.Input type="text" name="name" value={formValues.name} onChange={handleChange} />
+        </S.FieldWrapper>
+
+        <S.FieldWrapper>
+          <S.Label>휴대폰 번호</S.Label>
+          <S.Input
+            type="text"
+            name="phoneNumber"
+            placeholder="01012345678"
+            value={formValues.phoneNumber}
+            onChange={handleChange}
+          />
+        </S.FieldWrapper>
+
+        <S.FieldWrapper>
+          <S.Label>회사 이름</S.Label>
+          <S.Input
+            type="text"
+            name="companyName"
+            placeholder="회사 이름을 입력해주세요."
+            value={formValues.companyName}
+            onChange={handleChange}
+          />
         </S.FieldWrapper>
 
         {warningMessage && <S.WarningMessage>{warningMessage}</S.WarningMessage>}

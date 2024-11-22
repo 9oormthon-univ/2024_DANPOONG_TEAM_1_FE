@@ -56,7 +56,10 @@ const authSlice = createSlice({
       state.accessToken = null;
       localStorage.removeItem('accessToken');
       document.cookie = 'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-      window.location.href = '/login';
+      window.location.href = '/';
+    },
+    clearError(state) {
+      state.error = null; // 오류 상태 초기화
     },
   },
   extraReducers: builder => {
@@ -96,6 +99,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, clearError } = authSlice.actions;
 
 export default authSlice.reducer;
