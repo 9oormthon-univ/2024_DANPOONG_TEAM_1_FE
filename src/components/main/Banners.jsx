@@ -18,7 +18,7 @@ function Banners() {
       }
     };
     fetchList();
-  }, []);
+  }, [fetchBannersAPI]);
 
   useEffect(() => {
     // 자동 슬라이딩

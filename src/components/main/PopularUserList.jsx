@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import * as S from './PopularUserList.styles';
 import { useState } from 'react';
-import { recentPlanList } from '../../assets/const/planData';
 import defaultProfile from '../../assets/images/default-profile-image.svg';
 import { fetchPopularUsersAPI } from '../../api/plan/main';
 

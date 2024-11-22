@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import * as S from './PlanPreview.styles';
 import { category } from '../../../assets/const/category';
 
-function PlanPreview({ planId, image, title, user, itemCategory, town }) {
+function PlanPreview({ planId, image, title, user, itemCategory }) {
   const navigate = useNavigate();
   const [categoryTitle, setCategoryTitle] = useState('');
 
