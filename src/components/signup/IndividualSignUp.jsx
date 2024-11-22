@@ -62,10 +62,25 @@ const IndividualSignUp = () => {
   };
 
   const validateForm = () => {
+    // 비밀번호 일치 확인
     if (!passwordMatch) {
       alert('비밀번호가 일치하지 않습니다.');
       return false;
     }
+
+    // 이메일 형식 검사
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formValues.email)) {
+      alert('유효한 이메일 주소를 입력해주세요.');
+      return false;
+    }
+
+    // 전화번호 숫자만 확인
+    if (!/^\d+$/.test(formValues.phone)) {
+      alert('유효한 전화번호를 입력해주세요.');
+      return false;
+    }
+
     return true;
   };
 
@@ -82,11 +97,16 @@ const IndividualSignUp = () => {
 
     const [province, city] = formValues.region.split(' ');
 
+    if (!province || !city) {
+      alert('지역을 선택해주세요.');
+      return;
+    }
+
     const payload = {
       name: formValues.name,
-      phoneNumber: formValues.phone.replace(/\s+/g, ''),
+      phoneNumber: formValues.phone.replace(/[^0-9]/g, ''), // 숫자만 추출
       email: formValues.email,
-      username: formValues.id,
+      username: formValues.id, // 서버에서 기대하는 속성명 확인
       password: formValues.password,
       nickname: formValues.name,
       province,
@@ -99,6 +119,7 @@ const IndividualSignUp = () => {
       navigate('/login/signup-complete');
     } catch (err) {
       console.error('회원가입 실패:', err);
+      alert('회원가입 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
@@ -110,6 +131,7 @@ const IndividualSignUp = () => {
       <I.Container>
         <I.SlidingFormWrapper isRegionOpen={isRegionOpen}>
           <S.Form onSubmit={handleSubmit}>
+            {/* 폼 필드 */}
             <S.FieldWrapper>
               <S.Label>이름</S.Label>
               <S.Input type="text" name="name" value={formValues.name} onChange={handleChange} />
