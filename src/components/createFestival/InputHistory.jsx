@@ -2,6 +2,18 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import * as S from './InputHistory.styles';
 
+const themeMap = {
+  '음악/공연': 1,
+  '미술/공예': 2,
+  지역문화: 3,
+  '음식/푸드마켓': 4,
+  '전통/역사': 5,
+  '자연환경/농업': 6,
+  스포츠: 7,
+  계절행사: 8,
+  '커뮤니티/가족': 9,
+};
+
 function InputHistory({ setCurrentStep }) {
   const { title, details, currentStep } = useSelector(state => state.history);
 
@@ -24,6 +36,10 @@ function InputHistory({ setCurrentStep }) {
     }
     return {};
   };
+  const getMappedTheme = () => {
+    const themeText = details.theme || '축제 테마';
+    return themeMap[themeText] || themeText; // 매핑된 숫자 또는 기본 텍스트 반환
+  };
 
   return (
     <S.Container>
@@ -34,7 +50,7 @@ function InputHistory({ setCurrentStep }) {
           {details.location || '장소'}
         </S.Button>
         <S.Button onClick={() => handleButtonClick(3)} style={getButtonStyle(3)}>
-          {details.theme || '축제 테마'}
+          {getMappedTheme() || '축제 테마'}
         </S.Button>
         <S.Button onClick={() => handleButtonClick(4)} style={getButtonStyle(4)}>
           {details.period || '축제 기간'}
