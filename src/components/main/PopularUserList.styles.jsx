@@ -140,7 +140,10 @@ export const RecentPlanContent = styled.div`
 
 export const RecentPlanTitle = styled.p`
   font-size: 14px;
-
+  width: 100%;
+  white-space: nowrap; /* 텍스트를 한 줄로 유지 */
+  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis; /* 말줄임표 추가 */
   @media (max-width: 1000px) {
     font-size: 10px;
   }
@@ -151,4 +154,15 @@ export const RecentPlanLike = styled.p`
   @media (max-width: 1000px) {
     font-size: 10px;
   }
+`;
+
+export const Icon = styled.img`
+  width: 14px;
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
 `;

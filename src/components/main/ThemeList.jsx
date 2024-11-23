@@ -7,6 +7,7 @@ import leftArrowIcon from '../../assets/images/left-arrow-icon.svg';
 import { fetchThemesAPI } from '../../api/plan/main';
 import { category } from '../../assets/const/category';
 import defaultPoster from '../../assets/images/default-poster.png';
+import filledLikeIcon from '../../assets/images/filled-like-icon.svg';
 
 function ThemeList() {
   const navigate = useNavigate();
@@ -56,6 +57,7 @@ function ThemeList() {
                 <S.PlanCategory>{matchedCategory}</S.PlanCategory>
                 <S.PlanTitle>{item.title}</S.PlanTitle>
                 <S.PlanDetail>
+                  <S.Icon src={filledLikeIcon} alt="icon" />
                   <S.PlanLike>{item.likesCount}</S.PlanLike>
                 </S.PlanDetail>
               </S.PlanContent>

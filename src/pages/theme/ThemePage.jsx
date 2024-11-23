@@ -34,15 +34,16 @@ function ThemePage() {
           <S.PlanContainer>
             {planList &&
               planList.map((item, index) => (
-                <PlanPreviewMain
-                  key={index}
-                  planId={item.planId}
-                  user={item.title}
-                  lanking={index + 1}
-                  title={item.title}
-                  commentsCount={item.commentsCount}
-                  image={item.imageLink}
-                />
+                <S.Scale key={index}>
+                  <PlanPreviewMain
+                    planId={item.planId}
+                    user={item.title}
+                    lanking={index + 1}
+                    title={item.title}
+                    commentsCount={item.commentsCount}
+                    image={item.imageLink}
+                  />
+                </S.Scale>
               ))}
           </S.PlanContainer>
         </S.ThemeMainPlanContainer>

@@ -27,13 +27,19 @@ export const fetchSearchPlanThemeAPI = async ({ searchContent, category }) => {
 
 export const fetchSearchPlanRegionAPI = async ({ searchContent, region }) => {
   console.log(region);
+
   try {
-    const response = await sendRequest(
-      planSearchInstance,
-      'get',
-      `/${searchContent}/regions?region=${region}`
-    );
-    return response.data.result;
+    if (region === '전체') {
+      const response = await sendRequest(planSearchInstance, 'get', `/${searchContent}/all`);
+      return response.data.result;
+    } else {
+      const response = await sendRequest(
+        planSearchInstance,
+        'get',
+        `/${searchContent}/regions?region=${region}`
+      );
+      return response.data.result;
+    }
   } catch (error) {
     console.error('Failed to fetch plan:', error);
     return error;

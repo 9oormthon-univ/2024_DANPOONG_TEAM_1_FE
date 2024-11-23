@@ -7,16 +7,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import filledCommentLikeIcon from '../../../assets/images/filled-comment-like-icon.svg';
 import useLikeClick from '../../../hooks/useLikeClick';
 
-function Comment({ comment, hierarchy, onReplyClick, planId }) {
+function Comment({ comment, hierarchy, planId }) {
   const { handleClick, checkLike } = useLikeClick('comment');
   const { isLoggedIn } = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
-  const handleReplyButtonClick = () => {
-    if (onReplyClick) {
-      onReplyClick(comment); // 부모 컴포넌트로 comment 정보 전달
-    }
-  };
+  // const handleReplyButtonClick = () => {
+  //   if (onReplyClick) {
+  //     onReplyClick(comment); // 부모 컴포넌트로 comment 정보 전달
+  //   }
+  // };
 
   const handleDeleteButtonClick = () => {
     // 댓글 삭제 및 수정버튼 보이기 여부 설정 필요
@@ -41,9 +41,9 @@ function Comment({ comment, hierarchy, onReplyClick, planId }) {
           />
           <S.LikeCount>{comment.likesCount}</S.LikeCount>
         </S.LikeButtonContainer>
-        {hierarchy === 0 && (
+        {/* {hierarchy === 0 && (
           <S.NestedReplyButton onClick={handleReplyButtonClick}>답글</S.NestedReplyButton>
-        )}
+        )} */}
         <S.DeleteCommentButton onClick={handleDeleteButtonClick}>삭제</S.DeleteCommentButton>
       </S.ButtonContainer>
     </S.Container>
