@@ -35,8 +35,10 @@ export const deletePlanAsync = createAsyncThunk(
   'plan/deletePlanAsync',
   async (planId, { rejectWithValue }) => {
     try {
-      await deletePlanAPI(planId);
-      return planId;
+      const isSuccess = await deletePlanAPI(planId);
+      if (isSuccess) {
+        return planId;
+      } else return rejectWithValue(isSuccess);
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message);
@@ -110,8 +112,8 @@ export const postLikeCommentAsync = createAsyncThunk(
   'plan/postLikeCommentAsync',
   async ({ planId, commentId }, { rejectWithValue }) => {
     try {
-      const likesCount = await postLikeCommentAPI({ planId, commentId });
-      return { planId, commentId, likesCount };
+      const response = await postLikeCommentAPI({ planId, commentId });
+      return { planId, commentId, checkLike: response.checkLike, likesCount: response.likesCount };
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message);
@@ -139,7 +141,6 @@ const planSlice = createSlice({
           state.currentPlan = null;
         }
 
-        const planIndex = state.plans.findIndex(plan => plan.id === planId);
         state.plans = state.plans.filter(plan => plan.id !== planId);
 
         state.error = null;
@@ -201,10 +202,10 @@ const planSlice = createSlice({
       .addCase(postLikePlanAsync.fulfilled, (state, action) => {
         const { planId, likesCount, checkLike } = action.payload;
 
-        if (state.currentPlan && state.currentPlan.id === planId) {
+        if (state.currentPlan && state.currentPlan.planId === planId) {
           state.currentPlan = { ...state.currentPlan, likesCount, checkLike };
         }
-
+        console.log(checkLike);
         const planIndex = state.plans.findIndex(plan => plan.id === planId);
         if (planIndex !== -1) {
           state.plans[planIndex] = { ...state.plans[planIndex], likesCount, checkLike };

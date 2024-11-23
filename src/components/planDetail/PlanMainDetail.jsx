@@ -10,6 +10,7 @@ import kakaoMapIcon from '../../assets/images/kakaomap-icon.svg';
 import useLikeClick from '../../hooks/useLikeClick';
 import MoreIcon from './components/MoreIcon';
 import { formatPrice } from '../../util/formatPrice';
+import defaultPoster from '../../assets/images/default-poster.png';
 
 function PlanMainDetail({ findPathRef, planId }) {
   const { handleClick, checkLike } = useLikeClick('plan');
@@ -17,6 +18,12 @@ function PlanMainDetail({ findPathRef, planId }) {
   const currentPlan = useSelector(state => state.plan.currentPlan);
   const [categoryIcon, setCategoryIcon] = useState(null);
   const [categoryTitle, setCategoryTitle] = useState('');
+  const [username, setUsername] = useState(null);
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    setUsername(storedUsername);
+    console.log(username);
+  }, [username]);
 
   useEffect(() => {
     if (currentPlan?.category) {
@@ -51,7 +58,7 @@ function PlanMainDetail({ findPathRef, planId }) {
               {currentPlan.posterUrl !== null ? (
                 <S.PlanPoster src={currentPlan.posterUrl} />
               ) : (
-                <S.DefaultPoster />
+                <S.PlanPoster src={defaultPoster} />
               )}
               <S.PlanContentDetailContainer>
                 <S.PlanTitle>{currentPlan.title}</S.PlanTitle>
@@ -72,7 +79,7 @@ function PlanMainDetail({ findPathRef, planId }) {
                   <tr>
                     <S.PlanDetailKey>참가 비용</S.PlanDetailKey>
                     <S.PlanDetailValue>
-                      {currentPlan.cost === 0 ? '무료' : `${formatPrice(currentPlan.cost)}원`}
+                      {currentPlan.cost === 0 ? '무료' : `${formatPrice(currentPlan.cost)}`}
                     </S.PlanDetailValue>
                   </tr>
                   <tr>

@@ -63,6 +63,7 @@ export const LikeButtonContainer = styled.div`
 
 export const LikeIcon = styled.img`
   width: 12px;
+  cursor: pointer;
 `;
 
 export const LikeCount = styled.p`

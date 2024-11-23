@@ -32,12 +32,6 @@ function PlanComments({ planId }) {
   const [nestedComments, setNestedComments] = useState([]);
   const [replyTo, setReplyTo] = useState(null);
   const inputRef = useRef(null);
-  const [username, setUsername] = useState(null);
-
-  useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
-    setUsername(storedUsername);
-  }, []);
 
   const buildNestedComments = comments => {
     const map = {};
@@ -66,6 +60,7 @@ function PlanComments({ planId }) {
     if (currentPlan?.comments) {
       const nested = buildNestedComments(currentPlan.comments);
       setNestedComments(nested);
+      console.log(nested);
     }
   }, [currentPlan?.comments]);
 
@@ -76,18 +71,14 @@ function PlanComments({ planId }) {
 
     const newCommentData = {
       body: commentValue,
-      group: replyTo ? replyTo.groups : 0,
       hierarchy: replyTo ? replyTo.hierarchy + 1 : 0,
+      group: replyTo ? replyTo.groups : 0,
     };
-    try {
-      await dispatch(postCommentAsync({ planId, commentData: newCommentData })); // 객체로 전달
-      setCommentValue('');
-      setReplyTo(null);
 
-      await dispatch(fetchPlanAsync(planId));
-    } catch (error) {
-      console.error('댓글 등록 중 에러 발생:', error);
-    }
+    await dispatch(postCommentAsync({ planId, commentData: newCommentData })); // 객체로 전달
+    await dispatch(fetchPlanAsync(planId));
+    setCommentValue('');
+    setReplyTo(null);
   };
 
   const handleReplyClick = comment => {
@@ -100,8 +91,6 @@ function PlanComments({ planId }) {
     setCommentValue('');
   };
 
-  // username 수정 필요
-
   return (
     <S.Container>
       <S.CommentCount>댓글 {nestedComments?.length}개</S.CommentCount>
@@ -109,7 +98,7 @@ function PlanComments({ planId }) {
         <S.CreateCommentContainer>
           <S.UserProfile>
             <S.ProfileImage src={defaultProfileImage} alt="profile" />
-            <S.UserName>{username || '익명 사용자'}</S.UserName>
+            <S.UserName>{currentPlan?.username}</S.UserName>
           </S.UserProfile>
           <S.FormContainer onSubmit={handleCommentSubmit}>
             <S.InputContainer

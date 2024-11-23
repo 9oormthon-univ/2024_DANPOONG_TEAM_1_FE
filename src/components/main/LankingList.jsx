@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './LankingList.styles';
 import { fetchRankingsAPI } from '../../api/plan/main';
+import defaultPoster from '../../assets/images/default-poster.png';
 
 function LankingList() {
   const navigate = useNavigate();
@@ -29,7 +30,11 @@ function LankingList() {
         {rankingsList &&
           rankingsList.map((item, index) => (
             <S.Plan key={index} onClick={() => handlePlanClick(item.planId)}>
-              <S.PlanImage src={item.imageLink} />
+              {item.imageLink !== null ? (
+                <S.PlanImage src={item.imageLink} />
+              ) : (
+                <S.PlanImage src={defaultPoster} />
+              )}
               <S.PlanContent>
                 <S.PlanLanking>{index + 1}</S.PlanLanking>
                 <S.PlanTitle>{item.title}</S.PlanTitle>

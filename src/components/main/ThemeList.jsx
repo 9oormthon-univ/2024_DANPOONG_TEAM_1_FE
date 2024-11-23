@@ -6,6 +6,7 @@ import rightArrowIcon from '../../assets/images/right-arrow-icon.svg';
 import leftArrowIcon from '../../assets/images/left-arrow-icon.svg';
 import { fetchThemesAPI } from '../../api/plan/main';
 import { category } from '../../assets/const/category';
+import defaultPoster from '../../assets/images/default-poster.png';
 
 function ThemeList() {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ function ThemeList() {
           const matchedCategory = category.find(cat => cat.name === item.category).title;
           return (
             <S.Plan key={index} onClick={() => handlePlanClick(item.planId)}>
-              <S.PlanImage src={item.imageLink} />
+              <S.PlanImage src={item.imageLink ? item.imageLink : defaultPoster} />
               <S.PlanContent>
                 <S.PlanCategory>{matchedCategory}</S.PlanCategory>
                 <S.PlanTitle>{item.title}</S.PlanTitle>

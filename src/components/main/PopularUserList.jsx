@@ -4,6 +4,7 @@ import { useState } from 'react';
 import defaultProfile from '../../assets/images/default-profile-image.svg';
 import { fetchPopularUsersAPI } from '../../api/plan/main';
 import { useNavigate } from 'react-router-dom';
+import defaultPoster from '../../assets/images/default-poster.png';
 
 function PopularUserList() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ function PopularUserList() {
               {item.planImageLink ? (
                 <S.RecentPlanImage src={item.planImageLink} alt="image" />
               ) : (
-                <S.RecentPlanDefaultImage />
+                <S.RecentPlanImage src={defaultPoster} alt="image" />
               )}
               <S.RecentPlanContent>
                 <S.RecentPlanTitle>{item.title}</S.RecentPlanTitle>

@@ -14,7 +14,6 @@ function MoreIcon({ planId }) {
   };
 
   const deleteClick = async () => {
-    console.log(planId);
     await dispatch(deletePlanAsync(planId));
     confirm('삭제가 완료되었습니다.');
     navigate('/');

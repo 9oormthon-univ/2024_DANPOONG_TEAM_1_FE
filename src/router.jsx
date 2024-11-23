@@ -78,6 +78,10 @@ const router = createBrowserRouter([
         path: 'search/:searchContent',
         element: <SearchPlanPage />,
       },
+      {
+        path: 'plan/:planId',
+        element: <PlanDetailPage />,
+      },
     ],
     errorElement: <NotFound />,
   },
