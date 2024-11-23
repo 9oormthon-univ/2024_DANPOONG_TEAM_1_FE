@@ -137,11 +137,11 @@ const planSlice = createSlice({
       .addCase(deletePlanAsync.fulfilled, (state, action) => {
         const planId = action.payload;
 
-        if (state.currentPlan && state.currentPlan.id === planId) {
+        if (state.currentPlan && state.currentPlan.planId === planId) {
           state.currentPlan = null;
         }
 
-        state.plans = state.plans.filter(plan => plan.id !== planId);
+        state.plans = state.plans.filter(plan => plan.planId !== planId);
 
         state.error = null;
       })
@@ -151,11 +151,11 @@ const planSlice = createSlice({
       .addCase(postCommentAsync.fulfilled, (state, action) => {
         const { planId, comments } = action.payload;
 
-        if (state.currentPlan && state.currentPlan.id === planId) {
+        if (state.currentPlan && state.currentPlan.planId === planId) {
           state.currentPlan.comments = comments;
         }
 
-        const planIndex = state.plans.findIndex(plan => plan.id === planId);
+        const planIndex = state.plans.findIndex(plan => plan.planId === planId);
         if (planIndex !== -1) {
           state.plans[planIndex].comments = comments;
         }
@@ -168,11 +168,11 @@ const planSlice = createSlice({
       .addCase(deleteCommentAsync.fulfilled, (state, action) => {
         const { planId, updatedComments } = action.payload;
 
-        if (state.currentPlan && state.currentPlan.id === planId) {
+        if (state.currentPlan && state.currentPlan.planId === planId) {
           state.currentPlan.comments = updatedComments;
         }
 
-        const planIndex = state.plans.findIndex(plan => plan.id === planId);
+        const planIndex = state.plans.findIndex(plan => plan.planId === planId);
         if (planIndex !== -1) {
           state.plans[planIndex].comments = updatedComments;
         }
@@ -189,7 +189,7 @@ const planSlice = createSlice({
           state.currentPlan.comments = updatedComments;
         }
 
-        const planIndex = state.plans.findIndex(plan => plan.id === planId);
+        const planIndex = state.plans.findIndex(plan => plan.planId === planId);
         if (planIndex !== -1) {
           state.plans[planIndex].comments = updatedComments;
         }
@@ -206,7 +206,7 @@ const planSlice = createSlice({
           state.currentPlan = { ...state.currentPlan, likesCount, checkLike };
         }
         console.log(checkLike);
-        const planIndex = state.plans.findIndex(plan => plan.id === planId);
+        const planIndex = state.plans.findIndex(plan => plan.planId === planId);
         if (planIndex !== -1) {
           state.plans[planIndex] = { ...state.plans[planIndex], likesCount, checkLike };
         }
@@ -219,14 +219,14 @@ const planSlice = createSlice({
       .addCase(postLikeCommentAsync.fulfilled, (state, action) => {
         const { planId, commentId, likesCount } = action.payload;
 
-        if (state.currentPlan && state.currentPlan.id === planId) {
+        if (state.currentPlan && state.currentPlan.planId === planId) {
           const comment = state.currentPlan.comments.find(comment => comment.id === commentId);
           if (comment) {
             comment.likesCount = likesCount;
           }
         }
 
-        const planIndex = state.plans.findIndex(plan => plan.id === planId);
+        const planIndex = state.plans.findIndex(plan => plan.planId === planId);
         if (planIndex !== -1) {
           const comment = state.plans[planIndex]?.comments?.find(
             comment => comment.id === commentId

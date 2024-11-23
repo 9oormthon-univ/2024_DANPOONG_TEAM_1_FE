@@ -66,7 +66,6 @@ function PlanComments({ planId }) {
     if (currentPlan?.comments) {
       const nested = buildNestedComments(currentPlan.comments);
       setNestedComments(nested);
-      console.log(nested);
     }
   }, [currentPlan?.comments]);
 

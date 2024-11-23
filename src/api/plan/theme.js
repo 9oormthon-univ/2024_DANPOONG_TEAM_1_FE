@@ -1,4 +1,4 @@
-import { planThemeInstance } from '../instance';
+import { planThemeInstance, planRankingInstance } from '../instance';
 import { sendRequest } from '../request';
 
 export const fetchUpdateDateThemeAPI = async categoryName => {
@@ -47,6 +47,7 @@ export const fetchBannerThemeAPI = async categoryName => {
 
 export const fetchRankingThemeAPI = async categoryName => {
   try {
+    await sendRequest(planRankingInstance, 'post', '');
     const response = await sendRequest(planThemeInstance, 'get', `/Ranking/${categoryName}`);
     return response.data.result;
   } catch (error) {

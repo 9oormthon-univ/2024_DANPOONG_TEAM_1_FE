@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as S from './CreteFestival.styles';
 import { useSelector, useDispatch } from 'react-redux';
 import InputHistory from '../../components/createFestival/InputHistory';
 import Step1 from '../../components/createFestival/Steps/Step1';
@@ -48,10 +49,12 @@ const CreateFestival = () => {
   return (
     <>
       <Header />
-      {currentStep > 1 && currentStep < 9 && (
-        <InputHistory setCurrentStep={step => handleNextStep(step)} />
-      )}
-      {renderStep()}
+      <S.Container>
+        {currentStep > 1 && currentStep < 9 && (
+          <InputHistory setCurrentStep={step => handleNextStep(step)} />
+        )}
+        {renderStep()}
+      </S.Container>
     </>
   );
 };

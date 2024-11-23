@@ -48,6 +48,7 @@ export const BannerTitle = styled.p`
   @media (max-width: 750px) {
     font-size: 30px;
   }
+  text-shadow: 2px 2px 5px ${({ theme }) => theme.colors.gray8};
   font-size: 40px;
   font-weight: 600;
   color: white;
@@ -57,6 +58,7 @@ export const PlannerName = styled.p`
   @media (max-width: 750px) {
     font-size: 20px;
   }
+  text-shadow: 2px 2px 5px ${({ theme }) => theme.colors.gray8};
   font-size: 30px;
   font-weight: 500;
   color: white;
@@ -66,6 +68,7 @@ export const Date = styled.p`
   @media (max-width: 750px) {
     font-size: 16px;
   }
+  text-shadow: 2px 2px 5px ${({ theme }) => theme.colors.gray8};
   font-size: 26px;
   font-weight: 400;
   color: white;
