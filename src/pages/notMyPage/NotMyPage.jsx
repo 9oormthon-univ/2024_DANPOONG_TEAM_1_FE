@@ -18,6 +18,7 @@ const Profile = () => {
   const storedUsername = localStorage.getItem('username');
 
   useEffect(() => {
+    console.log('@', storedUsername, username);
     if (username === storedUsername) {
       navigate('/profile');
     }
