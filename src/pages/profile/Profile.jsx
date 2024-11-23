@@ -1,37 +1,143 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../../redux/slices/authSlice'; // logout 액션 가져오기
+import { logout } from '../../redux/slices/authSlice';
 import * as S from './Profile.styles';
+import Header from '../../components/common/header/Header';
+import defaultProfileImage from '../../assets/images/default-profile-image.svg';
+import { defaultInstance } from '../../api/instance';
+import MyPageList from '../../components/common/myPageList/MyPageList';
 
 const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [username, setUsername] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [followerCount, setFollowerCount] = useState(0);
+  const [followingCount, setFollowingCount] = useState(0);
+  const [activeTab, setActiveTab] = useState('early');
 
   const handleLogout = () => {
-    // Redux 상태 초기화
     dispatch(logout());
-
     localStorage.removeItem('accessToken');
-
     localStorage.removeItem('username');
     console.log('✅ Access Token 제거 완료');
 
-    // Refresh Token 쿠키 제거
     document.cookie =
       'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT; Secure; HttpOnly;';
     console.log('✅ Refresh Token 제거 완료');
 
-    // 로그아웃 알림 및 메인 페이지로 리다이렉트
     alert('로그아웃되었습니다.');
-    navigate('/'); // 메인 페이지로 이동
+    navigate('/');
   };
+
+  // fetchPosts를 useCallback으로 래핑
+  const fetchPosts = useCallback(
+    async username => {
+      try {
+        const endpoint =
+          activeTab === 'early'
+            ? `/members/profiles/${username}/recent`
+            : `/members/profiles/${username}/likeCount`;
+
+        const response = await defaultInstance.get(endpoint);
+
+        if (response.data?.isSuccess) {
+          const result = response.data.result;
+
+          setFollowerCount(result.followerCount);
+          setFollowingCount(result.followingCount);
+
+          const postListKey =
+            activeTab === 'early' ? 'planListByUpdateDate' : 'planListByLikeCount';
+
+          const posts = result[postListKey].map(post => ({
+            id: post.planId,
+            title: post.title || '제목 없음',
+            town: post.town || '알 수 없음',
+            startDate: post.startDate || '날짜 없음',
+            endDate: post.endDate || '날짜 없음',
+            likeCount: post.likeCount || 0,
+            imageLink: post.imageLink || '',
+          }));
+
+          setPosts(posts);
+        } else {
+          alert('게시글을 불러올 수 없습니다.');
+        }
+      } catch (error) {
+        console.error('API 호출 에러:', error);
+        alert('데이터를 불러오는 중 오류가 발생했습니다.');
+      }
+    },
+    [activeTab] // activeTab이 변경되면 새 함수를 생성
+  );
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    setUsername(storedUsername || '익명 사용자');
+    if (storedUsername) {
+      fetchPosts(storedUsername);
+    }
+  }, [fetchPosts]); // fetchPosts를 종속성 배열에 추가
 
   return (
     <S.Container>
-      <S.Title>내 프로필</S.Title>
-      <S.Content>여기에 사용자 정보를 보여줄 내용 추가!</S.Content>
-      <S.LogoutButton onClick={handleLogout}>로그아웃</S.LogoutButton>
+      <Header />
+      <S.User>
+        <S.UserProfile>
+          <S.ProfileImage src={defaultProfileImage} alt="profile" />
+          <S.UserInfor>
+            <S.ProfileList>
+              <S.UserName>{username}</S.UserName>
+              <S.UserButton>
+                <S.ModifyButton type="button">회원정보수정</S.ModifyButton>
+                <S.LogoutButton type="button" onClick={handleLogout}>
+                  로그아웃
+                </S.LogoutButton>
+              </S.UserButton>
+            </S.ProfileList>
+            <S.UserStats>
+              <span>
+                게시물 <strong>{posts.length}</strong>
+              </span>
+              <span>
+                팔로워 <strong>{followerCount}</strong>
+              </span>
+              <span>
+                팔로우 <strong>{followingCount}</strong>
+              </span>
+            </S.UserStats>
+          </S.UserInfor>
+        </S.UserProfile>
+        <S.TabContainer>
+          <S.Tab active={activeTab === 'early'} onClick={() => setActiveTab('early')}>
+            최신순
+          </S.Tab>
+          <S.Tab active={activeTab === 'good'} onClick={() => setActiveTab('good')}>
+            좋아요 순
+          </S.Tab>
+        </S.TabContainer>
+        <S.UserContent>
+          {posts.length > 0 ? (
+            posts.map(post => {
+              console.log('planId:', post.id); // 확인용 로그
+              return (
+                <MyPageList
+                  planId={post.id}
+                  key={post.id}
+                  image={post.imageLink}
+                  title={post.title}
+                  town={post.town}
+                  likeCount={post.likeCount}
+                />
+              );
+            })
+          ) : (
+            <p>게시글이 없습니다.</p>
+          )}
+        </S.UserContent>
+      </S.User>
     </S.Container>
   );
 };
