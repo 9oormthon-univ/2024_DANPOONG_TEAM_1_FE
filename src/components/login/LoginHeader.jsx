@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import LogoImage from '../../assets/images/trends-logo.svg';
 import * as S from './LoginHeader.styles';
-
+import { Link } from 'react-router-dom';
 const Header = () => {
   const location = useLocation();
   const showDivider =
@@ -14,7 +14,9 @@ const Header = () => {
   return (
     <>
       <S.HeaderWrapper>
-        <S.Logo src={LogoImage} alt="유행 로고" />
+        <Link to="/">
+          <S.Logo src={LogoImage} alt="유행 로고" />
+        </Link>
       </S.HeaderWrapper>
       {showDivider && <S.Divider />}
     </>
