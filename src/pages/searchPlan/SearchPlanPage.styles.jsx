@@ -48,3 +48,24 @@ export const EmptyList = styled.p`
   text-align: center;
   width: 100%;
 `;
+
+export const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+export const PageButton = styled.button`
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: ${({ isActive }) => (isActive ? '#9A50F1' : '#f0f0f0')};
+  color: ${({ isActive }) => (isActive ? '#fff' : '#000')};
+  cursor: pointer;
+
+  &:hover {
+    background-color: #9a50f1;
+    color: #fff;
+  }
+`;
