@@ -3,7 +3,7 @@ import { sendRequest } from '../request';
 
 export const fetchSearchPlanAPI = async searchContent => {
   try {
-    const response = await sendRequest(planSearchInstance, 'get', `/${searchContent}`);
+    const response = await sendRequest(planSearchInstance, 'get', `/${searchContent}/all`);
     return response.data.result;
   } catch (error) {
     console.error('Failed to fetch plan:', error);
@@ -43,6 +43,20 @@ export const fetchSearchPlanRegionAPI = async ({ searchContent, region }) => {
 export const fetchSearchPlanFreeAPI = async ({ searchContent, freeOrNon }) => {
   try {
     const response = await sendRequest(planSearchInstance, 'get', `/${searchContent}/${freeOrNon}`);
+    return response.data.result;
+  } catch (error) {
+    console.error('Failed to fetch plan:', error);
+    return error;
+  }
+};
+
+export const fetchSearchPlanPeriodsAPI = async ({ searchContent, startDate, endDate }) => {
+  try {
+    const response = await sendRequest(
+      planSearchInstance,
+      'get',
+      `/${searchContent}/periods?startDate=${startDate}&endDate=${endDate}`
+    );
     return response.data.result;
   } catch (error) {
     console.error('Failed to fetch plan:', error);

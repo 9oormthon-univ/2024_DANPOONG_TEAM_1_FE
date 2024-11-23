@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchPlanAPI, postLikePlanAPI } from '../../api/plan/detail';
+import { fetchPlanAPI, postLikePlanAPI, deletePlanAPI } from '../../api/plan/detail';
 import {
   fetchCommentAPI,
   postCommentAPI,
@@ -18,12 +18,27 @@ export const fetchPlanAsync = createAsyncThunk(
   'plan/fetchPlanAsync',
   async (planId, { getState, rejectWithValue }) => {
     const state = getState().plan;
-    if (state.currentPlan?.id === planId) {
+    if (state.currentPlan?.planId === planId) {
       return state.currentPlan;
     }
     try {
       const [plan, comments] = await Promise.all([fetchPlanAPI(planId), fetchCommentAPI(planId)]);
-      return { ...plan, comments: Array.isArray(comments) ? comments : [] };
+      return { ...plan, planId, comments: Array.isArray(comments) ? comments : [] };
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deletePlanAsync = createAsyncThunk(
+  'plan/deletePlanAsync',
+  async (planId, { rejectWithValue }) => {
+    try {
+      const isSuccess = await deletePlanAPI(planId);
+      if (isSuccess) {
+        return planId;
+      } else return rejectWithValue(isSuccess);
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message);
@@ -97,8 +112,8 @@ export const postLikeCommentAsync = createAsyncThunk(
   'plan/postLikeCommentAsync',
   async ({ planId, commentId }, { rejectWithValue }) => {
     try {
-      const likesCount = await postLikeCommentAPI({ planId, commentId });
-      return { planId, commentId, likesCount };
+      const response = await postLikeCommentAPI({ planId, commentId });
+      return { planId, commentId, checkLike: response.checkLike, likesCount: response.likesCount };
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message);
@@ -117,6 +132,20 @@ const planSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchPlanAsync.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(deletePlanAsync.fulfilled, (state, action) => {
+        const planId = action.payload;
+
+        if (state.currentPlan && state.currentPlan.id === planId) {
+          state.currentPlan = null;
+        }
+
+        state.plans = state.plans.filter(plan => plan.id !== planId);
+
+        state.error = null;
+      })
+      .addCase(deletePlanAsync.rejected, (state, action) => {
         state.error = action.payload;
       })
       .addCase(postCommentAsync.fulfilled, (state, action) => {
@@ -173,10 +202,10 @@ const planSlice = createSlice({
       .addCase(postLikePlanAsync.fulfilled, (state, action) => {
         const { planId, likesCount, checkLike } = action.payload;
 
-        if (state.currentPlan && state.currentPlan.id === planId) {
+        if (state.currentPlan && state.currentPlan.planId === planId) {
           state.currentPlan = { ...state.currentPlan, likesCount, checkLike };
         }
-
+        console.log(checkLike);
         const planIndex = state.plans.findIndex(plan => plan.id === planId);
         if (planIndex !== -1) {
           state.plans[planIndex] = { ...state.plans[planIndex], likesCount, checkLike };

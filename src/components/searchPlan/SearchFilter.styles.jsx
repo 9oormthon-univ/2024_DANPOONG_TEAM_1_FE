@@ -82,3 +82,39 @@ export const Box = styled.div`
   top: 50px;
   background-color: white;
 `;
+
+export const DateInputWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+`;
+
+export const Label = styled.label`
+  white-space: nowrap;
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.gray5};
+`;
+
+export const Input = styled.input``;
+
+export const DateInputContainer = styled.form`
+  border: 1px solid ${({ theme }) => theme.colors.gray4};
+  padding: 15px 20px;
+  border-radius: 30px;
+  display: flex;
+  gap: 30px;
+  box-shadow: 2px 4px 10px 0px ${({ theme }) => theme.colors.gray3};
+  position: absolute;
+  top: 50px;
+  background-color: white;
+  flex-direction: row;
+`;
+
+export const Button = styled.button`
+  background-color: ${({ theme }) => theme.colors.primary2};
+  white-space: nowrap;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 10px;
+`;

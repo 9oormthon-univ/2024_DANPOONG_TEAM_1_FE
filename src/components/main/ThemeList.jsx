@@ -4,9 +4,9 @@ import * as S from './ThemeList.styles';
 import Category from './components/Category';
 import rightArrowIcon from '../../assets/images/right-arrow-icon.svg';
 import leftArrowIcon from '../../assets/images/left-arrow-icon.svg';
-import { popularPlanList } from '../../assets/const/planData';
 import { fetchThemesAPI } from '../../api/plan/main';
 import { category } from '../../assets/const/category';
+import defaultPoster from '../../assets/images/default-poster.png';
 
 function ThemeList() {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ function ThemeList() {
 
   // 화살표 클릭 핸들러
   const handleNext = () => {
-    if (startIndex + 1 < popularPlanList.length) {
+    if (startIndex + 1 < themeList.length) {
       setStartIndex(startIndex + 1); // 1씩 증가
     }
   };
@@ -51,7 +51,7 @@ function ThemeList() {
           const matchedCategory = category.find(cat => cat.name === item.category).title;
           return (
             <S.Plan key={index} onClick={() => handlePlanClick(item.planId)}>
-              <S.PlanImage src={item.imageLink} />
+              <S.PlanImage src={item.imageLink ? item.imageLink : defaultPoster} />
               <S.PlanContent>
                 <S.PlanCategory>{matchedCategory}</S.PlanCategory>
                 <S.PlanTitle>{item.title}</S.PlanTitle>
@@ -62,7 +62,7 @@ function ThemeList() {
             </S.Plan>
           );
         })}
-        {startIndex + itemsPerPage < popularPlanList.length && (
+        {startIndex + itemsPerPage < themeList.length && (
           <S.RightArrow src={rightArrowIcon} alt="arrow" onClick={handleNext} />
         )}
       </S.PlanContainer>

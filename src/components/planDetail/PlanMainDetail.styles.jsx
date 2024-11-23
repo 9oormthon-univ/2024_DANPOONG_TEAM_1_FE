@@ -127,7 +127,8 @@ export const MapButton = styled.img`
 
 export const PlanDetailValue = styled.td`
   font-size: 20px;
-  font-weight: 300;
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.gray6};
   padding: 20px;
   display: flex;
   flex-direction: row;
@@ -152,6 +153,7 @@ export const PlanInfoContainer = styled.div`
 export const PlanInfo = styled.p`
   font-size: 20px;
   font-weight: 400;
+  line-height: 40px;
   @media (max-width: 1000px) {
     font-size: 16px;
   }

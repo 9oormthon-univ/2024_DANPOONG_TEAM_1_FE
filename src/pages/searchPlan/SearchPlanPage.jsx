@@ -6,6 +6,7 @@ import {
   fetchSearchPlanThemeAPI,
   fetchSearchPlanFreeAPI,
   fetchSearchPlanRegionAPI,
+  fetchSearchPlanPeriodsAPI,
 } from '../../api/plan/search';
 import Header from '../../components/common/header/Header';
 import PlanPreview from '../../components/common/planPreview/PlanPreview';
@@ -41,7 +42,15 @@ function SearchPlanPage() {
         searchContent,
         region: filter['지역'], // 지역 필터값 전달
       });
+    } else if (filter['기간']) {
+      response = await fetchSearchPlanPeriodsAPI({
+        searchContent,
+        startDate: filter['기간'].startInput,
+        endDate: filter['기간'].endInput,
+      });
+      console.log(filter['기간'].endInput);
     }
+
     setPlanList(response);
   };
 
