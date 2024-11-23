@@ -72,7 +72,7 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: 'notmypage/:userName', // 새로운 경로 추가
+        path: 'notmypage/:username', // 새로운 경로 추가
         element: <NotMyPage />, // 해당 컴포넌트 렌더링
       },
       {
