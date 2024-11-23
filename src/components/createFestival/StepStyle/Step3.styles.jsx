@@ -13,7 +13,7 @@ export const CategoryContainer = styled.div`
   gap: 20px; /* 아이템 간격 설정 */
   width: 100%;
   max-width: 100%; /* 전체 화면 너비에 맞게 확장 */
-  margin-top: 30px;
+  margin-top: 50px;
   justify-content: center; /* 중앙 정렬 */
   flex-wrap: nowrap; /* 줄 바꿈 없음 */
   overflow-x: auto; /* 내용이 화면을 넘어가면 스크롤 생성 */

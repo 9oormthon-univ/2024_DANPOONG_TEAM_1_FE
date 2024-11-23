@@ -1,9 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Link 컴포넌트 import
+import { Link, useNavigate } from 'react-router-dom'; // Link 컴포넌트 import
 import * as S from '../StepStyle/Step9.styles';
 import uploadIcon from '../../../assets/images/login/upload-icon.png';
 
-function UploadSuccessPage() {
+function UploadSuccessPage({ planId }) {
+  const navigate = useNavigate();
+
+  const handleViewPost = () => {
+    if (planId) {
+      navigate(`/plan/${planId}`);
+    } else {
+      alert('게시글 정보를 불러올 수 없습니다.');
+    }
+  };
+
   return (
     <S.Container>
       <S.IconContainer>
@@ -21,7 +31,7 @@ function UploadSuccessPage() {
         </Link>
 
         <S.Button>
-          <S.ButtonIcon>게시글 보러 가기</S.ButtonIcon>
+          <S.ButtonIcon onClick={handleViewPost}>게시글 보러 가기</S.ButtonIcon>
         </S.Button>
       </S.ButtonContainer>
     </S.Container>

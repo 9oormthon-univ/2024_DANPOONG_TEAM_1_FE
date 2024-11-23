@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as S from './PlanComments.styles';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import defaultProfileImage from '../../assets/images/default-profile-image.svg';
 import Comment from './components/Comment';
-import { useDispatch } from 'react-redux';
-import { postCommentAsync } from '../../redux/slices/planSlice';
+
+import { fetchPlanAsync, postCommentAsync } from '../../redux/slices/planSlice';
 
 // 댓글 목록 변동 시 재 랜더링 되도록 수정이 필요합니다.
 
@@ -73,10 +73,15 @@ function PlanComments({ planId }) {
       group: replyTo ? replyTo.groups : 0,
       hierarchy: replyTo ? replyTo.hierarchy + 1 : 0,
     };
+    try {
+      await dispatch(postCommentAsync({ planId, commentData: newCommentData })); // 객체로 전달
+      setCommentValue('');
+      setReplyTo(null);
 
-    await dispatch(postCommentAsync({ planId, commentData: newCommentData })); // 객체로 전달
-    setCommentValue('');
-    setReplyTo(null);
+      await dispatch(fetchPlanAsync(planId));
+    } catch (error) {
+      console.error('댓글 등록 중 에러 발생:', error);
+    }
   };
 
   const handleReplyClick = comment => {

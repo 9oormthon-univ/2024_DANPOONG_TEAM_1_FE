@@ -1,91 +1,135 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  grid-template-areas: 'header header header header' // InputHistory가 차지하는 4x1 영역
+    'left left right right'; // 하단에 2x3, 2x3 (LeftPanel, RightPanel)
+
   width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  gap: 20px;
+  height: 100%; // 전체 화면 높이
+  gap: 10px; // 그리드 항목 간격을 줄이기 위해 10px로 설정
+  justify-items: center; // 수평 중앙 정렬
+  align-items: center; // 수직 중앙 정렬
+
+  // 작은 화면에서 flex 방향을 column으로 변경하여 세로로 배치
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr; // 한 열로 설정
+    grid-template-rows: auto auto auto; // 자동 크기 조정
+    grid-template-areas:
+      'header'
+      'left'
+      'right';
+  }
+`;
+export const SearchIcon = styled.img`
+  width: 20px;
 `;
 
-export const LeftPanel = styled.div`
-  width: 450px;
-  height: 230px;
-  padding: 20px;
+export const Header = styled.div`
+  grid-area: header;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #919191;
   border-radius: 30px;
-  border: 1.4px solid #9a50f1;
-
-  margin-left: 150px;
-`;
-export const PlaceholderMessage = styled.div`
   padding: 10px;
-  text-align: center;
-  color: #aaa;
-  font-size: 14px;
+  font-size: 20px;
+  color: #919191;
+`;
+export const LeftPanel = styled.div`
+  grid-area: left;
+  display: flex;
+  flex-direction: column; // 세로로 배치
+  justify-content: flex-start;
+  align-items: stretch; // 자식 요소들이 가로로 꽉 차게 배치
+  padding: 20px;
+  border-radius: 50px;
+  border: 1.6px solid #9a50f1;
+  height: 350px;
+  width: 400px; // 넓이를 적당히 설정
+  margin-left: 200px;
+  @media (max-width: 1000px) {
+    height: auto;
+    width: 100%;
+  }
+`;
+export const Searchbar = styled.form`
+  border-radius: 100px;
+  border: 1px solid ${({ theme }) => theme.colors.gray5};
+  display: flex;
+  justify-content: space-between;
+  padding-left: 6px;
+  padding-right: 10px;
+  width: 100%;
+  box-shadow: 0px 0px 12px 0px ${({ theme }) => theme.colors.gray3};
 `;
 export const RightPanel = styled.div`
-  width: 400px;
-  height: 400px;
-  background-color: #f0f0f0;
+  grid-area: right;
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin-top: -150px;
-  margin-right: 150px;
+  padding: 20px;
+  border-radius: 10px;
+  height: 400px;
+  width: 400px;
+  margin-right: 200px;
+  @media (max-width: 1000px) {
+    height: auto;
+    width: 100%;
+    margin-top: 0; // 작은 화면에서는 자동으로 조정
+  }
 `;
 
-export const SearchInput = styled.input`
-  padding: 10px;
-  font-size: 15px;
-  border-bottom: 1px solid #ddd;
-  border-radius: 5px;
+export const Title = styled.h1`
+  font-size: 20px;
+  color: #919191;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: #9a50f1;
+    border: 1.6px solid #9a50f1;
+  }
 `;
 
-export const AddressList = styled.div`
-  margin-top: 10px;
+export const ButtonContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  gap: 10px;
+  justify-content: center;
 `;
 
-export const AddressItem = styled.div`
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  cursor: pointer;
+export const Button = styled.button`
   background-color: #fff;
-
+  border: 1px solid #919191;
+  border-radius: 30px;
+  padding: 7px 14px;
+  font-size: 13px;
+  color: #919191;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
   &:hover {
-    background-color: #f9f9f9;
+    color: #9a50f1;
+    border: 1.6px solid #9a50f1;
   }
 `;
+
 export const NextButton = styled.button`
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  font-size: 14px;
-  background-color: #4b0082;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 7px 20px;
+  border: 1px solid #919191;
+  border-radius: 50px;
+  box-shadow: 0 1px 2px #919191;
   cursor: pointer;
   &:hover {
-    background-color: #37106e;
+    box-shadow: 0 2px 3px #919191;
   }
 `;
+
 export const SearchResults = styled.ul`
   margin-top: 10px;
   padding: 0;
   list-style: none;
-  max-height: 150px;
+  max-height: 350px;
   overflow-y: auto;
-  border: 1px solid #ccc;
   background: #fff;
   border-radius: 5px;
 `;
@@ -96,4 +140,18 @@ export const ResultItem = styled.li`
   &:hover {
     background-color: #f0f0f0;
   }
+`;
+
+export const PlaceholderMessage = styled.div`
+  padding: 10px;
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+`;
+
+export const SearchInput = styled.input`
+  padding: 10px;
+  font-size: 15px;
+  border-bottom: 1px solid #ddd;
+  border-radius: 5px;
 `;

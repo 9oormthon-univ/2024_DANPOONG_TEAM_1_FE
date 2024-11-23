@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 70%;
-  margin-top: 100px;
+  margin-top: 50px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 160px;
+  margin-left: 100px;
 `;
 
 export const Title = styled.h1`
@@ -15,7 +15,7 @@ export const Title = styled.h1`
   background-color: #fff;
   border: 1px solid #919191;
   border-radius: 30px;
-  padding: 5px 10px;
+  padding: 9px 17px;
   font-size: 13px;
   color: #919191;
   cursor: pointer;
@@ -44,7 +44,7 @@ export const Button = styled.button`
   background-color: #fff;
   border: 1px solid #919191;
   border-radius: 30px;
-  padding: 5px 10px;
+  padding: 7px 14px;
   font-size: 13px;
   color: #919191;
   cursor: pointer;
