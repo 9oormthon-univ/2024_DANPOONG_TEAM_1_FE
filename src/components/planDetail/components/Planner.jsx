@@ -10,7 +10,7 @@ function Planner() {
 
   useEffect(() => {
     if (currentPlan) {
-      setUserName(currentPlan.username);
+      setUserName(currentPlan.name);
       setFollowerCount(currentPlan.followerCount);
     }
   }, [currentPlan]);
