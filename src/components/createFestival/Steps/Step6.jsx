@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setDetail } from '../../../redux/slices/historySlice';
-import * as S from '../StepStyle/Step567.styles';
+import * as S from '../StepStyle/Step6.styles';
 
 function Step6({ onNextStep }) {
   const { details } = useSelector(state => state.history);

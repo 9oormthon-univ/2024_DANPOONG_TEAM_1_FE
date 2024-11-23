@@ -5,7 +5,6 @@ import axios from 'axios';
 const API_ENDPOINTS = {
   LOGIN: '/login',
   SIGN_UP: '/join',
-  REISSUE: '/reissue',
 };
 
 export const login = async (username, password) => {
@@ -33,11 +32,7 @@ export const login = async (username, password) => {
     localStorage.setItem('username', username);
     localStorage.setItem('accessToken', accessToken);
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-    // if (refreshToken) {
-    //   document.cookie = `refreshToken=${refreshToken}; path=/; secure; httponly; samesite=Strict;`;
-    // } else {
-    //   console.warn('Refresh Token이 반환되지 않았습니다.');
-    // }
+
     console.log('✅ 로그인 성공');
     return response.data;
   } catch (error) {

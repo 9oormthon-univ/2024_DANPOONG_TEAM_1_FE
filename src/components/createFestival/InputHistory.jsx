@@ -3,20 +3,23 @@ import { useSelector } from 'react-redux';
 import * as S from './InputHistory.styles';
 
 const themeMap = {
-  '음악/공연': 1,
-  '미술/공예': 2,
-  지역문화: 3,
-  '음식/푸드마켓': 4,
-  '전통/역사': 5,
-  '자연환경/농업': 6,
-  스포츠: 7,
-  계절행사: 8,
-  '커뮤니티/가족': 9,
+  1: '음악/공연',
+  2: '미술/공예',
+  3: '지역문화',
+  4: '음식/푸드마켓',
+  5: '전통/역사',
+  6: '자연환경/농업',
+  7: '스포츠',
+  8: '계절행사',
+  9: '커뮤니티/가족',
 };
 
 function InputHistory({ setCurrentStep }) {
-  const { title, details, currentStep } = useSelector(state => state.history);
-
+  const { title, details } = useSelector(state => state.history);
+  const currentStep = useSelector(state => {
+    console.log('Redux currentStep:', state.history.currentStep); // 상태 확인
+    return state.history.currentStep;
+  });
   const handleButtonClick = step => {
     console.log(`Button for step ${step} clicked`); // 디버깅
     setCurrentStep(step);
@@ -29,6 +32,7 @@ function InputHistory({ setCurrentStep }) {
   // 버튼의 border-radius를 현재 위치한 step에 따라 다르게 적용
   const getButtonStyle = step => {
     if (step === currentStep) {
+      console.log(`Button for step ${step} is active`);
       return {
         color: '#9a50f1',
         border: '2px solid #9a50f1', // 보라색 테두리

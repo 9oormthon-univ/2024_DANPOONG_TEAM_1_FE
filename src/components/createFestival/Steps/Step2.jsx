@@ -95,8 +95,9 @@ function Step2({ onNextStep }) {
   return (
     <S.Container>
       <S.LeftPanel>
-        <S.Searchbar>
+        <S.Searchbar onClick={() => document.getElementById('search-input').focus()}>
           <S.SearchInput
+            id="search-input"
             type="text"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}

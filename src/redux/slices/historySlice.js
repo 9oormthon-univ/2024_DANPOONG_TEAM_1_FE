@@ -22,6 +22,7 @@ const historySlice = createSlice({
       state.title = action.payload;
     },
     setDetail: (state, action) => {
+      console.log(`Updating currentStep in Redux: ${action.payload}`);
       const { key, value } = action.payload;
       state.details[key] = value; // title로 저장
     },

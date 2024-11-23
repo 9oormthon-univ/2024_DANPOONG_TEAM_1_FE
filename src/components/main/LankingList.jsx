@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import * as S from './LankingList.styles';
 import { fetchRankingsAPI } from '../../api/plan/main';
-import defaultPoster from '../../assets/images/default-poster.png';
 import PlanPreviewMain from '../common/planPreview/PlanPreviewMain';
 
 function LankingList() {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [rankingsList, setRankingList] = useState([]);
 
   useEffect(() => {
@@ -20,9 +19,9 @@ function LankingList() {
     fetchRankingListAsync();
   }, []);
 
-  const handlePlanClick = planId => {
-    navigate(`/plan/${planId}`);
-  };
+  // const handlePlanClick = planId => {
+  //   navigate(`/plan/${planId}`);
+  // };
 
   return (
     <S.MonthPopularLanking>
