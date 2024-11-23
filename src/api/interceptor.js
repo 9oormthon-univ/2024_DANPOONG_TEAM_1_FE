@@ -5,7 +5,7 @@ export const applyInterceptors = instance => {
   instance.interceptors.request.use(
     config => {
       const accessToken = localStorage.getItem('accessToken');
-
+      console.log(accessToken);
       // Access Token이 존재하고 유효할 경우 헤더에 추가
       if (accessToken) {
         config.headers['Authorization'] = `Bearer ${accessToken}`;

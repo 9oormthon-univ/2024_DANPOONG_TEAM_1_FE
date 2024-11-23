@@ -6,7 +6,6 @@ import * as S from './Header.styles';
 import logo from '../../../assets/images/trends-logo.svg';
 import searchIcon from '../../../assets/images/search-icon.svg';
 import userIcon from '../../../assets/images/user-icon.svg';
-import bellIcon from '../../../assets/images/bell-icon.svg';
 import planningIcon from '../../../assets/images/planning-icon.svg';
 
 function Header({ value }) {
@@ -64,9 +63,6 @@ function Header({ value }) {
                 <S.Icon src={userIcon} alt="mypage" />
               </S.Button>
             </Link>
-            <S.Button>
-              <S.Icon src={bellIcon} alt="alert" />
-            </S.Button>
           </>
         ) : (
           <>
