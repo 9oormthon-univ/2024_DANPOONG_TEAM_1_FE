@@ -5,8 +5,19 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin: 0 auto;
 `;
+
+export const PlanList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  align-items: flex-start;
+
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 50px;
+`;
+
 export const User = styled.div`
   width: 80%;
 `;

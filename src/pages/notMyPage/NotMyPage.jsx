@@ -113,9 +113,8 @@ const Profile = () => {
         </S.TabContainer>
         <S.UserContent>
           {posts.length > 0 ? (
-            posts.map(post => {
-              console.log('planId:', post.id); // 확인용 로그
-              return (
+            <S.PlanList>
+              {posts.map(post => (
                 <MyPageList
                   planId={post.id}
                   key={post.id}
@@ -124,8 +123,8 @@ const Profile = () => {
                   town={post.town}
                   likeCount={post.likeCount}
                 />
-              );
-            })
+              ))}
+            </S.PlanList>
           ) : (
             <p>게시글이 없습니다.</p>
           )}
