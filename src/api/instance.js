@@ -29,6 +29,7 @@ const planDetailInstance = createInstance(planInstance, '/detail');
 const planMainInstance = createInstance(planInstance, '/main');
 const planSearchInstance = createInstance(planInstance, '/search');
 const planThemeInstance = createInstance(planInstance, '/themes');
+const planRankingInstance = createInstance(planInstance, '/ranking');
 
 export {
   defaultInstance,
@@ -40,4 +41,5 @@ export {
   planSearchInstance,
   planDetailInstance,
   planThemeInstance,
+  planRankingInstance,
 };
