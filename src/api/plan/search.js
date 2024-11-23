@@ -3,7 +3,7 @@ import { sendRequest } from '../request';
 
 export const fetchSearchPlanAPI = async searchContent => {
   try {
-    const response = await sendRequest(planSearchInstance, 'get', `/${searchContent}`);
+    const response = await sendRequest(planSearchInstance, 'get', `/${searchContent}/all`);
     return response.data.result;
   } catch (error) {
     console.error('Failed to fetch plan:', error);

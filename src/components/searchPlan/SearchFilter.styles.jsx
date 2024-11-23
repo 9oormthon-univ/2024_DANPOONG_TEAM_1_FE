@@ -114,4 +114,7 @@ export const DateInputContainer = styled.form`
 export const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.primary2};
   white-space: nowrap;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 10px;
 `;
