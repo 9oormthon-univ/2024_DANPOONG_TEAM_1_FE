@@ -1,37 +1,28 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { logout } from '../../redux/slices/authSlice';
-import * as S from './Profile.styles';
+
+import { useParams, useNavigate } from 'react-router-dom';
+import * as S from './NotMyPage.styles';
 import Header from '../../components/common/header/Header';
 import defaultProfileImage from '../../assets/images/default-profile-image.svg';
 import { defaultInstance } from '../../api/instance';
 import MyPageList from '../../components/common/myPageList/MyPageList';
 
 const Profile = () => {
-  const dispatch = useDispatch();
+  const { username } = useParams();
   const navigate = useNavigate();
-  const [username, setUsername] = useState(null);
   const [posts, setPosts] = useState([]);
   const [followerCount, setFollowerCount] = useState(0);
   const [followingCount, setFollowingCount] = useState(0);
+  const [isFollowing, setIsFollowing] = useState(false); // 팔로우 상태 관리
   const [activeTab, setActiveTab] = useState('early');
+  const storedUsername = localStorage.getItem('username');
 
-  const handleLogout = () => {
-    dispatch(logout());
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('username');
-    console.log('✅ Access Token 제거 완료');
+  useEffect(() => {
+    if (username === storedUsername) {
+      navigate('/profile');
+    }
+  }, [username, storedUsername, navigate]);
 
-    document.cookie =
-      'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT; Secure; HttpOnly;';
-    console.log('✅ Refresh Token 제거 완료');
-
-    alert('로그아웃되었습니다.');
-    navigate('/');
-  };
-
-  // fetchPosts를 useCallback으로 래핑
   const fetchPosts = useCallback(
     async username => {
       try {
@@ -74,13 +65,16 @@ const Profile = () => {
   );
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
-    setUsername(storedUsername || '익명 사용자');
-    if (storedUsername) {
-      fetchPosts(storedUsername);
+    fetchPosts(username);
+  }, [fetchPosts, username]);
+  const handleFollowClick = () => {
+    if (!isFollowing) {
+      setFollowerCount(prev => prev + 1); // 팔로워 수 증가
+    } else {
+      setFollowerCount(prev => prev - 1); // 팔로워 수 감소
     }
-  }, [fetchPosts]); // fetchPosts를 종속성 배열에 추가
-
+    setIsFollowing(prev => !prev); // 상태 변경
+  };
   return (
     <S.Container>
       <Header />
@@ -91,10 +85,9 @@ const Profile = () => {
             <S.ProfileList>
               <S.UserName>{username}</S.UserName>
               <S.UserButton>
-                <S.ModifyButton type="button">회원정보수정</S.ModifyButton>
-                <S.LogoutButton type="button" onClick={handleLogout}>
-                  로그아웃
-                </S.LogoutButton>
+                <S.FollowButton type="button" onClick={handleFollowClick} isFollowing={isFollowing}>
+                  {isFollowing ? '팔로잉' : '팔로우'}
+                </S.FollowButton>
               </S.UserButton>
             </S.ProfileList>
             <S.UserStats>
