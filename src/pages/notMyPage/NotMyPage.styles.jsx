@@ -6,7 +6,6 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
 `;
-
 export const PlanList = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -17,7 +16,6 @@ export const PlanList = styled.div`
   width: 100%;
   margin-bottom: 50px;
 `;
-
 export const User = styled.div`
   width: 80%;
 `;
@@ -52,7 +50,6 @@ export const UserInfor = styled.div`
 
 export const ProfileList = styled.div`
   display: flex;
-  justify-content: space-between; /* username과 버튼 간격 조절 */
   align-items: center;
   width: 100%;
 `;
@@ -62,15 +59,16 @@ export const UserName = styled.h2`
   margin: 0;
 `;
 export const UserButton = styled.div``;
-export const ModifyButton = styled.button`
+export const FollowButton = styled.button`
   padding: 5px 10px;
   font-size: 10px;
-  background-color: #696969;
+  background-color: ${({ isFollowing }) => (isFollowing ? '#a9a9a9' : '#5098f1')};
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: 600;
+  margin-left: 10px;
 `;
 
 export const LogoutButton = styled.button`
@@ -99,20 +97,17 @@ export const UserStats = styled.div`
 
 export const UserContent = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   align-items: flex-start;
-  width: 100%;
-
+  gap: 20px; /* 요소 간 간격 */
   padding: 30px;
   width: 100%;
-  gap: 15px;
   @media (max-width: 1300px) {
-    gap: 8px;
+    gap: 15px;
   }
   @media (max-width: 1000px) {
-    gap: 5px;
+    gap: 10px;
   }
-  cursor: pointer;
 `;
 
 export const Post = styled.div`

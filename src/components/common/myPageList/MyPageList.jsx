@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import * as S from './MyPageList.styles';
-import defaultImage from '../../../assets/images/defaultImage.png';
+import defaultPoster from '../../../assets/images/default-poster.png';
 function PlanPreview({ planId, image, title, town }) {
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ function PlanPreview({ planId, image, title, town }) {
         {image !== null ? (
           <S.PlanImage src={image} alt="image" />
         ) : (
-          <S.PlanImage src={defaultImage} />
+          <S.PlanImage src={defaultPoster} />
         )}
       </S.PlanImageContainer>
       <S.PlanContent>
