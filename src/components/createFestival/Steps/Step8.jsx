@@ -7,15 +7,15 @@ import { planInstance } from '../../../api/instance';
 import { applyInterceptors } from '../../../api/interceptor';
 
 function Step8({ onNextStep }) {
-  const { title, details } = useSelector(state => state.history); // title을 redux에서 가져옴
+  const { title, details } = useSelector(state => state.history); // title과 details를 Redux에서 가져옴
   const [content, setContent] = useState(details?.content || '');
   const [budget, setBudget] = useState(details?.budget || '');
-  const [, setPoster] = useState(null);
-  const [, setBanner] = useState(null);
+  const [poster, setPoster] = useState(null);
+  const [banner, setBanner] = useState(null);
 
   const dispatch = useDispatch();
 
-  // Redux 저장
+  // Redux에 상태 저장
   const saveToRedux = async () => {
     await dispatch(setDetail({ key: 'content', value: content }));
     await dispatch(setDetail({ key: 'budget', value: budget }));
@@ -36,7 +36,6 @@ function Step8({ onNextStep }) {
     try {
       const base64Payload = token.split('.')[1];
       const decodedPayload = JSON.parse(atob(base64Payload));
-
       const currentTime = Math.floor(Date.now() / 1000);
 
       if (decodedPayload.exp && decodedPayload.exp > currentTime) {
@@ -62,7 +61,39 @@ function Step8({ onNextStep }) {
     return { province: province || '', city: city || '', town: town || '' };
   };
 
-  // API 요청 처리
+  // 파일 업로드 함수
+  const uploadFile = async (endpoint, file, planId) => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const accessToken = localStorage.getItem('accessToken'); // Access Token 가져오기
+
+    console.log(`🔍 요청 URL: ${endpoint}/${planId}`);
+    console.log('🔍 요청 데이터:', formData.get('file')); // 업로드 파일 확인
+    console.log('🔍 Authorization 헤더:', `Bearer ${accessToken}`);
+
+    try {
+      const response = await sendRequest(
+        planInstance,
+        'post',
+        `${endpoint}/${planId}`, // 경로 앞에 '/' 제거
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${accessToken}`, // Authorization 헤더 추가
+          },
+        }
+      );
+      console.log(`✅ ${endpoint} 업로드 성공:`, response.data);
+      return response.data;
+    } catch (error) {
+      console.error(`❌ ${endpoint} 업로드 실패:`, error.response || error.message);
+      throw error;
+    }
+  };
+
+  // 게시글 생성 및 파일 업로드 처리
   const handleSubmit = async () => {
     const accessToken = localStorage.getItem('accessToken');
 
@@ -103,14 +134,25 @@ function Step8({ onNextStep }) {
         town,
       };
 
-      // API 요청
+      // 게시글 생성 API 호출
       applyInterceptors(planInstance);
       const response = await sendRequest(planInstance, 'post', '', data);
-      console.log('✅ API 성공 응답:', response.data);
-      alert('요청이 성공적으로 처리되었습니다.');
-      onNextStep && onNextStep();
+      console.log('✅ 게시글 작성 성공 응답:', response.data);
+      alert('게시글 작성이 완료되었습니다.');
+      const planId = response.data?.result?.planId;
+
+      // 포스터와 배너 파일 업로드
+      if (poster) {
+        await uploadFile('poster', poster, planId); // 포스터 업로드
+      }
+      if (banner) {
+        await uploadFile('banner', banner, planId); // 배너 업로드
+      }
+
+      console.log('✅ 모든 파일 업로드 완료');
+      onNextStep && onNextStep(planId);
     } catch (error) {
-      console.error('❌ API 요청 실패:', error.response || error.message);
+      console.error('❌ 요청 실패:', error.response || error.message);
 
       if (error.response) {
         console.error('🔍 응답 상태:', error.response.status);
@@ -137,7 +179,6 @@ function Step8({ onNextStep }) {
     <S.Container>
       <S.Section>
         <S.Title>
-          {' '}
           <span style={{ color: '#9a50f1' }}>{title}</span>, 어떤 축제인가요?
         </S.Title>
         <S.TextArea
@@ -167,7 +208,7 @@ function Step8({ onNextStep }) {
           <S.Row>
             <S.Label>배너:</S.Label>
             <S.Input1 type="file" accept="image/*" onChange={e => handleFileChange(e, 'banner')} />
-          </S.Row>{' '}
+          </S.Row>
           <S.Row>
             <S.SubmitButton onClick={handleSubmit}>작성완료</S.SubmitButton>
           </S.Row>
