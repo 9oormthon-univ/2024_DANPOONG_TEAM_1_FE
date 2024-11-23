@@ -3,9 +3,13 @@ import * as S from './Comment.styles';
 import defaultProfileImage from '../../../assets/images/default-profile-image.svg';
 import commentLikeIcon from '../../../assets/images/comment-like-icon.svg';
 import { deleteCommentAsync } from '../../../redux/slices/planSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import filledCommentLikeIcon from '../../../assets/images/filled-comment-like-icon.svg';
+import useLikeClick from '../../../hooks/useLikeClick';
 
 function Comment({ comment, hierarchy, onReplyClick, planId }) {
+  const { handleClick, checkLike } = useLikeClick('comment');
+  const { isLoggedIn } = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
   const handleReplyButtonClick = () => {
@@ -30,7 +34,11 @@ function Comment({ comment, hierarchy, onReplyClick, planId }) {
       <S.CommentContent>{comment.body}</S.CommentContent>
       <S.ButtonContainer>
         <S.LikeButtonContainer>
-          <S.LikeIcon src={commentLikeIcon} alt="like" />
+          <S.LikeIcon
+            src={checkLike ? filledCommentLikeIcon : commentLikeIcon}
+            onClick={() => isLoggedIn && handleClick({ planId: planId, commentId: comment.id })}
+            alt="like"
+          />
           <S.LikeCount>{comment.likesCount}</S.LikeCount>
         </S.LikeButtonContainer>
         {hierarchy === 0 && (

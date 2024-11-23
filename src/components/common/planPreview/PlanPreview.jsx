@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './PlanPreview.styles';
 import { category } from '../../../assets/const/category';
+import defaultPoster from '../../../assets/images/default-poster.png';
 
 function PlanPreview({ planId, image, title, user, itemCategory, startDate, endDate }) {
   const navigate = useNavigate();
@@ -23,7 +24,11 @@ function PlanPreview({ planId, image, title, user, itemCategory, startDate, endD
   return (
     <S.Container onClick={() => handlePlanClick(planId)}>
       <S.PlanImageContainer>
-        {image !== null ? <S.PlanImage src={image} alt="image" /> : <S.PlanDefaultImage />}
+        {image !== null ? (
+          <S.PlanImage src={image} alt="image" />
+        ) : (
+          <S.PlanImage src={defaultPoster} alt="image" />
+        )}
       </S.PlanImageContainer>
       <S.PlanContent>
         {categoryTitle && <S.Category>{categoryTitle}</S.Category>}

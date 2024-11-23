@@ -15,7 +15,7 @@ function PlanDetailPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [planId]);
 
   const findPathRef = useRef(null);
 

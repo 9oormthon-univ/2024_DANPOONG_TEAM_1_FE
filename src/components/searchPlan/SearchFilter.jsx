@@ -6,6 +6,8 @@ import { category } from '../../assets/const/category';
 function SearchFilter({ onFilterChange }) {
   const [currentFilter, setCurrentFilter] = useState(null); // 현재 활성화된 필터
   const [selectedValue, setSelectedValue] = useState({});
+  const [startInput, setStartInput] = useState(null);
+  const [endInput, setEndInput] = useState(null);
 
   // 카테고리 한글 -> 영어 변환 함수
   const getCategoryName = title => {
@@ -17,17 +19,28 @@ function SearchFilter({ onFilterChange }) {
     let convertedValue = value;
 
     if (filter === '테마') {
-      convertedValue = getCategoryName(value); // 한글 -> 영어 변환
+      convertedValue = getCategoryName(value);
     } else if (filter === '입장료') {
       convertedValue = value === '유료' ? 'non-free' : 'free';
     }
 
     setSelectedValue(() => ({ [filter]: value }));
     setCurrentFilter(null); // 박스 닫기
-    console.log(`Selected for ${filter}: ${value} -> ${convertedValue}`);
     onFilterChange({ filter, value: convertedValue }); // 부모로 전달
   };
 
+  const handleDateChange = (filter, value) => {
+    if (startInput && endInput) {
+      if (new Date(startInput) > new Date(endInput)) {
+        alert('종료일은 시작일 이후여야 합니다.');
+        return;
+      }
+      setSelectedValue(() => ({ [filter]: value }));
+      setCurrentFilter(null); // 박스 닫기
+      onFilterChange({ filter: filter, value: value });
+      console.log(value);
+    }
+  };
   const Box = ({ filter }) => {
     const options = {
       지역: ['전체', '서울', '경기/강원', '경상', '충청', '제주', '전라'],
@@ -36,17 +49,37 @@ function SearchFilter({ onFilterChange }) {
     };
 
     return (
-      <S.Box>
-        {options[filter].map(option => (
-          <S.Region
-            key={option}
-            onClick={() => handleValueClick(filter, option)}
-            isSelected={selectedValue[filter] === option}
-          >
-            {option}
-          </S.Region>
-        ))}
-      </S.Box>
+      <>
+        {filter !== '기간' ? (
+          <S.Box>
+            {options[filter].map(option => (
+              <S.Region
+                key={option}
+                onClick={() => handleValueClick(filter, option)}
+                isSelected={selectedValue[filter] === option}
+              >
+                {option}
+              </S.Region>
+            ))}
+          </S.Box>
+        ) : (
+          <S.DateInputContainer onSubmit={() => handleDateChange(filter, { startInput, endInput })}>
+            <S.DateInputWrapper>
+              <S.Label>시작</S.Label>
+              <S.Input
+                type="date"
+                value={startInput}
+                onChange={e => setStartInput(e.target.value)}
+              />
+            </S.DateInputWrapper>
+            <S.DateInputWrapper>
+              <S.Label>종료</S.Label>
+              <S.Input type="date" value={endInput} onChange={e => setEndInput(e.target.value)} />
+            </S.DateInputWrapper>
+            <S.Button type="submit">조회</S.Button>
+          </S.DateInputContainer>
+        )}
+      </>
     );
   };
 

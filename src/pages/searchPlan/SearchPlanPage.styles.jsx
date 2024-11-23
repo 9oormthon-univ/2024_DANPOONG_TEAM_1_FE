@@ -37,9 +37,11 @@ export const PlanList = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
-  align-items: center;
+  align-items: flex-start;
+
   justify-content: center;
   width: 100%;
+  margin-bottom: 50px;
 `;
 
 export const EmptyList = styled.p`
