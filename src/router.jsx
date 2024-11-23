@@ -13,6 +13,7 @@ import ForgotPasswdCompany from './components/login/ForgotPasswdCompany';
 import Profile from './pages/profile/Profile';
 import CreateFestival from './pages/createFestival/CreateFestival';
 import Step2 from './components/createFestival/Steps/Step2';
+import SearchPlanPage from './pages/searchPlan/SearchPlanPage';
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: 'plan/:planId',
         element: <PlanDetailPage />,
+      },
+      {
+        path: 'search/:searchContent',
+        element: <SearchPlanPage />,
       },
     ],
     errorElement: <NotFound />,

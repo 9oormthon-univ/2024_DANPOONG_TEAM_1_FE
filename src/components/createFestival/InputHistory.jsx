@@ -24,6 +24,7 @@ function InputHistory({ setCurrentStep }) {
 
   const getMappedTheme = () => {
     const themeText = details.theme || '축제 테마';
+    console.log(themeText);
     return themeMap[themeText] || themeText; // 매핑된 숫자 또는 기본 텍스트 반환
   };
 
