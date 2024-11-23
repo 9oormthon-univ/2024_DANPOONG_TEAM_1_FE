@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './ThemeLankingPlanList.styles';
-import { fetchRankingThemeAPI } from '../../api/plan/theme';
+import { fetchRankingThemeAPI, fetchRankingThemeListAPI } from '../../api/plan/theme';
 import PlanPreviewMain from '../common/planPreview/PlanPreviewMain';
 
 function ThemeLankingPlanList({ categoryName }) {
@@ -9,7 +9,8 @@ function ThemeLankingPlanList({ categoryName }) {
   useEffect(() => {
     const fetchRankingListAsync = async () => {
       try {
-        setRankingList(await fetchRankingThemeAPI(categoryName));
+        await fetchRankingThemeAPI(categoryName);
+        setRankingList(await fetchRankingThemeListAPI(categoryName));
       } catch (error) {
         console.error('Failed to fetch lists:', error);
       }

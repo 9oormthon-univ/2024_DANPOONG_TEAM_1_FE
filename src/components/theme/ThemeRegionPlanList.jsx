@@ -24,10 +24,11 @@ function ThemeRegionPlanList({ categoryName }) {
   }, [categoryName]);
 
   const handleValueClick = async value => {
+    console.log(value);
     setSelectedValue(value);
-    setIsOpen(false);
-    const response = await fetchRegionThemeAPI({ categoryName, town: selectedValue });
+    const response = await fetchRegionThemeAPI({ categoryName, town: value });
     setPlanList(response || []);
+    setIsOpen(false);
   };
   // 필터 박스 열림/닫힘 토글
   const toggleFilterBox = () => {

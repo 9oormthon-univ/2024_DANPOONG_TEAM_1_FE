@@ -45,10 +45,19 @@ export const fetchBannerThemeAPI = async categoryName => {
   }
 };
 
+export const fetchRankingThemeListAPI = async categoryName => {
+  try {
+    const response = await sendRequest(planThemeInstance, 'get', `/Ranking/${categoryName}`);
+    return response.data.result;
+  } catch (error) {
+    console.error('Failed to fetch rankings:', error);
+    return error;
+  }
+};
+
 export const fetchRankingThemeAPI = async categoryName => {
   try {
-    await sendRequest(planRankingInstance, 'post', '');
-    const response = await sendRequest(planThemeInstance, 'get', `/Ranking/${categoryName}`);
+    const response = await sendRequest(planRankingInstance, 'post', `/${categoryName}`);
     return response.data.result;
   } catch (error) {
     console.error('Failed to fetch rankings:', error);
