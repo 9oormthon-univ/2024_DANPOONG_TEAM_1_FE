@@ -24,7 +24,7 @@ function HottestPlanList() {
       <S.HotPlanContainer>
         {hottestPlanList &&
           hottestPlanList
-            .slice(0, 5)
+            .slice(0, Math.min(hottestPlanList.length, 5))
             .map((item, index) => (
               <PlanPreview
                 planId={item.planId}

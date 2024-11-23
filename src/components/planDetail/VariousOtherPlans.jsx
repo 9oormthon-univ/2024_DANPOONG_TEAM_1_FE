@@ -27,11 +27,17 @@ function VariousOtherPlans({ planId }) {
       </S.TitleContainer>
       <S.PlanContainer>
         {similarPlanList.length > 0 ? (
-          similarPlanList
-            .slice(0, 5)
-            .map((item, index) => (
-              <PlanPreview key={index} title={item.title} user={item.name} image={item.imageLink} />
-            ))
+          similarPlanList.slice(0, 5).map((item, index) => (
+            <>
+              <PlanPreview
+                planId={item.planId}
+                key={index}
+                title={item.title}
+                user={item.name}
+                image={item.imageLink}
+              />
+            </>
+          ))
         ) : (
           <p>유사 행사가 없습니다.</p>
         )}
