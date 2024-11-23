@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import * as S from './LankingList.styles';
 import { fetchRankingsAPI, fetchRankingListAPI } from '../../api/plan/main';
 import PlanPreviewMain from '../common/planPreview/PlanPreviewMain';
 
 function LankingList() {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [rankingsList, setRankingList] = useState([]);
 
   useEffect(() => {

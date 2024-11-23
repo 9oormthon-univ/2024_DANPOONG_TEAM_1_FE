@@ -16,6 +16,7 @@ import Step2 from './components/createFestival/Steps/Step2';
 import SearchPlanPage from './pages/searchPlan/SearchPlanPage';
 import SignUp from './pages/signup/SignUp';
 import ThemePage from './pages/theme/ThemePage';
+import NotMyPage from './pages/notMyPage/NotMyPage';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />,
+      },
+      {
+        path: 'notmypage/:userName', // 새로운 경로 추가
+        element: <NotMyPage />, // 해당 컴포넌트 렌더링
       },
       {
         path: 'plan/:planId',

@@ -81,7 +81,8 @@ export const SubmitButton = styled.button`
   border: 1px solid #9a50f1;
   cursor: pointer;
   transition: all 0.3s ease;
-
+  margin-top: 10px;
+  margin-bottom: 30px;
   &:hover {
     background-color: #37106e;
   }

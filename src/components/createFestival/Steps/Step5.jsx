@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setDetail } from '../../../redux/slices/historySlice';
-import * as S from '../StepStyle/Step567.styles';
+import * as S from '../StepStyle/Step5.styles';
 
 function Step5({ onNextStep }) {
   const { details } = useSelector(state => state.history); // Redux 상태 가져오기
@@ -11,7 +11,7 @@ function Step5({ onNextStep }) {
   const handleNextClick = () => {
     if (inputValue.trim()) {
       dispatch(setDetail({ key: 'target', value: inputValue })); // Redux에 제목 저장
-      onNextStep(); // Step2로 이동
+      onNextStep();
     }
   };
 

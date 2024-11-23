@@ -24,7 +24,7 @@ const Profile = () => {
     console.log('✅ Access Token 제거 완료');
 
     // document.cookie =
-    //   'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT; Secure; HttpOnly;';
+    // 'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT; Secure; HttpOnly;';
     console.log('✅ Refresh Token 제거 완료');
 
     alert('로그아웃되었습니다.');
