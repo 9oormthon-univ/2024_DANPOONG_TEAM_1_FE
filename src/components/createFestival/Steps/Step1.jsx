@@ -29,7 +29,7 @@ function Step1({ onNextStep }) {
           type="text"
           value={title}
           onChange={e => setInputValue(e.target.value)}
-          placeholder="축제 이름의 이름을 입력해주세요."
+          placeholder="축제 이름을 입력해주세요."
         />
       </S.InputContainer>
       <S.Button onClick={handleNextClick}>다음</S.Button>
