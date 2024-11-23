@@ -71,7 +71,9 @@ function SearchPlanPage() {
                   title={item.title}
                   user={item.name}
                   itemCategory={item.category}
-                  image={item.imageLink || item.planImageLink}
+                  image={item.imageLink || item.planImageLink || null}
+                  startDate={item.startDate}
+                  endDate={item.startDate}
                 />
               ))}
             </S.PlanList>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import * as S from './PlanPreview.styles';
 import { category } from '../../../assets/const/category';
 
-function PlanPreview({ planId, image, title, user, itemCategory }) {
+function PlanPreview({ planId, image, title, user, itemCategory, startDate, endDate }) {
   const navigate = useNavigate();
   const [categoryTitle, setCategoryTitle] = useState('');
 
@@ -28,6 +28,11 @@ function PlanPreview({ planId, image, title, user, itemCategory }) {
       <S.PlanContent>
         {categoryTitle && <S.Category>{categoryTitle}</S.Category>}
         <S.PlanTitle>{title}</S.PlanTitle>
+        {startDate && endDate && (
+          <S.Date>
+            {startDate} ~ {endDate}
+          </S.Date>
+        )}
         <S.PlanUser>기획: {user}</S.PlanUser>
       </S.PlanContent>
     </S.Container>

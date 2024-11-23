@@ -60,8 +60,8 @@ export const PlanContent = styled.div`
 export const PlanTitle = styled.p`
   font-size: 18px;
   text-align: left;
-  word-break: break-word; /* 텍스트 줄바꿈 */
-  width: 100%; /* 부모 요소에 맞게 크기 조정 */
+  word-break: break-word;
+  width: 100%;
   @media (max-width: 1300px) {
     font-size: 16px;
   }
@@ -77,8 +77,8 @@ export const PlanUser = styled.p`
   font-size: 14px;
   color: ${({ theme }) => theme.colors.gray5};
   text-align: left;
-  word-break: break-word; /* 텍스트 줄바꿈 */
-  width: 100%; /* 부모 요소에 맞게 크기 조정 */
+  word-break: break-word;
+  width: 100%;
   @media (max-width: 1300px) {
     font-size: 12px;
   }
@@ -93,13 +93,39 @@ export const PlanUser = styled.p`
 export const Category = styled.p`
   font-size: 16px;
   text-align: left;
-  word-break: break-word; /* 텍스트 줄바꿈 */
-  width: 100%; /* 부모 요소에 맞게 크기 조정 */
-  color: ${({ theme }) => theme.colors.primary1};
+  word-break: break-word;
+  width: 100%;
+  color: #64369e;
+  font-weight: 500;
+  @media (max-width: 1300px) {
+    font-size: 14px;
+  }
+  @media (max-width: 1000px) {
+    font-size: 12px;
+  }
+  @media (max-width: 750px) {
+    font-size: 10px;
+  }
 `;
 
 export const PlanDefaultImage = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.colors.gray3};
+`;
+
+export const Date = styled.p`
+  font-size: 14px;
+  text-align: left;
+  word-break: break-word;
+  width: 100%;
+  @media (max-width: 1300px) {
+    font-size: 12px;
+  }
+  @media (max-width: 1000px) {
+    font-size: 10px;
+  }
+  @media (max-width: 750px) {
+    display: none;
+  }
 `;
