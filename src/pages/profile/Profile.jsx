@@ -121,7 +121,7 @@ const Profile = () => {
         <S.UserContent>
           {posts.length > 0 ? (
             posts.map(post => {
-              console.log('planId:', post.id); // 확인용 로그
+              console.log('planId:', post.id); // 확인용 로
               return (
                 <MyPageList
                   planId={post.id}

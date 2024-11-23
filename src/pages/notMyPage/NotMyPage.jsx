@@ -13,6 +13,7 @@ const Profile = () => {
   const [posts, setPosts] = useState([]);
   const [followerCount, setFollowerCount] = useState(0);
   const [followingCount, setFollowingCount] = useState(0);
+  const [isFollowing, setIsFollowing] = useState(false); // 팔로우 상태 관리
   const [activeTab, setActiveTab] = useState('early');
   const storedUsername = localStorage.getItem('username');
 
@@ -66,7 +67,14 @@ const Profile = () => {
   useEffect(() => {
     fetchPosts(username);
   }, [fetchPosts, username]);
-
+  const handleFollowClick = () => {
+    if (!isFollowing) {
+      setFollowerCount(prev => prev + 1); // 팔로워 수 증가
+    } else {
+      setFollowerCount(prev => prev - 1); // 팔로워 수 감소
+    }
+    setIsFollowing(prev => !prev); // 상태 변경
+  };
   return (
     <S.Container>
       <Header />
@@ -77,7 +85,9 @@ const Profile = () => {
             <S.ProfileList>
               <S.UserName>{username}</S.UserName>
               <S.UserButton>
-                <S.ModifyButton type="button">팔로우</S.ModifyButton>
+                <S.FollowButton type="button" onClick={handleFollowClick} isFollowing={isFollowing}>
+                  {isFollowing ? '팔로잉' : '팔로우'}
+                </S.FollowButton>
               </S.UserButton>
             </S.ProfileList>
             <S.UserStats>

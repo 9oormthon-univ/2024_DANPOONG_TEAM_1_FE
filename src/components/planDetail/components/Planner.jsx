@@ -7,12 +7,14 @@ import defaultProfileImage from '../../../assets/images/default-profile-image.sv
 function Planner() {
   const navigate = useNavigate();
   const currentPlan = useSelector(state => state.plan.currentPlan);
+  const [name, setName] = useState('');
   const [userName, setUserName] = useState('');
   const [followerCount, setFollowerCount] = useState(0);
 
   useEffect(() => {
     if (currentPlan) {
-      setUserName(currentPlan.name);
+      setUserName(currentPlan.username);
+      setName(currentPlan.name);
       setFollowerCount(currentPlan.followerCount);
     }
   }, [currentPlan]);
@@ -26,7 +28,7 @@ function Planner() {
         <S.PlannerProfile src={defaultProfileImage} alt="image" />
         <S.PlannerDetailContainer>
           <S.PlannerDetail>
-            <S.PlannerName>{userName}</S.PlannerName>
+            <S.PlannerName>{name}</S.PlannerName>
             <S.PlannerFollower>팔로워 {followerCount}</S.PlannerFollower>
           </S.PlannerDetail>
           <S.FollowButton>팔로우</S.FollowButton>
