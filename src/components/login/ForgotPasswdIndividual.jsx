@@ -115,7 +115,7 @@ const FindIdPassword = () => {
       });
 
       if (response.data?.result?.password) {
-        alert(`비밀번호는 ${response.data.result.password} 입니다.`);
+        alert(` 새 비밀번호는 ${response.data.result.password} 입니다.`);
       } else {
         alert('비밀번호를 찾을 수 없습니다.');
       }
