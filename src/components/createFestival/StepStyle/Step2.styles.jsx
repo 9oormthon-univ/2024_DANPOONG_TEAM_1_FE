@@ -44,7 +44,7 @@ export const LeftPanel = styled.div`
   justify-content: flex-start;
   align-items: stretch; // 자식 요소들이 가로로 꽉 차게 배치
   padding: 20px;
-  border-radius: 50px;
+  border-radius: 30px;
   border: 1.6px solid #9a50f1;
   height: 350px;
   width: 400px; // 넓이를 적당히 설정
