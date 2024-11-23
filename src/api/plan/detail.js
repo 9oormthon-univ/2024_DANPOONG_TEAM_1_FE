@@ -22,6 +22,18 @@ export const fetchPlanAPI = async planId => {
   }
 };
 
+export const deletePlanAPI = async planId => {
+  const deletePlanInstance = planInstance;
+  applyInterceptors(deletePlanInstance);
+  try {
+    const response = await sendRequest(deletePlanInstance, 'delete', `/${planId}`);
+    return response.data.result;
+  } catch (error) {
+    console.error('Failed to fetch similar plan:', error);
+    return error;
+  }
+};
+
 export const fetchSimilarPlanAPI = async planId => {
   try {
     const response = await sendRequest(planDetailInstance, 'get', `/${planId}/similar`);
