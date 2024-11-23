@@ -9,7 +9,7 @@ export const loginAsync = createAsyncThunk(
       return response; // 성공 시 payload로 반환
     } catch (error) {
       console.error('❌ 로그인 에러:', error);
-      return rejectWithValue(error.response?.data || '로그인 중 오류 발생');
+      return rejectWithValue(error.response?.data || '아이디 또는 비밀번호를 잘못 입력하였습니다.');
     }
   }
 );
