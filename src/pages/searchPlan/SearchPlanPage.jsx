@@ -16,13 +16,16 @@ function SearchPlanPage() {
   const { searchContent } = useParams();
   const [planList, setPlanList] = useState([]);
   const [filter, setFilter] = useState({});
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
-  const itemsPerPage = 15; // 페이지당 아이템 수
 
   useEffect(() => {
     const fetchSearchPlanAsync = async searchContent => {
-      const response = await fetchSearchPlanAPI(searchContent);
-      setPlanList(response);
+      try {
+        const response = await fetchSearchPlanAPI(searchContent);
+        setPlanList(response || []); // null 또는 undefined를 빈 배열로 처리
+      } catch (error) {
+        console.error('Failed to fetch search plans:', error);
+        setPlanList([]); // 에러 발생 시 빈 배열로 설정
+      }
     };
     fetchSearchPlanAsync(searchContent);
   }, [searchContent]);
@@ -50,11 +53,9 @@ function SearchPlanPage() {
         startDate: filter['기간'].startInput,
         endDate: filter['기간'].endInput,
       });
-      console.log(filter['기간'].endInput);
     }
 
     setPlanList(response);
-    setCurrentPage(1);
   };
 
   useEffect(() => {
@@ -66,16 +67,6 @@ function SearchPlanPage() {
     setFilter(() => ({ [newFilter.filter]: newFilter.value })); // 필터 값 업데이트
   };
 
-  // 페이지당 데이터 계산
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentPageData = planList.slice(startIndex, endIndex);
-
-  // 총 페이지 수 계산
-  const totalPages = Math.ceil(planList.length / itemsPerPage);
-  const handlePageChange = pageNumber => {
-    setCurrentPage(pageNumber);
-  };
   return (
     <>
       <Header value={searchContent} />
@@ -85,9 +76,9 @@ function SearchPlanPage() {
           <SearchFilter onFilterChange={handleFilterChange} />
           <S.Line />
 
-          {currentPageData?.length > 0 ? (
+          {planList?.length > 0 ? (
             <S.PlanList>
-              {currentPageData.map((item, index) => (
+              {planList.map((item, index) => (
                 <PlanPreview
                   key={index}
                   planId={item.planId}
@@ -103,18 +94,6 @@ function SearchPlanPage() {
           ) : (
             <S.EmptyList>검색 결과가 존재하지 않습니다</S.EmptyList>
           )}
-          {/* 페이지네이션 UI */}
-          <S.Pagination>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <S.PageButton
-                key={index + 1}
-                isActive={currentPage === index + 1}
-                onClick={() => handlePageChange(index + 1)}
-              >
-                {index + 1}
-              </S.PageButton>
-            ))}
-          </S.Pagination>
         </S.FilteredPlanList>
       </S.MainWrapper>
     </>
