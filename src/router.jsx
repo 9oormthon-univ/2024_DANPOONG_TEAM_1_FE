@@ -15,6 +15,7 @@ import CreateFestival from './pages/createFestival/CreateFestival';
 import Step2 from './components/createFestival/Steps/Step2';
 import SearchPlanPage from './pages/searchPlan/SearchPlanPage';
 import SignUp from './pages/signup/SignUp';
+import ThemePage from './pages/theme/ThemePage';
 import NotMyPage from './pages/notMyPage/NotMyPage';
 const router = createBrowserRouter([
   {
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
       {
         path: 'plan/:planId',
         element: <PlanDetailPage />,
+      },
+      {
+        path: 'theme/:categoryName',
+        element: <ThemePage />,
       },
     ],
     errorElement: <NotFound />,
