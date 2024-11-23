@@ -13,6 +13,7 @@ export const PlanContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   width: 100%;
+  padding-top: 20px;
   gap: 10px;
   align-items: center;
   justify-content: center;
@@ -27,7 +28,9 @@ export const Title = styled.p`
     font-size: 25px;
   }
 `;
-
+export const Scale = styled.div`
+  transform: scale(1.2);
+`;
 export const ThemeMainPlanContainer = styled.div`
   display: flex;
   flex-direction: column;

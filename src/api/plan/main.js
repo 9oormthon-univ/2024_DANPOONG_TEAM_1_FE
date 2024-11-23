@@ -1,4 +1,4 @@
-import { planMainInstance, planRankingInstance } from '../instance';
+import { planMainInstance } from '../instance';
 import { sendRequest } from '../request';
 
 export const fetchThemesAPI = async () => {
@@ -45,16 +45,6 @@ export const fetchRankingListAPI = async () => {
   try {
     const response = await sendRequest(planMainInstance, 'get', `/Rankings`);
     return response.data.result;
-  } catch (error) {
-    console.error('Failed to fetch rankings:', error);
-    return error;
-  }
-};
-
-export const fetchRankingsAPI = async () => {
-  try {
-    const response = await sendRequest(planRankingInstance, 'post', '');
-    response.data.result;
   } catch (error) {
     console.error('Failed to fetch rankings:', error);
     return error;

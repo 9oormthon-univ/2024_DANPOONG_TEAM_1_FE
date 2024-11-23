@@ -40,6 +40,7 @@ export const PlanContent = styled.div`
   bottom: 0px;
   padding: 15px;
   gap: 10px;
+  width: 100%;
   @media (max-width: 1000px) {
     padding: 10px;
     gap: 5px;
@@ -86,6 +87,7 @@ export const PlanDetail = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
   justify-content: space-between;
   bottom: 0px;
   @media (max-width: 1300px) {
@@ -96,23 +98,32 @@ export const PlanDetail = styled.div`
   }
 `;
 
+export const IconContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  align-items: center;
+`;
+export const Icon = styled.img`
+  width: 13px;
+`;
 export const PlanUser = styled.p`
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   text-shadow: 0px 4px 4px ${({ theme }) => theme.colors.gray6};
 `;
 
 export const PlanLike = styled.p`
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   text-shadow: 0px 4px 4px ${({ theme }) => theme.colors.gray6};
 `;
 
 export const PlanComment = styled.p`
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   text-shadow: 0px 4px 4px ${({ theme }) => theme.colors.gray6};
 `;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 //import { useNavigate } from 'react-router-dom';
 import * as S from './LankingList.styles';
-import { fetchRankingsAPI, fetchRankingListAPI } from '../../api/plan/main';
+import { fetchRankingListAPI } from '../../api/plan/main';
 import PlanPreviewMain from '../common/planPreview/PlanPreviewMain';
 
 function LankingList() {
@@ -11,7 +11,6 @@ function LankingList() {
   useEffect(() => {
     const fetchRankingListAsync = async () => {
       try {
-        await fetchRankingsAPI();
         setRankingList(await fetchRankingListAPI());
       } catch (error) {
         console.error('Failed to fetch lists:', error);
@@ -31,6 +30,7 @@ function LankingList() {
               user={item.title}
               lanking={index + 1}
               title={item.title}
+              likesCount={item.likesCount}
               commentsCount={item.commentsCount}
               image={item.imageLink}
             />

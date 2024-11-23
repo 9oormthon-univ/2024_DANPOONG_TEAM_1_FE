@@ -85,7 +85,7 @@ export const PlanDetail = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  gap: 5px;
   bottom: 0px;
   @media (max-width: 1300px) {
     font-size: 10px;
@@ -111,10 +111,14 @@ export const PlanCategory = styled.p`
   }
 `;
 
+export const Icon = styled.img`
+  width: 16px;
+`;
+
 export const PlanLike = styled.p`
-  color: white;
+  color: #f70a8d;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   text-shadow: 0px 4px 4px ${({ theme }) => theme.colors.gray6};
 `;
 
