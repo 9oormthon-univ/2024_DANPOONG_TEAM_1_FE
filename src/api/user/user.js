@@ -30,7 +30,7 @@ export const login = async (username, password) => {
 
       return;
     }
-
+    localStorage.setItem('username', username);
     localStorage.setItem('accessToken', accessToken);
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     // if (refreshToken) {

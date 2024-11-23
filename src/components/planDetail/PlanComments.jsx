@@ -32,6 +32,12 @@ function PlanComments({ planId }) {
   const [nestedComments, setNestedComments] = useState([]);
   const [replyTo, setReplyTo] = useState(null);
   const inputRef = useRef(null);
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    setUsername(storedUsername);
+  }, []);
 
   const buildNestedComments = comments => {
     const map = {};
@@ -103,11 +109,11 @@ function PlanComments({ planId }) {
         <S.CreateCommentContainer>
           <S.UserProfile>
             <S.ProfileImage src={defaultProfileImage} alt="profile" />
-            <S.UserName>{currentPlan?.username}</S.UserName>
+            <S.UserName>{username || '익명 사용자'}</S.UserName>
           </S.UserProfile>
           <S.FormContainer onSubmit={handleCommentSubmit}>
             <S.InputContainer
-              ref={inputRef} // InputContainer에 ref 추가
+              ref={inputRef}
               type="text"
               placeholder={replyTo ? `답글 작성 중: @${replyTo.memberName}` : '댓글을 입력해주세요'}
               value={commentValue}

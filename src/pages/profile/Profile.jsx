@@ -12,8 +12,9 @@ const Profile = () => {
     // Redux 상태 초기화
     dispatch(logout());
 
-    // LocalStorage에서 Access Token 제거
     localStorage.removeItem('accessToken');
+
+    localStorage.removeItem('username');
     console.log('✅ Access Token 제거 완료');
 
     // Refresh Token 쿠키 제거
