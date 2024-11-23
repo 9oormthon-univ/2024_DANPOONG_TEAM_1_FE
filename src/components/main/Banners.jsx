@@ -52,7 +52,7 @@ function Banners() {
         {bannerList !== null &&
           bannerList.map((banner, index) => (
             <S.BannerContainer key={index}>
-              {banner.image && <S.Banner src={banner.image} alt="banner" />}
+              {banner.imageLink && <S.Banner src={banner.imageLink} alt="banner" />}
               <S.BannerContent>
                 <S.BannerTitle>{banner.title}</S.BannerTitle>
                 <S.PlannerName>기획 : {banner.name}</S.PlannerName>
