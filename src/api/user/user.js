@@ -10,10 +10,18 @@ const API_ENDPOINTS = {
 
 export const login = async (username, password) => {
   try {
-    const response = await sendRequest(defaultInstance, 'post', API_ENDPOINTS.LOGIN, {
-      username,
-      password,
-    });
+    const response = await sendRequest(
+      defaultInstance,
+      'post',
+      API_ENDPOINTS.LOGIN,
+      {
+        username,
+        password,
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
     const accessToken = response.headers?.access;
 
