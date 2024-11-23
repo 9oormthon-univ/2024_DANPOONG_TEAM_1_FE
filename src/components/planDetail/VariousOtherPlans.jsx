@@ -30,7 +30,7 @@ function VariousOtherPlans({ planId }) {
           similarPlanList
             .slice(0, 5)
             .map((item, index) => (
-              <PlanPreview key={index} title={item.name} image={item.imageLink} />
+              <PlanPreview key={index} title={item.title} user={item.name} image={item.imageLink} />
             ))
         ) : (
           <p>유사 행사가 없습니다.</p>

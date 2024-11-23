@@ -22,7 +22,7 @@ function SearchFilter({ onFilterChange }) {
       convertedValue = value === '유료' ? 'non-free' : 'free';
     }
 
-    setSelectedValue(prev => ({ [filter]: value }));
+    setSelectedValue(() => ({ [filter]: value }));
     setCurrentFilter(null); // 박스 닫기
     console.log(`Selected for ${filter}: ${value} -> ${convertedValue}`);
     onFilterChange({ filter, value: convertedValue }); // 부모로 전달
