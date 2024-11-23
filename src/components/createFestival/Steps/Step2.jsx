@@ -17,7 +17,7 @@ function Step2({ onNextStep }) {
   useEffect(() => {
     const kakaoMapScript = document.createElement('script');
     // eslint-disable-next-line no-undef
-    kakaoMapScript.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_MAP_API_KEY}&libraries=services`;
+    kakaoMapScript.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAOMAP_KEY}&libraries=services`;
     kakaoMapScript.async = true;
 
     kakaoMapScript.onload = () => {

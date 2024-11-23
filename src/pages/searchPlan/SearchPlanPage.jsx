@@ -19,8 +19,13 @@ function SearchPlanPage() {
 
   useEffect(() => {
     const fetchSearchPlanAsync = async searchContent => {
-      const response = await fetchSearchPlanAPI(searchContent);
-      setPlanList(response);
+      try {
+        const response = await fetchSearchPlanAPI(searchContent);
+        setPlanList(response || []); // null 또는 undefined를 빈 배열로 처리
+      } catch (error) {
+        console.error('Failed to fetch search plans:', error);
+        setPlanList([]); // 에러 발생 시 빈 배열로 설정
+      }
     };
     fetchSearchPlanAsync(searchContent);
   }, [searchContent]);
@@ -48,7 +53,6 @@ function SearchPlanPage() {
         startDate: filter['기간'].startInput,
         endDate: filter['기간'].endInput,
       });
-      console.log(filter['기간'].endInput);
     }
 
     setPlanList(response);
