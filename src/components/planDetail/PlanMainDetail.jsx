@@ -9,6 +9,7 @@ import Planner from './components/Planner';
 import kakaoMapIcon from '../../assets/images/kakaomap-icon.svg';
 import useLikeClick from '../../hooks/useLikeClick';
 import MoreIcon from './components/MoreIcon';
+import { formatPrice } from '../../util/formatPrice';
 
 function PlanMainDetail({ findPathRef, planId }) {
   const { handleClick, checkLike } = useLikeClick('plan');
@@ -71,7 +72,7 @@ function PlanMainDetail({ findPathRef, planId }) {
                   <tr>
                     <S.PlanDetailKey>참가 비용</S.PlanDetailKey>
                     <S.PlanDetailValue>
-                      {currentPlan.cost === 0 ? '무료' : `${currentPlan.cost}원`}
+                      {currentPlan.cost === 0 ? '무료' : `${formatPrice(currentPlan.cost)}원`}
                     </S.PlanDetailValue>
                   </tr>
                   <tr>
@@ -80,7 +81,7 @@ function PlanMainDetail({ findPathRef, planId }) {
                   </tr>
                   <tr>
                     <S.PlanDetailKey>예산</S.PlanDetailKey>
-                    <S.PlanDetailValue>{currentPlan.budget}</S.PlanDetailValue>
+                    <S.PlanDetailValue>{formatPrice(currentPlan.budget)}</S.PlanDetailValue>
                   </tr>
                 </table>
               </S.PlanContentDetailContainer>
