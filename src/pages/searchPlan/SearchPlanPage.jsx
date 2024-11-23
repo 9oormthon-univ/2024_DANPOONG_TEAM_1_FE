@@ -47,10 +47,11 @@ function SearchPlanPage() {
 
   useEffect(() => {
     fetchSearchAsync();
+    // eslint-disable-next-line
   }, [searchContent, filter]);
 
   const handleFilterChange = newFilter => {
-    setFilter(prev => ({ [newFilter.filter]: newFilter.value })); // 필터 값 업데이트
+    setFilter(() => ({ [newFilter.filter]: newFilter.value })); // 필터 값 업데이트
   };
 
   return (

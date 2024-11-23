@@ -47,7 +47,7 @@ function PlanMainDetail({ findPathRef, planId }) {
               <MoreIcon />
             </S.PlanCategory>
             <S.PlanContentContainer>
-              {currentPlan.posterUrl ? (
+              {currentPlan.posterUrl !== null ? (
                 <S.PlanPoster src={currentPlan.posterUrl} />
               ) : (
                 <S.DefaultPoster />
