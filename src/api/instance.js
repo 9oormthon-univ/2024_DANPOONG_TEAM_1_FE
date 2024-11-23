@@ -8,7 +8,7 @@ const BASE_URL = process.env.REACT_APP_BACKEND_SERVER_URL;
 // Axios 기본 인스턴스
 const defaultInstance = axios.create({
   baseURL: BASE_URL,
-  //withCredentials: true, // Refresh 토큰 처리를 위한 옵션
+  withCredentials: true, // Refresh 토큰 처리를 위한 옵션
 });
 
 // 인터셉터 적용
