@@ -32,6 +32,12 @@ function PlanComments({ planId }) {
   const [nestedComments, setNestedComments] = useState([]);
   const [replyTo, setReplyTo] = useState(null);
   const inputRef = useRef(null);
+  const [username, setUsername] = useState(null);
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    setUsername(storedUsername);
+    console.log(username);
+  }, [username]);
 
   const buildNestedComments = comments => {
     const map = {};
@@ -98,7 +104,7 @@ function PlanComments({ planId }) {
         <S.CreateCommentContainer>
           <S.UserProfile>
             <S.ProfileImage src={defaultProfileImage} alt="profile" />
-            <S.UserName>{currentPlan?.username}</S.UserName>
+            <S.UserName>{username}</S.UserName>
           </S.UserProfile>
           <S.FormContainer onSubmit={handleCommentSubmit}>
             <S.InputContainer
