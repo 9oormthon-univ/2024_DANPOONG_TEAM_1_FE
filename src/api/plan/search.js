@@ -49,3 +49,17 @@ export const fetchSearchPlanFreeAPI = async ({ searchContent, freeOrNon }) => {
     return error;
   }
 };
+
+export const fetchSearchPlanPeriodsAPI = async ({ searchContent, startDate, endDate }) => {
+  try {
+    const response = await sendRequest(
+      planSearchInstance,
+      'get',
+      `/${searchContent}/periods?startDate=${startDate}&endDate=${endDate}`
+    );
+    return response.data.result;
+  } catch (error) {
+    console.error('Failed to fetch plan:', error);
+    return error;
+  }
+};
