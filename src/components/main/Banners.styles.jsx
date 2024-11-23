@@ -31,6 +31,9 @@ export const Banner = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%),
+    url(${({ src }) => src}) lightgray 50% / cover no-repeat;
 `;
 
 export const BannerContent = styled.div`

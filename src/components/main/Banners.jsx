@@ -49,18 +49,19 @@ function Banners() {
           transform: `translateX(-${currentIndex * 100}%)`,
         }}
       >
-        {bannerList.map((banner, index) => (
-          <S.BannerContainer key={index}>
-            {banner.image && <S.Banner src={banner.image} alt="banner" />}
-            <S.BannerContent>
-              <S.BannerTitle>{banner.title}</S.BannerTitle>
-              <S.PlannerName>기획 : {banner.name}</S.PlannerName>
-              <S.Date>
-                {banner.startDate} ~ {banner.endDate}
-              </S.Date>
-            </S.BannerContent>
-          </S.BannerContainer>
-        ))}
+        {bannerList !== null &&
+          bannerList.map((banner, index) => (
+            <S.BannerContainer key={index}>
+              {banner.imageLink && <S.Banner src={banner.imageLink} alt="banner" />}
+              <S.BannerContent>
+                <S.BannerTitle>{banner.title}</S.BannerTitle>
+                <S.PlannerName>기획 : {banner.name}</S.PlannerName>
+                <S.Date>
+                  {banner.startDate} ~ {banner.endDate}
+                </S.Date>
+              </S.BannerContent>
+            </S.BannerContainer>
+          ))}
       </S.InnerList>
       <S.LeftArrow src={leftArrowIcon} alt="arrow" onClick={handlePrev} />
       <S.RightArrow src={rightArrowIcon} alt="arrow" onClick={handleNext} />

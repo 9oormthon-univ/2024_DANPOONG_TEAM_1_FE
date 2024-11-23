@@ -17,8 +17,9 @@ export const CateogoryItemContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px 10px;
-  background-color: white;
+  background-color: ${({ isActive, theme }) => (isActive ? theme.colors.primary3 : '#fff')};
   border-radius: 30px;
+  color: ${({ isActive }) => (isActive ? '#fff' : '#000')};
   box-shadow: 0px 4px 12px 0px ${({ theme }) => theme.colors.gray3};
   width: 110px;
   height: 110px;
