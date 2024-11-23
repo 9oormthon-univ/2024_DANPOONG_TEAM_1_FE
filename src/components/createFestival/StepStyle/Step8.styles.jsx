@@ -4,9 +4,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   gap: 20px;
   width: 100%;
+  margin-left: 100px;
 `;
 
 export const Section = styled.div`
@@ -15,17 +16,19 @@ export const Section = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-self: flex-start;
 `;
 
 export const Title = styled.div`
   font-size: 13px;
   font-weight: 600;
   color: #333;
+  margin-top: 10px;
 `;
 
 export const TextArea = styled.textarea`
   width: 100%;
-  height: 300px;
+  height: 250px;
   padding: 10px;
   border: 1px solid #ddd;
   font-size: 16px;
@@ -38,7 +41,7 @@ export const Input = styled.input`
   width: 30%;
   padding: 10px;
   border-bottom: 1px solid #ddd;
-  font-size: 16px;
+  font-size: 13px;
 
   &:focus {
     border-color: #4b0082;
@@ -71,13 +74,11 @@ export const Input1 = styled.input`
   width: 30%;
 `;
 export const SubmitButton = styled.button`
-  width: 150px;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #4b0082;
-  border: none;
-  border-radius: 10px;
+  width: 80px;
+  padding: 5px 10px;
+  font-size: 13px;
+  color: #9a50f1;
+  border: 1px solid #9a50f1;
   cursor: pointer;
   transition: all 0.3s ease;
 

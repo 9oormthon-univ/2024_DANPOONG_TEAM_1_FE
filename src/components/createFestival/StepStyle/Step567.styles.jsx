@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 180px;
-  margin-top: -100px;
+  margin-top: -110px;
 `;
 
 export const TitleContainer = styled.div`
@@ -20,9 +20,9 @@ export const Title = styled.h2`
 `;
 
 export const Input = styled.input`
-  width: 40%;
+  width: 30%;
   padding: 10px;
-  font-size: 15px;
+  font-size: 17px;
   text-align: center;
   border-bottom: 1px solid #9a50f1;
 `;

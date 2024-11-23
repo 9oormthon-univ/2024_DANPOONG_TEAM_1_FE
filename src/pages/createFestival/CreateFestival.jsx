@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import InputHistory from '../../components/createFestival/InputHistory';
 import Step1 from '../../components/createFestival/Steps/Step1';
@@ -16,9 +16,11 @@ import { setCurrentStep } from '../../redux/slices/historySlice';
 const CreateFestival = () => {
   const currentStep = useSelector(state => state.history.currentStep);
   const dispatch = useDispatch();
+  const [planId, setPlanId] = useState(null);
 
-  const handleNextStep = nextStep => {
-    console.log(`Moving to step ${nextStep}`);
+  const handleNextStep = (nextStep, id = null) => {
+    console.log('Setting planId:', id);
+    if (id) setPlanId(id);
     dispatch(setCurrentStep(nextStep));
   };
 
@@ -31,8 +33,8 @@ const CreateFestival = () => {
       5: <Step5 onNextStep={() => handleNextStep(6)} />,
       6: <Step6 onNextStep={() => handleNextStep(7)} />,
       7: <Step7 onNextStep={() => handleNextStep(8)} />,
-      8: <Step8 onNextStep={() => handleNextStep(9)} />,
-      9: <Step9 />,
+      8: <Step8 onNextStep={id => handleNextStep(9, id)} />,
+      9: <Step9 planId={planId} />,
     };
 
     console.log(`Rendering component for step ${currentStep}`);

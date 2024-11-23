@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import LoginHeader from '../../components/login/LoginHeader';
 import companyImage from '../../assets/images/login/company.png';
 import userImage from '../../assets/images/login/user.png';
 import * as S from './LoginForm.styles';
-import { loginAsync } from '../../redux/slices/authSlice';
+import { loginAsync, clearError } from '../../redux/slices/authSlice';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -16,6 +16,11 @@ const LoginForm = () => {
 
   const { loading, error } = useSelector(state => state.auth);
   const iconSrc = userType === 'individual' ? userImage : companyImage;
+
+  useEffect(() => {
+    // 페이지 이동 시 오류 메시지 초기화
+    dispatch(clearError());
+  }, [userType, dispatch]);
 
   const validateForm = () => {
     if (username.trim() === '' || password.trim() === '') {
@@ -37,8 +42,6 @@ const LoginForm = () => {
     try {
       const result = await dispatch(loginAsync({ username, password })).unwrap();
       console.log('로그인 성공:', result);
-      // 로그인 성공 후 토큰 재발급 테스트
-      //await dispatch(reissueTokenAsync());
       navigate('/');
     } catch (err) {
       console.error('로그인 실패:', err);
