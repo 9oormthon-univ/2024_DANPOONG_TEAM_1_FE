@@ -9,28 +9,28 @@ const API_ENDPOINTS = {
 
 export const login = async (username, password) => {
   try {
-    const response = await sendRequest(defaultInstance, 'post', API_ENDPOINTS.LOGIN, {
-      username,
-      password,
-    });
+    const response = await sendRequest(
+      defaultInstance,
+      'post',
+      API_ENDPOINTS.LOGIN,
+      {
+        username,
+        password,
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
     const accessToken = response.headers?.access;
-    //const refreshToken = response.headers?.refresh;
 
     if (!accessToken) {
       console.warn('Access Token이 반환되지 않아 재발급 요청을 시도합니다.');
+
       return;
     }
-    // if (!refreshToken) {
-    //   console.warn('Refresh Token이 반환되지 않아 재발급 요청을 시도합니다.');
-
-    //   return;
-    // }
-
     localStorage.setItem('username', username);
     localStorage.setItem('accessToken', accessToken);
-    //localStorage.setItem('refreshToken', refreshToken);
-
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
     console.log('✅ 로그인 성공');
