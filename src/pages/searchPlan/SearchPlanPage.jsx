@@ -16,6 +16,8 @@ function SearchPlanPage() {
   const { searchContent } = useParams();
   const [planList, setPlanList] = useState([]);
   const [filter, setFilter] = useState({});
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const itemsPerPage = 15; // 페이지당 아이템 수
 
   useEffect(() => {
     const fetchSearchPlanAsync = async searchContent => {
@@ -52,6 +54,7 @@ function SearchPlanPage() {
     }
 
     setPlanList(response);
+    setCurrentPage(1);
   };
 
   useEffect(() => {
@@ -63,6 +66,16 @@ function SearchPlanPage() {
     setFilter(() => ({ [newFilter.filter]: newFilter.value })); // 필터 값 업데이트
   };
 
+  // 페이지당 데이터 계산
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentPageData = planList.slice(startIndex, endIndex);
+
+  // 총 페이지 수 계산
+  const totalPages = Math.ceil(planList.length / itemsPerPage);
+  const handlePageChange = pageNumber => {
+    setCurrentPage(pageNumber);
+  };
   return (
     <>
       <Header value={searchContent} />
@@ -72,9 +85,9 @@ function SearchPlanPage() {
           <SearchFilter onFilterChange={handleFilterChange} />
           <S.Line />
 
-          {planList?.length > 0 ? (
+          {currentPageData?.length > 0 ? (
             <S.PlanList>
-              {planList.map((item, index) => (
+              {currentPageData.map((item, index) => (
                 <PlanPreview
                   key={index}
                   planId={item.planId}
@@ -90,6 +103,18 @@ function SearchPlanPage() {
           ) : (
             <S.EmptyList>검색 결과가 존재하지 않습니다</S.EmptyList>
           )}
+          {/* 페이지네이션 UI */}
+          <S.Pagination>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <S.PageButton
+                key={index + 1}
+                isActive={currentPage === index + 1}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </S.PageButton>
+            ))}
+          </S.Pagination>
         </S.FilteredPlanList>
       </S.MainWrapper>
     </>

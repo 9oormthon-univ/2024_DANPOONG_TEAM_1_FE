@@ -13,7 +13,7 @@ const FindPath = forwardRef(function FindPath(props, ref) {
   useEffect(() => {
     const kakaoMapScript = document.createElement('script');
     // eslint-disable-next-line no-undef
-    kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_MAP_API_KEY}&libraries=services`;
+    kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAOMAP_KEY}&libraries=services`;
     kakaoMapScript.async = true;
 
     kakaoMapScript.onerror = () => {
