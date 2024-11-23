@@ -1,31 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import * as S from './LankingList.styles';
-import { fetchRankingsAPI } from '../../api/plan/main';
-import defaultPoster from '../../assets/images/default-poster.png';
+import * as S from './ThemeLankingPlanList.styles';
+import { fetchRankingThemeAPI } from '../../api/plan/theme';
 import PlanPreviewMain from '../common/planPreview/PlanPreviewMain';
 
-function LankingList() {
-  const navigate = useNavigate();
+function ThemeLankingPlanList({ categoryName }) {
   const [rankingsList, setRankingList] = useState([]);
 
   useEffect(() => {
     const fetchRankingListAsync = async () => {
       try {
-        setRankingList(await fetchRankingsAPI());
+        setRankingList(await fetchRankingThemeAPI(categoryName));
       } catch (error) {
         console.error('Failed to fetch lists:', error);
       }
     };
     fetchRankingListAsync();
-  }, []);
-
-  const handlePlanClick = planId => {
-    navigate(`/plan/${planId}`);
-  };
+  }, [categoryName]);
 
   return (
-    <S.MonthPopularLanking>
+    <S.Container>
       <S.Title>최고 좋아요! 이달의 인기 랭킹</S.Title>
       <S.PlanContainer>
         {rankingsList &&
@@ -40,7 +33,8 @@ function LankingList() {
             />
           ))}
       </S.PlanContainer>
-    </S.MonthPopularLanking>
+    </S.Container>
   );
 }
-export default LankingList;
+
+export default ThemeLankingPlanList;
