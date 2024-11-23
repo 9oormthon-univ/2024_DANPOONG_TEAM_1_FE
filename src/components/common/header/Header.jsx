@@ -18,6 +18,9 @@ function Header({ value }) {
   const handleLogin = () => {
     navigate('/login');
   };
+  const handleSignup = () => {
+    navigate('/signup');
+  };
 
   const handleCreateFestival = () => {
     dispatch(resetState());
@@ -67,7 +70,7 @@ function Header({ value }) {
           </>
         ) : (
           <>
-            <S.Menu onClick={handleLogin}>회원가입</S.Menu>
+            <S.Menu onClick={handleSignup}>회원가입</S.Menu>
             <S.Menu onClick={handleLogin}>로그인</S.Menu>
           </>
         )}

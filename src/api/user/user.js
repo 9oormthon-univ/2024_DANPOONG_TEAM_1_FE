@@ -16,7 +16,6 @@ export const login = async (username, password) => {
     });
 
     const accessToken = response.headers?.access;
-    //const refreshToken = response.headers?.refresh;
 
     if (!accessToken) {
       console.warn('Access Token이 반환되지 않아 재발급 요청을 시도합니다.');

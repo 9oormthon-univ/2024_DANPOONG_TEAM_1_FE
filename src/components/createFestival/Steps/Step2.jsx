@@ -77,6 +77,7 @@ function Step2({ onNextStep }) {
 
   const handleNextButtonClick = () => {
     if (address.trim()) {
+      console.log('📌 Redux에 저장될 주소:', address); // Redux 저장 전 주소 확인
       dispatch(setDetail({ key: 'location', value: address })); // Redux에 최종 주소 저장
       onNextStep(); // 다음 스텝으로 이동
     } else {

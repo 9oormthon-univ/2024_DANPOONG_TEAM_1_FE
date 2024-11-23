@@ -57,7 +57,11 @@ function Step8({ onNextStep }) {
       console.error('❌ 유효하지 않은 주소 값:', address);
       return { province: '', city: '', town: '' };
     }
-    const [province, city, town] = address.split(' ');
+    const addressParts = address.split(' '); // 주소를 먼저 나눔
+    const province = addressParts[0] || ''; // 첫 번째 부분: 도/광역시
+    const city = addressParts[1] || ''; // 두 번째 부분: 시/구
+    const town = addressParts.slice(2).join(' '); // 나머지 부분: 동/도로명 주소
+    console.log('📌 나눠진 주소:', { province, city, town }); // 나눠진 주소 확인
     return { province: province || '', city: city || '', town: town || '' };
   };
 

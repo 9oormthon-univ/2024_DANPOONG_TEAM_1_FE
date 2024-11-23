@@ -14,7 +14,7 @@ import Profile from './pages/profile/Profile';
 import CreateFestival from './pages/createFestival/CreateFestival';
 import Step2 from './components/createFestival/Steps/Step2';
 import SearchPlanPage from './pages/searchPlan/SearchPlanPage';
-
+import SignUp from './pages/signup/SignUp';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -61,6 +61,10 @@ const router = createBrowserRouter([
             element: <ForgotPasswdCompany />,
           },
         ],
+      },
+      {
+        path: 'signup',
+        element: <SignUp />,
       },
       {
         path: 'profile',
